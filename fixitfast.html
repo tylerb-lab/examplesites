@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixIt Fast – Phone Repairs Sydney</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f4f0;
+    --accent: #ff4d1c;
+    --accent2: #ffb800;
+    --mid: #1a1a1a;
+    --muted: #888;
+    --card-bg: #141414;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav a { color: var(--white); text-decoration: none; font-size: 0.9rem; font-weight: 500; opacity: 0.75; transition: opacity 0.2s; }
+  nav a:hover { opacity: 1; }
+  .nav-cta {
+    background: var(--accent); color: var(--white) !important; opacity: 1 !important;
+    padding: 10px 22px; border-radius: 6px; font-weight: 500;
+    transition: transform 0.15s, box-shadow 0.15s !important;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,77,28,0.4); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,77,28,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,77,28,0.12); border: 1px solid rgba(255,77,28,0.3);
+    color: var(--accent); border-radius: 100px; padding: 6px 16px;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.15rem; font-weight: 300; color: rgba(245,244,240,0.7);
+    max-width: 420px; margin-bottom: 44px;
+    animation: fadeUp 0.6s 0.2s ease both;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--white);
+    padding: 16px 32px; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 1rem;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,77,28,0.4); }
+  .btn-ghost {
+    color: var(--white); text-decoration: none; font-size: 0.95rem;
+    opacity: 0.7; display: flex; align-items: center; gap: 8px;
+    transition: opacity 0.2s;
+  }
+  .btn-ghost:hover { opacity: 1; }
+
+  .hero-image {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-image img {
+    width: 100%; max-width: 520px; border-radius: 20px;
+    object-fit: cover; height: 560px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .hero-stat-card {
+    position: absolute; bottom: -20px; left: -30px;
+    background: var(--white); color: var(--black);
+    border-radius: 14px; padding: 18px 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .hero-stat-card .num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1;
+    color: var(--accent);
+  }
+  .hero-stat-card .label { font-size: 0.8rem; color: #555; margin-top: 4px; }
+
+  .hero-stat-card2 {
+    position: absolute; top: 30px; right: -20px;
+    background: var(--accent2); color: var(--black);
+    border-radius: 14px; padding: 14px 20px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    animation: fadeUp 0.6s 0.6s ease both;
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    background: var(--card-bg); border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 48px;
+    display: flex; justify-content: center; gap: 60px; align-items: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.9rem; color: rgba(245,244,240,0.6);
+  }
+  .trust-item .icon { font-size: 1.3rem; }
+
+  /* SERVICES */
+  .section { padding: 100px 48px; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 60px;
+  }
+  h2 em { font-style: normal; color: var(--accent); }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .service-card {
+    background: var(--card-bg); padding: 40px 36px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .service-card:hover { background: #1f1f1f; transform: translateY(-4px); }
+  .service-icon { display: none; }
+  .service-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700;
+    margin-bottom: 12px; letter-spacing: -0.02em;
+  }
+  .service-card p { font-size: 0.92rem; color: rgba(245,244,240,0.6); line-height: 1.65; }
+  .service-price {
+    margin-top: 20px; font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1.1rem; color: var(--accent2);
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--card-bg); }
+  .how-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .how-image img {
+    width: 100%; border-radius: 16px; height: 500px; object-fit: cover;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+  }
+  .steps { display: flex; flex-direction: column; gap: 36px; }
+  .step { display: flex; gap: 24px; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+  }
+  .step-content h3 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+  .step-content p { font-size: 0.9rem; color: rgba(245,244,240,0.6); }
+
+  /* REVIEWS */
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .review-card {
+    background: var(--card-bg); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 28px;
+  }
+  .stars { color: var(--accent2); font-size: 1rem; margin-bottom: 14px; }
+  .review-text { font-size: 0.92rem; color: rgba(245,244,240,0.75); line-height: 1.65; margin-bottom: 20px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem;
+  }
+  .reviewer-name { font-weight: 500; font-size: 0.9rem; }
+  .reviewer-sub { font-size: 0.78rem; color: var(--muted); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--accent);
+    padding: 100px 48px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    color: var(--white); margin-bottom: 16px; position: relative;
+  }
+  .cta-section p { color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 44px; }
+  .btn-white {
+    background: var(--white); color: var(--accent);
+    padding: 16px 36px; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 1rem;
+    font-family: 'Syne', sans-serif;
+    display: inline-block;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+  .cta-contact {
+    margin-top: 28px; color: rgba(255,255,255,0.7); font-size: 0.9rem; position: relative;
+  }
+  .cta-contact a { color: var(--white); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: var(--mid); padding: 40px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex-wrap: wrap; gap: 20px;
+  }
+  footer p { font-size: 0.85rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+
+  /* NORWEST BADGE */
+  .norwest-badge {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: var(--white); color: var(--black);
+    padding: 10px 18px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 600;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+  }
+  .norwest-badge span { color: var(--accent); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    .hero-image { display: none; }
+    .section { padding: 70px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr; gap: 40px; }
+    .how-image { display: none; }
+    .trust-bar { padding: 20px 24px; gap: 28px; }
+    footer { flex-direction: column; text-align: center; }
+    .cta-section { padding: 70px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">FixIt<span>Fast</span></div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Repair</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Sydney's #1 Phone Repair</div>
+    <h1>We fix<br><em>any phone,</em><br>fast.</h1>
+    <p class="hero-sub">Cracked screen? Dead battery? Water damage? We repair all major brands — same day in most cases. No appointment needed.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+  <a href="tel:0412345678" class="btn-ghost">0412 345 678</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="1.jpg" alt="Phone repair technician at work" />
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">All brands repaired</div>
+  <div class="trust-item">90-day warranty</div>
+  <div class="trust-item">Most repairs under 1 hour</div>
+  <div class="trust-item">Walk-ins welcome</div>
+  <div class="trust-item">4.9 / 5 on Google</div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">What We Fix</div>
+  <h2>Our <em>repair</em> services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">—</div>
+      <h3>Screen Replacement</h3>
+      <p>Cracked or shattered screen? We replace screens for iPhone, Samsung, Google Pixel and more with genuine or premium-quality parts.</p>
+      <div class="service-price">From $89</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">—</div>
+      <h3>Battery Replacement</h3>
+      <p>Is your phone dying before lunch? A new battery brings it back to life. Done in under 30 minutes while you wait.</p>
+      <div class="service-price">From $59</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">—</div>
+      <h3>Water Damage Repair</h3>
+      <p>Dropped it in the pool? Don't panic. Bring it straight in — the faster we get to it, the better the outcome.</p>
+      <div class="service-price">From $99</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">—</div>
+      <h3>Charging Port Repair</h3>
+      <p>Not charging properly or taking forever? We clean and repair charging ports for all devices.</p>
+      <div class="service-price">From $69</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">—</div>
+      <h3>Camera Repair</h3>
+      <p>Blurry photos, cracked lens, or camera not opening? We restore your camera to full working condition.</p>
+      <div class="service-price">From $79</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">—</div>
+      <h3>Button & Speaker Repair</h3>
+      <p>Sticky home button, broken volume rocker, or muffled speaker? No job is too small for our techs.</p>
+      <div class="service-price">From $49</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section" id="how">
+  <div class="how-grid">
+    <div class="how-image">
+      <img src="2.jpg" alt="Technician repairing phone with tools" />
+    </div>
+    <div>
+      <div class="section-label">Simple Process</div>
+      <h2>Fixed in<br><em>four steps</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Walk in or book online</h3>
+            <p>No appointment needed. Just come in, or book a time online if you prefer.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Free diagnostic check</h3>
+            <p>We assess your device and give you a fixed-price quote — no hidden fees, ever.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>We get to work</h3>
+            <p>Most repairs are done in under an hour. Grab a coffee and come back.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h3>Pick up, good as new</h3>
+            <p>We test everything before handover. Backed by our 90-day warranty.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews">
+  <div class="section-label">What Customers Say</div>
+  <h2>Don't take<br>our <em>word for it</em></h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Dropped my iPhone in the pool on a Sunday morning. Had it fixed by midday. Absolutely legends, I couldn't believe how fast they were."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">SL</div>
+        <div>
+          <div class="reviewer-name">Sarah L.</div>
+          <div class="reviewer-sub">iPhone 14 Pro — Water Damage</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Quoted me $89, charged me $89. Screen looks brand new. The whole thing took maybe 45 minutes. Best phone repair shop in the Hills."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">MK</div>
+        <div>
+          <div class="reviewer-name">Marcus K.</div>
+          <div class="reviewer-sub">Samsung S23 — Screen Replacement</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"My battery was shot and the phone was dying by noon every day. New battery in 20 minutes and it's like having a new phone. So happy!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">JT</div>
+        <div>
+          <div class="reviewer-name">Jenny T.</div>
+          <div class="reviewer-sub">Google Pixel 7 — Battery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2 style="color:white; margin-bottom: 16px;">Ready to fix your phone?</h2>
+  <p>Walk in anytime, or get in touch and we'll give you a quote in minutes.</p>
+  <a href="tel:0412345678" class="btn-white">Call 0412 345 678</a>
+  <div class="cta-contact">
+    Or email us at <a href="mailto:hello@fixitfast.com.au">hello@fixitfast.com.au</a> · 12 Old Windsor Rd, Norwest NSW 2153
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="logo" style="margin-bottom:6px;">FixIt<span style="color:var(--accent)">Fast</span></div>
+    <p>Phone repairs done right. Norwest, Sydney NSW.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#how">How It Works</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>© 2025 FixItFast. All rights reserved.</p>
+</footer>
+
+<!-- NORWEST BADGE -->
+<a href="https://norwestit.com.au" class="norwest-badge" target="_blank">
+  Site by <span>Norwest IT</span>
+</a>
+
+</body>
+</html>
