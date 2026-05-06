@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Groundwork — Landscaping & Garden Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f4f7f2;--bg2:#eaf0e6;--white:#ffffff;--dark:#1a2818;--green:#2d6a30;--green2:#3d8840;--green3:#d4e8d0;--sage:#6a8860;--earth:#8b5e3c;--text2:#4a6040;--text3:#8aa880;--border:rgba(45,106,48,.12);--serif:'Playfair Display',serif;--sans:'Inter',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--dark);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 52px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(244,247,242,.96);backdrop-filter:blur(16px);padding:12px 52px;box-shadow:0 1px 0 var(--border)}
+.nlogo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--dark);text-decoration:none;letter-spacing:-.01em}
+.nlogo em{font-style:italic;color:var(--green)}
+.nlinks{display:flex;gap:28px;list-style:none}
+.nlinks a{font-size:12px;font-weight:400;color:var(--text2);text-decoration:none;letter-spacing:.04em;transition:color .2s}.nlinks a:hover{color:var(--dark)}
+.ncta{background:var(--green);color:#fff;font-size:12px;font-weight:500;padding:10px 22px;border-radius:100px;text-decoration:none;transition:all .2s}.ncta:hover{background:var(--green2);transform:translateY(-1px)}
+/* hero */
+.hero{min-height:100vh;background:var(--dark);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-l{position:relative;overflow:hidden}
+/* Illustrated SVG garden scene */
+.hero-scene{width:100%;height:100%;position:absolute;inset:0}
+.hero-r{display:flex;flex-direction:column;justify-content:center;padding:120px 60px;position:relative}
+.hero-r::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.06)}
+.hero-eyebrow{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(212,232,208,.5);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--green2)}
+.hero h1{font-family:var(--serif);font-size:clamp(46px,5vw,74px);line-height:1.0;color:#fff;margin-bottom:24px;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--green2)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.4);line-height:1.8;max-width:380px;margin-bottom:44px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{background:var(--green);color:#fff;font-size:13px;font-weight:500;padding:13px 26px;border-radius:100px;text-decoration:none;transition:all .2s}.btn-p:hover{background:var(--green2);transform:translateY(-1px)}
+.btn-o{background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);font-size:13px;font-weight:400;padding:13px 22px;border-radius:100px;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:all .2s}.btn-o:hover{background:rgba(255,255,255,.1)}
+/* sections */
+section{padding:90px 52px}
+.si{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--sage)}
+.sh{font-family:var(--serif);font-size:clamp(32px,4vw,52px);line-height:1.05;color:var(--dark);margin-bottom:14px;letter-spacing:-.01em}
+.sh em{font-style:italic;color:var(--green)}
+/* services */
+.services{background:var(--white)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border:1px solid var(--border);margin-top:52px}
+.svc-card{background:var(--white);padding:36px 28px;transition:background .2s}.svc-card:hover{background:var(--bg2)}
+.svc-icon{width:48px;height:48px;border-radius:50%;background:var(--green3);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.svc-icon svg{width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.svc-card h3{font-family:var(--serif);font-size:20px;color:var(--dark);margin-bottom:8px;font-weight:700}
+.svc-card p{font-size:13px;color:var(--text2);line-height:1.7}
+/* process */
+.process{background:var(--bg2)}
+.process-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:52px}
+.process-steps{display:flex;flex-direction:column;gap:0}
+.ps-item{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid var(--border)}
+.ps-item:last-child{border-bottom:none}
+.ps-num{font-family:var(--serif);font-size:28px;color:var(--green3);font-weight:700;line-height:1;min-width:40px;flex-shrink:0}
+.ps-item h4{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:4px}
+.ps-item p{font-size:13px;color:var(--text2);line-height:1.65}
+.process-aside{background:var(--green);border-radius:12px;padding:40px;color:#fff}
+.pa-quote{font-family:var(--serif);font-size:24px;font-style:italic;line-height:1.35;margin-bottom:20px;color:rgba(255,255,255,.9)}
+.pa-author{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:.08em}
+.pa-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:8px;overflow:hidden;margin-top:32px}
+.ps{padding:22px;background:rgba(255,255,255,.05);text-align:center}
+.ps-n{font-family:var(--serif);font-size:30px;font-weight:700;color:#fff;line-height:1;margin-bottom:4px}
+.ps-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+/* gallery */
+.gallery{background:var(--dark);padding:90px 52px}
+.gallery .eyebrow{color:rgba(212,232,208,.35)}
+.gallery .eyebrow::before{background:var(--green2)}
+.gallery .sh{color:#fff}
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);margin-top:52px}
+.gal-cell{aspect-ratio:1;background:linear-gradient(135deg,#1e3020,#142018);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:opacity .3s}.gal-cell:hover{opacity:.85}
+.gal-cell:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.gal-cell svg{opacity:.07}
+.gal-cell-label{position:absolute;bottom:0;left:0;right:0;padding:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);background:linear-gradient(transparent,rgba(26,40,24,.8));opacity:0;transition:opacity .3s}.gal-cell:hover .gal-cell-label{opacity:1}
+/* contact */
+.contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:52px}
+.contact-form{background:var(--white);border-radius:12px;padding:36px;border:1px solid var(--border)}
+.cf-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.cf-group label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text2)}
+.cf-group input,.cf-group select,.cf-group textarea{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-family:var(--sans);font-size:14px;color:var(--dark);outline:none;transition:border-color .2s;width:100%}.cf-group input:focus,.cf-group select:focus{border-color:var(--green)}
+.cf-group textarea{resize:vertical;min-height:80px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cf-submit{width:100%;background:var(--green);color:#fff;font-family:var(--sans);font-size:13px;font-weight:500;padding:13px;border-radius:100px;border:none;cursor:pointer;transition:all .2s}.cf-submit:hover{background:var(--green2)}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.ci{display:flex;gap:14px;align-items:flex-start}
+.ci-icon{width:40px;height:40px;border-radius:50%;background:var(--green3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci-icon svg{width:17px;height:17px;stroke:var(--green);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ci-l{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.ci-v{font-size:14px;color:var(--dark);line-height:1.5}
+/* footer */
+footer{background:var(--dark);padding:52px 52px 24px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.flogo{font-family:var(--serif);font-size:20px;font-weight:700;color:#fff;margin-bottom:10px}
+.flogo em{font-style:italic;color:var(--green2)}
+.ftagline{font-size:13px;color:rgba(255,255,255,.3);line-height:1.65;max-width:220px}
+.fcol-h{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}.flinks a:hover{color:#fff}
+.fcopy{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.04em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media(max-width:900px){nav{padding:14px 24px}nav.s{padding:12px 24px}.nlinks{display:none}.hero{grid-template-columns:1fr}.hero-l{min-height:55vw}.hero-r{padding:60px 24px}.hero-r::before{display:none}.svc-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr}.gal-grid{grid-template-columns:1fr 1fr}.gal-cell:first-child{grid-column:auto;grid-row:auto;aspect-ratio:1}.contact-grid{grid-template-columns:1fr}.cf-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr;gap:28px}section{padding:70px 24px}.gallery{padding:70px 24px}footer{padding:40px 24px 20px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">Ground<em>work</em></a>
+  <ul class="nlinks"><li><a href="#services">Services</a></li><li><a href="#process">Our approach</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a href="#contact" class="ncta">Get a quote</a>
+</nav>
+<section class="hero">
+  <div class="hero-l">
+    <svg class="hero-scene" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="skyH" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2818"/><stop offset="100%" stop-color="#0e1810"/></linearGradient></defs>
+      <rect width="600" height="800" fill="url(#skyH)"/>
+      <!-- ground -->
+      <ellipse cx="300" cy="750" rx="400" ry="120" fill="#1e3020"/>
+      <ellipse cx="300" cy="780" rx="350" ry="80" fill="#243a26"/>
+      <!-- large tree left -->
+      <rect x="88" y="300" width="14" height="300" fill="#2a3c20" rx="4"/>
+      <ellipse cx="95" cy="280" rx="70" ry="90" fill="#2d5a28"/>
+      <ellipse cx="95" cy="260" rx="55" ry="70" fill="#3a7030"/>
+      <ellipse cx="95" cy="245" rx="40" ry="50" fill="#4a8838"/>
+      <!-- tree right -->
+      <rect x="478" y="350" width="12" height="280" fill="#2a3c20" rx="4"/>
+      <ellipse cx="484" cy="330" rx="60" ry="80" fill="#2d5a28"/>
+      <ellipse cx="484" cy="312" rx="46" ry="62" fill="#3a7030"/>
+      <!-- shrubs -->
+      <ellipse cx="60" cy="700" rx="55" ry="40" fill="#2d6a30"/>
+      <ellipse cx="160" cy="720" rx="40" ry="28" fill="#3a7830"/>
+      <ellipse cx="420" cy="710" rx="50" ry="35" fill="#2d6a30"/>
+      <ellipse cx="520" cy="700" rx="45" ry="32" fill="#3a7030"/>
+      <!-- path -->
+      <path d="M240 800 Q260 720 270 650 Q280 580 285 500" stroke="#4a6040" stroke-width="28" stroke-linecap="round" fill="none" opacity=".4"/>
+      <path d="M360 800 Q340 720 330 650 Q320 580 315 500" stroke="#4a6040" stroke-width="28" stroke-linecap="round" fill="none" opacity=".4"/>
+      <!-- flowers -->
+      <circle cx="180" cy="680" r="6" fill="#c8d060" opacity=".7"/>
+      <circle cx="200" cy="692" r="4" fill="#e8c060" opacity=".6"/>
+      <circle cx="390" cy="675" r="5" fill="#c8d060" opacity=".7"/>
+      <circle cx="410" cy="688" r="6" fill="#d8a840" opacity=".6"/>
+      <!-- moon/light -->
+      <circle cx="480" cy="80" r="45" fill="#f0e8c0" opacity=".06"/>
+      <circle cx="480" cy="80" r="28" fill="#f0e8d0" opacity=".08"/>
+    </svg>
+  </div>
+  <div class="hero-r">
+    <p class="hero-eyebrow">Garden Design & Landscaping</p>
+    <h1>Spaces worth<br><em>spending time</em><br>in.</h1>
+    <p class="hero-sub">Landscape design and construction for residential and commercial properties across Sydney. From concept through to planting and ongoing care.</p>
+    <div class="hero-btns"><a href="#contact" class="btn-p">Get a free quote</a><a href="#services" class="btn-o">Our services</a></div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="si">
+    <p class="eyebrow rv">Services</p>
+    <h2 class="sh rv d1">From design<br>to <em>maintenance.</em></h2>
+    <div class="svc-grid">
+      <div class="svc-card rv d1"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 000 20c5.52 0 10-4.48 10-10"/><path d="M12 6v6l4 2"/></svg></div><h3>Landscape Design</h3><p>Full design service from site analysis to planting plans and construction documentation. Hand-drawn or CAD drawings.</p></div>
+      <div class="svc-card rv d2"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><h3>Garden Construction</h3><p>Paving, decking, retaining walls, drainage, irrigation and planting. We build what we design — or work from your plans.</p></div>
+      <div class="svc-card rv d3"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0014 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 01-11.91 4.97"/></svg></div><h3>Planting & Turf</h3><p>Plant selection, sourcing and installation. Native gardens, edible gardens, cottage planting and lawns. We know what survives Sydney summers.</p></div>
+      <div class="svc-card rv d1"><div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h3>Regular Maintenance</h3><p>Fortnightly or monthly maintenance programs. Mowing, pruning, weeding, mulching and seasonal care to keep your garden at its best.</p></div>
+      <div class="svc-card rv d2"><div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.07 9.8 2 2 0 012 2h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45"/></svg></div><h3>Irrigation Systems</h3><p>Automated irrigation design and installation. Drip systems, pop-up sprinklers and smart controllers. Set it and forget it.</p></div>
+      <div class="svc-card rv d3"><div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><h3>Commercial Landscaping</h3><p>Body corporates, office buildings, retail and hospitality. Ongoing maintenance contracts and one-off upgrades.</p></div>
+    </div>
+  </div>
+</section>
+<section class="process" id="process">
+  <div class="si">
+    <p class="eyebrow rv">Our approach</p>
+    <h2 class="sh rv d1">How we <em>work.</em></h2>
+    <div class="process-grid">
+      <div class="process-steps rv d1">
+        <div class="ps-item"><span class="ps-num">01</span><div><h4>Site visit & brief</h4><p>We visit your property to understand the space, conditions and what you're hoping to achieve. Free for residential clients.</p></div></div>
+        <div class="ps-item"><span class="ps-num">02</span><div><h4>Design proposal</h4><p>We develop a design concept with mood board, plant palette and preliminary plans for your feedback.</p></div></div>
+        <div class="ps-item"><span class="ps-num">03</span><div><h4>Quote & timeline</h4><p>Fixed-price quote with a clear scope of work and construction timeline. No surprises on the final bill.</p></div></div>
+        <div class="ps-item"><span class="ps-num">04</span><div><h4>Construction & planting</h4><p>Our own crew handles construction. We don't subcontract. Direct communication throughout.</p></div></div>
+      </div>
+      <div class="process-aside rv d2">
+        <p class="pa-quote">"A garden should feel like an extension of the house — somewhere you actually want to be, every day."</p>
+        <p class="pa-author">— Tom Reid, Groundwork founder</p>
+        <div class="pa-stats">
+          <div class="ps"><div class="ps-n">10+</div><div class="ps-l">Years in business</div></div>
+          <div class="ps"><div class="ps-n">400+</div><div class="ps-l">Gardens created</div></div>
+          <div class="ps"><div class="ps-n">4.9★</div><div class="ps-l">Google rating</div></div>
+          <div class="ps"><div class="ps-n">$0</div><div class="ps-l">Callout fee</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="gallery" id="gallery">
+  <div class="si">
+    <p class="eyebrow rv">Recent work</p>
+    <h2 class="sh rv d1">Gardens we've <em>built.</em></h2>
+    <div class="gal-grid">
+      <div class="gal-cell rv d1"><svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#4a8838" stroke-width=".7"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76"/></svg><span class="gal-cell-label">Paddington courtyard</span></div>
+      <div class="gal-cell rv d2"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#4a8838" stroke-width=".7"><path d="M3 9l9-7 9 7v11"/></svg><span class="gal-cell-label">Mosman front garden</span></div>
+      <div class="gal-cell rv d3"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#4a8838" stroke-width=".7"><circle cx="12" cy="12" r="10"/></svg><span class="gal-cell-label">Glebe native planting</span></div>
+      <div class="gal-cell rv"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#4a8838" stroke-width=".7"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4"/></svg><span class="gal-cell-label">Balmain pool garden</span></div>
+      <div class="gal-cell rv d1"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#4a8838" stroke-width=".7"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span class="gal-cell-label">Newtown raised beds</span></div>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="si">
+    <p class="eyebrow rv">Get in touch</p>
+    <h2 class="sh rv d1">Free quote,<br>no <em>obligation.</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info rv d1">
+        <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.07 9.8 2 2 0 012 2h3a2 2 0 012 1.72"/></svg></div><div><p class="ci-l">Phone</p><p class="ci-v">0400 000 000</p></div></div>
+        <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><p class="ci-l">Email</p><p class="ci-v">hello@groundworklandscaping.com.au</p></div></div>
+        <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><p class="ci-l">Service area</p><p class="ci-v">All Sydney metro. Free site visit within 25km of CBD.</p></div></div>
+        <div class="ci"><div class="ci-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div><p class="ci-l">Hours</p><p class="ci-v">Mon–Fri 7am–5pm<br>Sat 8am–2pm</p></div></div>
+      </div>
+      <div class="contact-form rv d2">
+        <div class="cf-row"><div class="cf-group"><label>Name</label><input type="text" placeholder="Jane Smith"/></div><div class="cf-group"><label>Phone</label><input type="tel" placeholder="0400 000 000"/></div></div>
+        <div class="cf-group"><label>Email</label><input type="email" placeholder="jane@email.com"/></div>
+        <div class="cf-group"><label>Service needed</label><select><option>Landscape design</option><option>Garden construction</option><option>Planting / turf</option><option>Regular maintenance</option><option>Irrigation</option><option>Not sure yet</option></select></div>
+        <div class="cf-group"><label>Property type</label><select><option>Residential — house</option><option>Residential — apartment/strata</option><option>Commercial</option></select></div>
+        <div class="cf-group"><label>Tell us about your project</label><textarea placeholder="Size of the space, what you have now, what you'd like..."></textarea></div>
+        <button class="cf-submit" onclick="this.textContent='Quote request sent — we\'ll be in touch soon'">Request free quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">Ground<em>work</em></div><p class="ftagline">Landscape design and construction across Sydney. Est. 2014.</p></div>
+      <div><p class="fcol-h">Services</p><ul class="flinks"><li><a href="#">Landscape Design</a></li><li><a href="#">Construction</a></li><li><a href="#">Planting</a></li><li><a href="#">Maintenance</a></li><li><a href="#">Commercial</a></li></ul></div>
+      <div><p class="fcol-h">Contact</p><ul class="flinks"><li><a href="#">0400 000 000</a></li><li><a href="#">hello@groundworklandscaping.com.au</a></li><li><a href="#">Sydney metro</a></li><li><a href="#">Instagram</a></li></ul></div>
+    </div>
+    <p class="fcopy">© 2025 Groundwork Landscaping Pty Ltd. ABN: XX XXX XXX XXX. Landscape contractor licence: XXXXXXXX.</p>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

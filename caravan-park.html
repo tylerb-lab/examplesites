@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Riverside Valley Holiday Park — Hawkesbury, NSW</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf8f4;
+  --bg2:#f2ede4;
+  --bg3:#e8e0d0;
+  --green:#2d4a28;
+  --green2:#4a7a3a;
+  --green3:#7aaa5a;
+  --sage:#8a9e7a;
+  --earth:#8b6040;
+  --earth2:#c49a6a;
+  --sky:#7aaac0;
+  --text:#1e2a18;
+  --text2:#5a6a50;
+  --text3:#8a9a80;
+  --white:#ffffff;
+  --border:rgba(45,74,40,.1);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 52px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.scrolled{background:rgba(250,248,244,.94);backdrop-filter:blur(16px);padding:14px 52px;box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-family:var(--serif);font-size:20px;color:var(--green);text-decoration:none;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.nav-logo span{display:block;font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);font-style:normal}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:13px;font-weight:400;color:var(--text2);text-decoration:none;letter-spacing:.02em;transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;font-size:13px;font-weight:500;padding:10px 24px;border-radius:100px;text-decoration:none;letter-spacing:.02em;transition:all .2s}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(45,74,40,.25)}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.nav-mobile-btn span{display:block;width:22px;height:2px;background:var(--green);margin:4px 0;transition:all .3s}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:linear-gradient(160deg,#e8f0e0 0%,#d4e8c8 40%,#c0d8b8 100%)}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+/* SVG landscape */
+.hero-landscape{position:absolute;bottom:0;left:0;right:0}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,248,244,0) 0%,rgba(250,248,244,.05) 60%,rgba(250,248,244,.4) 100%)}
+.hero-content{position:relative;z-index:2;padding:120px 52px 80px;max-width:700px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);border:1px solid rgba(45,74,40,.15);border-radius:100px;padding:6px 16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:28px;backdrop-filter:blur(8px)}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green3)}
+.hero h1{font-family:var(--serif);font-size:clamp(48px,6vw,84px);line-height:1.0;letter-spacing:-.02em;color:var(--green);margin-bottom:8px}
+.hero h1 em{font-style:italic;color:var(--earth)}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--text2);line-height:1.65;max-width:480px;margin:20px 0 40px;font-weight:300}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--green);color:#fff;font-size:15px;font-weight:500;padding:14px 32px;border-radius:100px;text-decoration:none;transition:all .2s;letter-spacing:.01em}
+.btn-primary:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 10px 28px rgba(45,74,40,.3)}
+.btn-outline{background:rgba(255,255,255,.6);color:var(--green);font-size:15px;font-weight:400;padding:14px 28px;border-radius:100px;text-decoration:none;border:1.5px solid rgba(45,74,40,.3);transition:all .2s;backdrop-filter:blur(8px)}
+.btn-outline:hover{background:rgba(255,255,255,.9);border-color:var(--green)}
+/* hero stats */
+.hero-stats{position:absolute;bottom:48px;left:52px;right:52px;display:flex;gap:0;z-index:2}
+.hstat{padding:20px 32px;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);display:flex;flex-direction:column;gap:3px}
+.hstat:first-child{border-radius:12px 0 0 12px}
+.hstat:last-child{border-radius:0 12px 12px 0}
+.hstat+.hstat{border-left:1px solid rgba(45,74,40,.08)}
+.hstat-n{font-family:var(--serif);font-size:26px;color:var(--green);font-weight:700;line-height:1}
+.hstat-l{font-size:11px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase}
+
+/* ── SECTION BASE ── */
+section{padding:100px 52px}
+.si{max-width:1200px;margin:0 auto}
+.sec-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-eyebrow::before{content:'';width:24px;height:1px;background:var(--sage)}
+.sec-h{font-family:var(--serif);font-size:clamp(34px,4vw,52px);line-height:1.1;letter-spacing:-.02em;color:var(--green);margin-bottom:14px}
+.sec-h em{font-style:italic;color:var(--earth)}
+.sec-body{font-size:16px;color:var(--text2);line-height:1.75;max-width:520px}
+
+/* ── ABOUT ── */
+.about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:0}
+.about-visual{position:relative}
+.about-img-main{width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#c8e0b8,#a8c898);position:relative}
+.about-img-main svg{position:absolute;inset:0;width:100%;height:100%}
+.about-img-accent{position:absolute;bottom:-24px;right:-24px;width:55%;aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#d8e8c8,#b8d4a8);border:4px solid var(--white);overflow:hidden}
+.about-tag{display:inline-block;background:var(--green);color:#fff;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:20px}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px}
+.about-features{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.af{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text2);background:var(--bg2);padding:7px 14px;border-radius:100px}
+.af::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green3)}
+
+/* ── ACCOMMODATION ── */
+.accommodation{background:var(--bg2)}
+.accom-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:60px}
+.accom-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.accom-card{background:var(--white);padding:36px;position:relative;transition:background .25s;cursor:default}
+.accom-card:hover{background:#f8fdf4}
+.accom-icon{width:52px;height:52px;border-radius:12px;background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.accom-icon svg{width:26px;height:26px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.accom-card h3{font-family:var(--serif);font-size:22px;color:var(--green);margin-bottom:10px;font-weight:700}
+.accom-card p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.accom-from{font-size:13px;color:var(--text3);margin-bottom:4px;letter-spacing:.02em}
+.accom-price{font-family:var(--serif);font-size:28px;color:var(--earth);font-weight:700;line-height:1}
+.accom-price span{font-family:var(--sans);font-size:12px;color:var(--text3);font-weight:300}
+.accom-badge{position:absolute;top:28px;right:28px;background:var(--green3);color:var(--white);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+
+/* ── AMENITIES ── */
+.amenities{background:var(--white)}
+.amen-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:64px}
+.amen-card{text-align:center;padding:32px 20px;border-radius:16px;border:1px solid var(--border);background:var(--bg);transition:all .25s}
+.amen-card:hover{background:var(--white);box-shadow:0 8px 32px rgba(45,74,40,.08);transform:translateY(-3px)}
+.amen-icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#e8f0e0,#d0e4c0);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.amen-icon svg{width:26px;height:26px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.amen-card h4{font-size:15px;font-weight:500;color:var(--green);margin-bottom:6px;letter-spacing:-.01em}
+.amen-card p{font-size:13px;color:var(--text3);line-height:1.55}
+
+/* ── PRICING ── */
+.pricing{background:var(--bg2)}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:60px}
+.price-card{background:var(--white);border-radius:16px;padding:32px 24px;border:1.5px solid var(--border);transition:all .25s;position:relative;overflow:hidden}
+.price-card:hover{border-color:var(--green);box-shadow:0 8px 32px rgba(45,74,40,.1)}
+.price-card.featured{border-color:var(--green);background:var(--green)}
+.price-card.featured .price-type,.price-card.featured .price-per,.price-card.featured .price-includes li{color:rgba(255,255,255,.75)}
+.price-card.featured .price-amount,.price-card.featured h3{color:#fff}
+.price-card.featured::before{content:'Most Popular';position:absolute;top:16px;right:16px;background:var(--green3);color:#fff;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px}
+.price-type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.price-card h3{font-family:var(--serif);font-size:20px;color:var(--green);margin-bottom:20px;font-weight:700}
+.price-amount{font-family:var(--serif);font-size:42px;color:var(--earth);font-weight:700;line-height:1;margin-bottom:4px}
+.price-amount sup{font-size:20px;vertical-align:super}
+.price-per{font-size:12px;color:var(--text3);margin-bottom:24px;letter-spacing:.04em}
+.price-includes{list-style:none;display:flex;flex-direction:column;gap:9px}
+.price-includes li{font-size:13px;color:var(--text2);display:flex;gap:9px;align-items:flex-start;line-height:1.4}
+.price-includes li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green3);flex-shrink:0;margin-top:5px}
+.price-note{font-size:11px;color:var(--text3);margin-top:16px;letter-spacing:.02em}
+
+/* ── LOCATION ── */
+.location{background:var(--white)}
+.location-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.map-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--bg2);aspect-ratio:4/3;position:relative}
+.map-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+.map-embed{width:100%;height:100%;border:none}
+.location-details{display:flex;flex-direction:column;gap:28px}
+.loc-item{display:flex;gap:16px;align-items:flex-start}
+.loc-icon{width:44px;height:44px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.loc-icon svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.loc-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.loc-value{font-size:15px;color:var(--text);font-weight:400;line-height:1.5}
+.directions-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:32px}
+.directions-list li{font-size:14px;color:var(--text2);display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.dir-num{font-family:var(--serif);font-size:13px;color:var(--earth);font-weight:700;flex-shrink:0;min-width:20px}
+
+/* ── CONTACT ── */
+.contact{background:linear-gradient(160deg,#e8f0e0 0%,#d4e8c4 100%)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.ci-item{display:flex;gap:14px;align-items:flex-start}
+.ci-icon{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;backdrop-filter:blur(8px)}
+.ci-icon svg{width:18px;height:18px;stroke:var(--green);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ci-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.ci-value{font-size:15px;color:var(--green);font-weight:400}
+/* form */
+.booking-form{background:rgba(255,255,255,.8);backdrop-filter:blur(16px);border-radius:20px;padding:40px;border:1px solid rgba(255,255,255,.9)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.form-group label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);font-weight:500}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-family:var(--sans);font-size:14px;color:var(--text);outline:none;transition:border-color .2s;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-submit{width:100%;background:var(--green);color:#fff;font-family:var(--sans);font-size:15px;font-weight:500;padding:15px;border-radius:100px;border:none;cursor:pointer;transition:all .2s;letter-spacing:.01em;margin-top:6px}
+.form-submit:hover{background:var(--green2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(45,74,40,.3)}
+.form-note{font-size:11px;color:var(--text3);text-align:center;margin-top:10px;letter-spacing:.03em}
+
+/* ── FOOTER ── */
+footer{background:var(--green);padding:60px 52px 32px;color:rgba(255,255,255,.7)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-logo{font-family:var(--serif);font-size:24px;color:#fff;font-weight:700;margin-bottom:12px}
+.footer-tagline{font-size:13px;line-height:1.7;color:rgba(255,255,255,.55);max-width:260px}
+.footer-col-h{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.35);letter-spacing:.04em}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rvl{opacity:0;transform:translateX(-28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rvr{opacity:0;transform:translateX(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rv.in,.rvl.in,.rvr.in{opacity:1;transform:translate(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+.d5{transition-delay:.4s}.d6{transition-delay:.48s}.d7{transition-delay:.56s}.d8{transition-delay:.64s}
+
+@media(max-width:960px){
+  nav{padding:16px 24px}
+  nav.scrolled{padding:14px 24px}
+  .nav-links,.nav-cta{display:none}
+  .nav-mobile-btn{display:block}
+  .hero-content{padding:100px 24px 140px}
+  .hero-stats{left:24px;right:24px;bottom:24px;flex-wrap:wrap}
+  .hstat{flex:1;min-width:140px}
+  section{padding:70px 24px}
+  .about-grid,.accom-intro,.location-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .about-img-accent{display:none}
+  .amen-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr 1fr}
+  .accom-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  footer{padding:48px 24px 24px}
+}
+@media(max-width:600px){
+  .amen-grid,.pricing-grid,.form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .hstat:nth-child(n+3){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Riverside Valley<span>Holiday Park</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#accommodation">Stay</a></li>
+    <li><a href="#amenities">Facilities</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#location">Find Us</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book Now</a>
+  <button class="nav-mobile-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <!-- illustrated landscape SVG -->
+    <svg class="hero-landscape" viewBox="0 0 1440 480" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- sky gradient -->
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c8e8d8"/>
+          <stop offset="100%" stop-color="#e8f4e0"/>
+        </linearGradient>
+        <linearGradient id="hillGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4a7a3a"/>
+          <stop offset="100%" stop-color="#2d4a28"/>
+        </linearGradient>
+        <linearGradient id="riverGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#7aaac0" stop-opacity=".6"/>
+          <stop offset="50%" stop-color="#a8c8d8" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#7aaac0" stop-opacity=".6"/>
+        </linearGradient>
+      </defs>
+      <!-- distant hills -->
+      <ellipse cx="300" cy="420" rx="400" ry="180" fill="#7aaa5a" opacity=".4"/>
+      <ellipse cx="1100" cy="440" rx="500" ry="200" fill="#5a9040" opacity=".3"/>
+      <!-- mid hills -->
+      <path d="M0 380 Q200 280 400 340 Q600 390 800 310 Q1000 240 1200 300 Q1350 340 1440 320 L1440 480 L0 480Z" fill="url(#hillGrad)"/>
+      <!-- river -->
+      <path d="M0 440 Q360 410 720 430 Q1080 450 1440 420 L1440 480 L0 480Z" fill="url(#riverGrad)"/>
+      <!-- trees left -->
+      <g opacity=".85">
+        <path d="M80 380 L80 340 M80 340 L60 310 L100 310 Z" stroke="#2d4a28" stroke-width="2" fill="#4a7a3a"/>
+        <path d="M80 330 L62 305 L98 305 Z" fill="#5a8a48"/>
+        <path d="M120 390 L120 355 M120 355 L100 325 L140 325 Z" stroke="#2d4a28" stroke-width="2" fill="#4a7a3a"/>
+        <path d="M120 345 L102 318 L138 318 Z" fill="#5a8a48"/>
+        <path d="M55 395 L55 368 M55 368 L40 345 L70 345 Z" fill="#3a6a28"/>
+      </g>
+      <!-- trees right -->
+      <g opacity=".7">
+        <path d="M1320 370 L1320 330 M1320 330 L1298 298 L1342 298 Z" fill="#4a7a3a"/>
+        <path d="M1320 320 L1300 292 L1340 292 Z" fill="#5a8a48"/>
+        <path d="M1370 380 L1370 348 M1370 348 L1352 322 L1388 322 Z" fill="#3a6a28"/>
+        <path d="M1280 385 L1280 358 M1280 358 L1264 336 L1296 336 Z" fill="#4a7a3a"/>
+      </g>
+      <!-- caravan (right mid) -->
+      <g transform="translate(1050,360)" opacity=".8">
+        <rect x="0" y="0" width="80" height="40" rx="6" fill="#f5f0e8" stroke="#8b6040" stroke-width="1.5"/>
+        <rect x="8" y="8" width="18" height="14" rx="2" fill="#a8c8d8" stroke="#8b6040" stroke-width="1"/>
+        <rect x="32" y="8" width="14" height="14" rx="2" fill="#a8c8d8" stroke="#8b6040" stroke-width="1"/>
+        <circle cx="14" cy="42" r="5" fill="#3a3020" stroke="#1a1008" stroke-width="1"/>
+        <circle cx="62" cy="42" r="5" fill="#3a3020" stroke="#1a1008" stroke-width="1"/>
+        <path d="M-8 36 L0 36" stroke="#8b6040" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <!-- tent -->
+      <g transform="translate(950,375)" opacity=".75">
+        <path d="M0 30 L25 0 L50 30Z" fill="#d4501a" stroke="#8b3010" stroke-width="1"/>
+        <path d="M10 30 L25 8 L40 30Z" fill="#b83a10"/>
+        <rect x="18" y="18" width="14" height="12" fill="#8b3010"/>
+      </g>
+      <!-- birds -->
+      <g stroke="#2d4a28" stroke-width="1.5" fill="none" opacity=".4">
+        <path d="M600 80 Q606 74 612 80"/>
+        <path d="M618 70 Q624 64 630 70"/>
+        <path d="M560 95 Q565 89 570 95"/>
+      </g>
+      <!-- sun -->
+      <circle cx="1300" cy="100" r="40" fill="#f0d070" opacity=".35"/>
+      <circle cx="1300" cy="100" r="28" fill="#f0d880" opacity=".4"/>
+    </svg>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Hawkesbury River, NSW</div>
+    <h1>Where the river<br><em>meets the bush.</em></h1>
+    <p class="hero-sub">Nestled on the banks of the Hawkesbury River, our park is your base for fishing, kayaking, bushwalking and doing absolutely nothing — beautifully.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Check availability</a>
+      <a href="#accommodation" class="btn-outline">View sites & cabins</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">4.9★</div><div class="hstat-l">Guest rating</div></div>
+    <div class="hstat"><div class="hstat-n">120+</div><div class="hstat-l">Sites & cabins</div></div>
+    <div class="hstat"><div class="hstat-n">5min</div><div class="hstat-l">To the river</div></div>
+    <div class="hstat"><div class="hstat-n">1hr</div><div class="hstat-l">From Sydney CBD</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-visual rvl">
+        <div class="about-img-main">
+          <svg viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c0dce8"/><stop offset="100%" stop-color="#d8ecd4"/></linearGradient>
+            </defs>
+            <rect width="600" height="450" fill="url(#skyA)"/>
+            <ellipse cx="300" cy="480" rx="350" ry="160" fill="#4a7a3a"/>
+            <ellipse cx="100" cy="420" rx="120" ry="80" fill="#3a6028"/>
+            <ellipse cx="500" cy="410" rx="140" ry="90" fill="#5a8838"/>
+            <!-- River -->
+            <path d="M0 360 Q150 340 300 360 Q450 380 600 355 L600 450 L0 450Z" fill="#7aaac0" opacity=".7"/>
+            <!-- Trees -->
+            <path d="M80 340 L80 280 M80 280 L55 240 L105 240Z" fill="#2d4a28" stroke="#1a3018" stroke-width="1"/>
+            <path d="M80 270 L57 234 L103 234Z" fill="#3a6028"/>
+            <path d="M200 360 L200 310 M200 310 L178 272 L222 272Z" fill="#4a7a38"/>
+            <path d="M200 300 L180 266 L220 266Z" fill="#5a8a48"/>
+            <!-- Cabin -->
+            <rect x="340" y="290" width="120" height="80" fill="#e8d4b8" stroke="#8b6040" stroke-width="2"/>
+            <path d="M330 290 L400 240 L470 290Z" fill="#c49a6a" stroke="#8b6040" stroke-width="2"/>
+            <rect x="360" y="330" width="30" height="40" fill="#5a3010"/>
+            <rect x="400" y="305" width="28" height="22" rx="2" fill="#a8c8d8" stroke="#8b6040" stroke-width="1"/>
+            <!-- Sun reflection -->
+            <ellipse cx="450" cy="380" rx="60" ry="12" fill="#f0d880" opacity=".3"/>
+          </svg>
+        </div>
+        <div class="about-img-accent">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="#d4e8c4"/>
+            <circle cx="150" cy="120" r="60" fill="#a8c898" opacity=".6"/>
+            <path d="M80 220 Q150 180 220 220 L220 300 L80 300Z" fill="#4a7a38"/>
+            <path d="M120 200 L120 160 M120 160 L100 135 L140 135Z" fill="#2d4a28"/>
+            <path d="M170 210 L170 175 M170 175 L152 150 L188 150Z" fill="#3a6028"/>
+            <circle cx="150" cy="80" r="25" fill="#f0d070" opacity=".6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="about-text rvr">
+        <span class="about-tag">Est. 1982</span>
+        <p class="sec-eyebrow">About the park</p>
+        <h2 class="sec-h">More than just a<br><em>campsite.</em></h2>
+        <p>Riverside Valley Holiday Park has been welcoming families, couples and solo adventurers to the Hawkesbury for over 40 years. Set across 12 hectares of river flat and bushland, we're a proper park — not a car park with grass.</p>
+        <p>Whether you're pulling in with a caravan, pitching a tent under the stars, or settling into one of our self-contained cabins, you'll find yourself genuinely away from it all — while still being just an hour from Sydney.</p>
+        <div class="about-features">
+          <span class="af">Pet friendly</span>
+          <span class="af">Direct river access</span>
+          <span class="af">Free Wi-Fi</span>
+          <span class="af">Camp kitchen</span>
+          <span class="af">Kids playground</span>
+          <span class="af">Boat ramp</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOMMODATION -->
+<section class="accommodation" id="accommodation">
+  <div class="si">
+    <div class="accom-intro">
+      <div>
+        <p class="sec-eyebrow rv">Accommodation</p>
+        <h2 class="sec-h rv d1">Find your<br><em>perfect site.</em></h2>
+      </div>
+      <p class="sec-body rv d2">From unpowered tent sites to fully equipped cabins, we have something for every style of getaway. All sites are spacious and most have river or bush views.</p>
+    </div>
+    <div class="accom-grid">
+      <div class="accom-card rv d1">
+        <div class="accom-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="accom-badge">Most popular</span>
+        <h3>Self-Contained Cabins</h3>
+        <p>Fully equipped with kitchen, bathroom, air conditioning and private deck. Linen included. Sleeps 2–6 depending on configuration. Several have direct water views.</p>
+        <p class="accom-from">From</p>
+        <p class="accom-price">$185<span>/night</span></p>
+      </div>
+      <div class="accom-card rv d2">
+        <div class="accom-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <h3>Ensuite Sites</h3>
+        <p>Powered sites with your own private bathroom and hot shower. Perfect for caravans and motorhomes wanting the comforts of home without giving up the outdoor experience.</p>
+        <p class="accom-from">From</p>
+        <p class="accom-price">$72<span>/night</span></p>
+      </div>
+      <div class="accom-card rv d3">
+        <div class="accom-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3>Powered Sites</h3>
+        <p>Generous hardstand and grass powered sites with 15A and 20A connections available. Level sites suitable for all caravan and motorhome configurations up to 12 metres.</p>
+        <p class="accom-from">From</p>
+        <p class="accom-price">$52<span>/night</span></p>
+      </div>
+      <div class="accom-card rv d4">
+        <div class="accom-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l8-8 8 8v10"/><path d="M10 20v-6h4v6"/></svg>
+        </div>
+        <h3>Unpowered Sites</h3>
+        <p>Flat grassed unpowered sites for tents, campervans and caravans. Set amongst the gums with shared amenities nearby. Some sites have river outlook — ask when booking.</p>
+        <p class="accom-from">From</p>
+        <p class="accom-price">$36<span>/night</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities" id="amenities">
+  <div class="si">
+    <p class="sec-eyebrow rv">Facilities</p>
+    <h2 class="sec-h rv d1">Everything you<br><em>need on-site.</em></h2>
+    <div class="amen-grid">
+      <div class="amen-card rv d1">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0014 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 01-11.91 4.97"/></svg></div>
+        <h4>Camp Kitchen</h4>
+        <p>Full camp kitchen with gas BBQs, sinks, microwaves and communal dining area</p>
+      </div>
+      <div class="amen-card rv d2">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 00-1-1h-4a1 1 0 00-1 1v8"/><path d="M3 10l2.5-2.5M3 10h18M21 10l-2.5-2.5M5 10V6a1 1 0 011-1h12a1 1 0 011 1v4M3 21h18"/></svg></div>
+        <h4>Modern Amenities</h4>
+        <p>Spotless shower and toilet blocks, laundry facilities and accessible bathrooms</p>
+      </div>
+      <div class="amen-card rv d3">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Free Wi-Fi</h4>
+        <p>High-speed Wi-Fi throughout the park. Strong signal at most sites and all common areas</p>
+      </div>
+      <div class="amen-card rv d4">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div>
+        <h4>Kids Playground</h4>
+        <p>Safe, shaded playground with modern equipment for children of all ages</p>
+      </div>
+      <div class="amen-card rv d5">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .17h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+        <h4>Boat Ramp</h4>
+        <p>Private boat ramp and jetty with direct Hawkesbury River access for fishing and boating</p>
+      </div>
+      <div class="amen-card rv d6">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <h4>24hr Reception</h4>
+        <p>On-call park management day and night. Late arrivals welcome with prior arrangement</p>
+      </div>
+      <div class="amen-card rv d7">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg></div>
+        <h4>Camp Store</h4>
+        <p>Basic supplies, ice, firewood, bait and gas available from the camp store daily</p>
+      </div>
+      <div class="amen-card rv d8">
+        <div class="amen-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <h4>Pet Friendly</h4>
+        <p>Well-behaved pets welcome on sites and in designated pet-friendly cabins. Dog wash available</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="si">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:0">
+      <div>
+        <p class="sec-eyebrow rv">Rates</p>
+        <h2 class="sec-h rv d1">Simple,<br><em>honest pricing.</em></h2>
+      </div>
+      <p class="sec-body rv d2" style="margin-bottom:0">All rates are per night for 2 adults. Extra adults $15/night, children under 16 free. Peak season surcharges apply over school holidays and long weekends.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card rv d1">
+        <p class="price-type">Tent / Swag</p>
+        <h3>Unpowered Site</h3>
+        <div class="price-amount"><sup>$</sup>36</div>
+        <p class="price-per">per night, 2 adults</p>
+        <ul class="price-includes">
+          <li>Flat grassed site</li>
+          <li>Shared amenities access</li>
+          <li>Free Wi-Fi</li>
+          <li>Camp kitchen use</li>
+          <li>Pets welcome</li>
+        </ul>
+        <p class="price-note">Min. 2 night stay weekends</p>
+      </div>
+      <div class="price-card rv d2">
+        <p class="price-type">Caravan / Motorhome</p>
+        <h3>Powered Site</h3>
+        <div class="price-amount"><sup>$</sup>52</div>
+        <p class="price-per">per night, 2 adults</p>
+        <ul class="price-includes">
+          <li>15A or 20A power</li>
+          <li>Water connection</li>
+          <li>Shared amenities</li>
+          <li>Free Wi-Fi</li>
+          <li>Up to 12m rigs</li>
+        </ul>
+        <p class="price-note">Dump point on site</p>
+      </div>
+      <div class="price-card featured rv d3">
+        <p class="price-type">Caravan / Motorhome</p>
+        <h3>Ensuite Site</h3>
+        <div class="price-amount"><sup>$</sup>72</div>
+        <p class="price-per">per night, 2 adults</p>
+        <ul class="price-includes">
+          <li>Private bathroom & shower</li>
+          <li>20A power connection</li>
+          <li>Water & grey water</li>
+          <li>Free Wi-Fi</li>
+          <li>Premium locations</li>
+        </ul>
+        <p class="price-note" style="color:rgba(255,255,255,.4)">Limited availability</p>
+      </div>
+      <div class="price-card rv d4">
+        <p class="price-type">Self-Contained</p>
+        <h3>Cabin</h3>
+        <div class="price-amount"><sup>$</sup>185</div>
+        <p class="price-per">per night, 2 adults</p>
+        <ul class="price-includes">
+          <li>Full kitchen & bathroom</li>
+          <li>Air conditioning & heating</li>
+          <li>Linen & towels included</li>
+          <li>Private deck</li>
+          <li>Sleeps up to 6</li>
+        </ul>
+        <p class="price-note">Min. 2 night stay always</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <div class="si">
+    <p class="sec-eyebrow rv">Getting here</p>
+    <h2 class="sec-h rv d1">Easy to find,<br><em>hard to leave.</em></h2>
+    <div class="location-grid">
+      <div class="map-wrap rv">
+        <iframe
+          class="map-embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d424143.9002539247!2d150.5153689!3d-33.5522878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b0d7e7f3f3f3f3f%3A0x0!2sHawkesbury%20NSW!5e0!3m2!1sen!2sau!4v1234567890"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Riverside Valley Holiday Park location">
+        </iframe>
+      </div>
+      <div class="rvr">
+        <div class="location-details">
+          <div class="loc-item">
+            <div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <p class="loc-label">Address</p>
+              <p class="loc-value">123 River Road<br>Yarramundi NSW 2753</p>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+            <div>
+              <p class="loc-label">Distance from Sydney</p>
+              <p class="loc-value">58km — approx. 1 hour via Windsor Road or M7/M2</p>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .17h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+            <div>
+              <p class="loc-label">Phone</p>
+              <p class="loc-value">(02) 4578 0000</p>
+            </div>
+          </div>
+          <div class="loc-item">
+            <div class="loc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div>
+              <p class="loc-label">Email</p>
+              <p class="loc-value">hello@riversidevalleypark.com.au</p>
+            </div>
+          </div>
+        </div>
+        <ul class="directions-list">
+          <li><span class="dir-num">01</span>From Sydney, take the M7 north to Windsor Road (Route 40)</li>
+          <li><span class="dir-num">02</span>Follow Windsor Road through Richmond to Windsor</li>
+          <li><span class="dir-num">03</span>Turn left onto River Road at Yarramundi Bridge</li>
+          <li><span class="dir-num">04</span>Park entrance is 2.3km on the right — look for the green gates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / BOOKING -->
+<section class="contact" id="contact">
+  <div class="si">
+    <p class="sec-eyebrow rv">Bookings</p>
+    <h2 class="sec-h rv d1">Ready to<br><em>get away?</em></h2>
+    <div class="contact-grid">
+      <div class="rvl">
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:36px">Send us your preferred dates and we'll get back to you within a few hours to confirm availability and lock in your stay. For urgent bookings please call directly.</p>
+        <div class="contact-info">
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .17h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg></div>
+            <div><p class="ci-label">Phone</p><p class="ci-value">(02) 4578 0000</p></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><p class="ci-label">Email</p><p class="ci-value">hello@riversidevalleypark.com.au</p></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+            <div><p class="ci-label">Office hours</p><p class="ci-value">Mon–Sun, 8am–6pm<br>After hours: call for late arrivals</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="booking-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" placeholder="Jane"/>
+            </div>
+            <div class="form-group">
+              <label>Last name</label>
+              <input type="text" placeholder="Smith"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="jane@email.com"/>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="04xx xxx xxx"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Check-in</label>
+              <input type="date"/>
+            </div>
+            <div class="form-group">
+              <label>Check-out</label>
+              <input type="date"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Accommodation type</label>
+            <select>
+              <option value="">Select...</option>
+              <option>Unpowered Site</option>
+              <option>Powered Site</option>
+              <option>Ensuite Site</option>
+              <option>Self-Contained Cabin</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message (optional)</label>
+            <textarea placeholder="Rig size, number of guests, special requests..."></textarea>
+          </div>
+          <button class="form-submit" type="button" onclick="this.textContent='Enquiry sent — we\'ll be in touch shortly!';this.style.background='var(--green2)'">Send enquiry</button>
+          <p class="form-note">We respond within a few hours during office hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Riverside Valley<br>Holiday Park</div>
+        <p class="footer-tagline">Where the Hawkesbury River meets the bush. A proper park for proper getaways.</p>
+      </div>
+      <div>
+        <p class="footer-col-h">Stay</p>
+        <ul class="footer-links">
+          <li><a href="#accommodation">Cabins</a></li>
+          <li><a href="#accommodation">Ensuite Sites</a></li>
+          <li><a href="#accommodation">Powered Sites</a></li>
+          <li><a href="#accommodation">Unpowered Sites</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-h">Info</p>
+        <ul class="footer-links">
+          <li><a href="#about">About the park</a></li>
+          <li><a href="#amenities">Facilities</a></li>
+          <li><a href="#pricing">Rates</a></li>
+          <li><a href="#location">Getting here</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-h">Contact</p>
+        <ul class="footer-links">
+          <li><a href="tel:0245780000">(02) 4578 0000</a></li>
+          <li><a href="mailto:hello@riversidevalleypark.com.au">Email us</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Riverside Valley Holiday Park. 123 River Road, Yarramundi NSW 2753.</span>
+      <span class="footer-copy">ABN: XX XXX XXX XXX</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el));
+
+// Magnetic buttons
+document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta,.form-submit').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.15;
+    const y=(e.clientY-r.top-r.height/2)*.15;
+    btn.style.transform=`translate(${x}px,${y}px) translateY(-2px)`;
+  });
+  btn.addEventListener('mouseleave',()=>btn.style.transform='');
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+</script>
+</body>
+</html>

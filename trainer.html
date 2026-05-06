@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Jordan Mack — Personal Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0c10;--bg2:#111418;--surface:#181c22;--lime:#b8e040;--lime2:#d0f060;--text:#e8edf2;--text2:#6a7888;--border:rgba(184,224,64,.12);--display:'Barlow Condensed',sans-serif;--sans:'Barlow',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:18px 52px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(10,12,16,.95);backdrop-filter:blur(12px);padding:12px 52px;border-bottom:1px solid rgba(255,255,255,.05)}
+.nlogo{font-family:var(--display);font-size:24px;font-weight:800;letter-spacing:.06em;color:var(--text);text-decoration:none}
+.nlogo span{color:var(--lime)}
+.nlinks{display:flex;gap:28px;list-style:none}
+.nlinks a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--text)}
+.ncta{background:var(--lime);color:var(--bg);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;text-decoration:none;border-radius:2px;transition:all .2s}.ncta:hover{background:var(--lime2)}
+/* hero */
+.hero{min-height:100vh;background:var(--bg);display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 60px;position:relative;overflow:hidden}
+.hero-bg-text{position:absolute;top:50%;left:-2%;transform:translateY(-50%);font-family:var(--display);font-size:28vw;font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none;letter-spacing:-.02em}
+.hero-stripe{position:absolute;top:0;left:52px;bottom:0;width:2px;background:var(--lime);opacity:.3}
+.hero-eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--lime)}
+.hero h1{font-family:var(--display);font-size:clamp(72px,11vw,160px);font-weight:900;line-height:.85;letter-spacing:-.02em;color:var(--text);margin-bottom:32px;position:relative;z-index:1}
+.hero h1 em{color:var(--lime);font-style:normal}
+.hero-bottom{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;position:relative;z-index:1}
+.hero-sub{font-size:16px;color:var(--text2);line-height:1.7;max-width:420px}
+.hero-btns{display:flex;gap:12px;justify-content:flex-end}
+.btn-p{background:var(--lime);color:var(--bg);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:14px 30px;text-decoration:none;border-radius:2px;transition:all .2s}.btn-p:hover{background:var(--lime2)}
+.btn-o{color:var(--text2);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:14px 24px;text-decoration:none;border:1px solid rgba(255,255,255,.1);border-radius:2px;transition:all .2s}.btn-o:hover{border-color:rgba(255,255,255,.3);color:var(--text)}
+/* stats bar */
+.stats-bar{background:var(--surface);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);padding:0;display:flex}
+.stat-cell{flex:1;padding:24px 32px;text-align:center;border-right:1px solid rgba(255,255,255,.05)}.stat-cell:last-child{border-right:none}
+.sc-n{font-family:var(--display);font-size:32px;font-weight:800;color:var(--lime);line-height:1;margin-bottom:4px;letter-spacing:.02em}
+.sc-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2)}
+/* sections */
+section{padding:90px 52px}
+.si{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--lime);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--lime)}
+.sh{font-family:var(--display);font-size:clamp(42px,5vw,72px);font-weight:800;line-height:.9;letter-spacing:.02em;color:var(--text);margin-bottom:14px}
+.sh em{color:var(--lime);font-style:normal}
+/* services */
+.services{background:var(--bg2)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.04);margin-top:52px}
+.svc-card{background:var(--bg2);padding:36px;border-top:2px solid transparent;transition:all .2s}.svc-card:hover{background:var(--surface);border-top-color:var(--lime)}
+.svc-num{font-family:var(--display);font-size:13px;font-weight:800;color:var(--lime);letter-spacing:.1em;margin-bottom:16px;opacity:.6}
+.svc-card h3{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:10px}
+.svc-card p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.svc-price{font-family:var(--display);font-size:20px;font-weight:700;color:var(--lime);letter-spacing:.04em}
+/* testimonials */
+.testimonials{background:var(--bg)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.03);margin-top:52px}
+.test-card{background:var(--bg);padding:32px;border-left:2px solid transparent;transition:all .2s}.test-card:hover{background:var(--surface);border-left-color:var(--lime)}
+.test-stars{font-size:14px;color:var(--lime);margin-bottom:14px;letter-spacing:2px}
+.test-card p{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:20px;font-style:italic}
+.test-author{font-size:12px;font-weight:500;color:var(--text);letter-spacing:.06em}
+.test-result{font-size:11px;color:var(--lime);letter-spacing:.08em;margin-top:2px}
+/* about */
+.about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img{aspect-ratio:3/4;background:linear-gradient(135deg,#1a2030,#101418);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.05)}
+.about-img svg{opacity:.08}
+.about-text .sh{margin-bottom:20px}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:18px}
+.about-creds{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.cred{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);background:rgba(184,224,64,.08);border:1px solid rgba(184,224,64,.15);padding:5px 14px;border-radius:2px}
+/* booking */
+.booking{background:var(--lime);padding:80px 52px}
+.booking-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.booking-text .eyebrow{color:rgba(10,12,16,.4)}
+.booking-text .eyebrow::before{background:var(--bg)}
+.booking-text .sh{color:var(--bg)}
+.booking-text p{font-size:15px;color:rgba(10,12,16,.55);line-height:1.75;margin-top:16px}
+.booking-form{display:flex;flex-direction:column;gap:12px}
+.bf-group{display:flex;flex-direction:column;gap:5px}
+.bf-group label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,12,16,.45);font-weight:600}
+.bf-group input,.bf-group select{background:rgba(10,12,16,.08);border:1px solid rgba(10,12,16,.12);padding:12px 14px;font-family:var(--sans);font-size:14px;color:var(--bg);outline:none;border-radius:2px;transition:border-color .2s}.bf-group input::placeholder{color:rgba(10,12,16,.3)}.bf-group input:focus,.bf-group select:focus{border-color:var(--bg)}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bf-submit{background:var(--bg);color:var(--lime);font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:all .2s;margin-top:4px;border-radius:2px}.bf-submit:hover{background:var(--bg2)}
+/* footer */
+footer{background:var(--bg2);padding:48px 52px 24px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.flogo{font-family:var(--display);font-size:22px;font-weight:800;letter-spacing:.06em;color:var(--text);margin-bottom:10px}
+.flogo span{color:var(--lime)}
+.ftagline{font-size:13px;color:var(--text2);line-height:1.65}
+.fcol-h{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text2);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}.flinks a:hover{color:var(--text)}
+.fcopy{border-top:1px solid rgba(255,255,255,.05);padding-top:20px;font-size:11px;color:var(--text2);letter-spacing:.04em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+@media(max-width:900px){nav{padding:14px 24px}nav.s{padding:12px 24px}.nlinks{display:none}.hero{padding:0 24px 48px}.hero-bg-text{display:none}.hero-stripe{left:24px}.hero-bottom{grid-template-columns:1fr}.hero-btns{justify-content:flex-start}.stats-bar{display:grid;grid-template-columns:1fr 1fr}.svc-grid{grid-template-columns:1fr}.test-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.booking-inner{grid-template-columns:1fr}.booking{padding:60px 24px}.bf-row{grid-template-columns:1fr}section{padding:70px 24px}.footer-top{grid-template-columns:1fr;gap:28px}footer{padding:36px 24px 20px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">JM<span>.</span></a>
+  <ul class="nlinks"><li><a href="#services">Training</a></li><li><a href="#about">About</a></li><li><a href="#booking">Book</a></li></ul>
+  <a href="#booking" class="ncta">Start now</a>
+</nav>
+<section class="hero">
+  <div class="hero-bg-text">MOVE</div>
+  <div class="hero-stripe"></div>
+  <p class="hero-eyebrow">Personal Trainer — Sydney</p>
+  <h1>BUILD<br>YOUR<br><em>BEST.</em></h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">Strength training, conditioning and nutrition coaching for people who want to actually change — not just try. Results-first. No fluff.</p>
+    <div class="hero-btns"><a href="#booking" class="btn-p">Book a session</a><a href="#services" class="btn-o">View programs</a></div>
+  </div>
+</section>
+<div class="stats-bar">
+  <div class="stat-cell"><div class="sc-n">8+</div><div class="sc-l">Years coaching</div></div>
+  <div class="stat-cell"><div class="sc-n">200+</div><div class="sc-l">Clients trained</div></div>
+  <div class="stat-cell"><div class="sc-n">Cert IV</div><div class="sc-l">Fitness & PT</div></div>
+  <div class="stat-cell"><div class="sc-n">100%</div><div class="sc-l">Dedicated to results</div></div>
+</div>
+<section class="services" id="services">
+  <div class="si">
+    <p class="eyebrow rv">Programs</p>
+    <h2 class="sh rv d1">PICK YOUR<br><em>PROGRAM.</em></h2>
+    <div class="svc-grid">
+      <div class="svc-card rv d1"><p class="svc-num">01</p><h3>1-ON-1 PT</h3><p>Fully personalised sessions. Strength programming, technique coaching and accountability built around your goals and schedule.</p><p class="svc-price">From $100/session</p></div>
+      <div class="svc-card rv d2"><p class="svc-num">02</p><h3>ONLINE COACHING</h3><p>Custom program delivered via app. Weekly check-ins, video form feedback and nutrition guidance. Train anywhere, any time.</p><p class="svc-price">From $220/month</p></div>
+      <div class="svc-card rv d3"><p class="svc-num">03</p><h3>SEMI-PRIVATE</h3><p>Train with 1–2 others. Shared cost, same quality programming. Great for couples, friends or work colleagues.</p><p class="svc-price">From $65/session</p></div>
+    </div>
+  </div>
+</section>
+<section class="testimonials" id="testimonials">
+  <div class="si">
+    <p class="eyebrow rv">Results</p>
+    <h2 class="sh rv d1">WHAT CLIENTS<br><em>SAY.</em></h2>
+    <div class="test-grid">
+      <div class="test-card rv d1"><div class="test-stars">★★★★★</div><p>"I've trained with other PTs before but Jordan is different. He actually explains why. I understand my body now and I've never been stronger."</p><div class="test-author">Sarah K.</div><div class="test-result">↑ Lost 14kg in 6 months</div></div>
+      <div class="test-card rv d2"><div class="test-stars">★★★★★</div><p>"Went from never lifting to deadlifting 120kg in 8 months. The programming is smart, the coaching is direct. No wasted time in sessions."</p><div class="test-author">Marcus T.</div><div class="test-result">↑ 120kg deadlift, 8 months</div></div>
+      <div class="test-card rv d3"><div class="test-stars">★★★★★</div><p>"Online coaching works better than I expected. Detailed feedback, flexible programming, always available when I have questions."</p><div class="test-author">Priya M.</div><div class="test-result">↑ 6 month transformation</div></div>
+    </div>
+  </div>
+</section>
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-img rv"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#e8edf2" stroke-width=".6"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div>
+      <div class="about-text rv d1">
+        <p class="eyebrow">About Jordan</p>
+        <h2 class="sh">COACHING<br>WITH <em>PURPOSE.</em></h2>
+        <p>I've been working in strength and conditioning for 8 years. I specialise in helping everyday people build real, lasting strength — not just aesthetics, but performance and longevity.</p>
+        <p>My approach is evidence-based and direct. I don't believe in gimmicks, crash programs or protocols that aren't sustainable long-term. Just progressive overload, consistent effort, and smart recovery.</p>
+        <div class="about-creds">
+          <span class="cred">Cert IV Fitness</span>
+          <span class="cred">Cert III & IV PT</span>
+          <span class="cred">Precision Nutrition L1</span>
+          <span class="cred">ASCA Accredited</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-text"><p class="eyebrow rv">Get started</p><h2 class="sh rv d1">BOOK YOUR<br>FREE CONSULT.</h2><p class="rv d2">30 minutes. No charge. We'll talk about your goals, what's held you back, and whether we're a good fit. No hard sell.</p></div>
+    <div class="booking-form rv d2">
+      <div class="bf-row"><div class="bf-group"><label>Name</label><input type="text" placeholder="John Smith"/></div><div class="bf-group"><label>Phone</label><input type="tel" placeholder="0400 000 000"/></div></div>
+      <div class="bf-group"><label>Email</label><input type="email" placeholder="john@email.com"/></div>
+      <div class="bf-group"><label>I'm interested in</label><select><option>1-on-1 PT</option><option>Online coaching</option><option>Semi-private</option><option>Not sure yet</option></select></div>
+      <div class="bf-group"><label>What's your main goal?</label><select><option>Build strength</option><option>Lose body fat</option><option>Improve fitness</option><option>Rehab / injury recovery</option><option>Athletic performance</option></select></div>
+      <button class="bf-submit" onclick="this.textContent='Request sent — I\'ll be in touch within 24hrs'">Book free consult</button>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">JM<span>.</span></div><p class="ftagline">Personal training and online coaching in Sydney. Results-first, no fluff.</p></div>
+      <div><p class="fcol-h">Programs</p><ul class="flinks"><li><a href="#">1-on-1 PT</a></li><li><a href="#">Online coaching</a></li><li><a href="#">Semi-private</a></li></ul></div>
+      <div><p class="fcol-h">Connect</p><ul class="flinks"><li><a href="#">0400 000 000</a></li><li><a href="#">jordan@jmtraining.com.au</a></li><li><a href="#">Instagram</a></li><li><a href="#">Based in Sydney</a></li></ul></div>
+    </div>
+    <p class="fcopy">© 2025 Jordan Mack Training. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

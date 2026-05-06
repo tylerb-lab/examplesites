@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Harlow & Associates — Solicitors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f5f3ee;--bg2:#ede9e0;--white:#fff;--ink:#0e0c08;--bronze:#8a6a30;--bronze2:#b08840;--light:#d8d0c0;--text2:#5a5040;--text3:#9a9080;--border:rgba(14,12,8,.1);--serif:'EB Garamond',serif;--sans:'Manrope',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(245,243,238,.97);backdrop-filter:blur(16px);padding:13px 60px;border-bottom:1px solid var(--light)}
+.nlogo{font-family:var(--serif);font-size:20px;color:var(--ink);text-decoration:none;letter-spacing:.03em}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--ink)}
+.ncta{background:var(--ink);color:#fff;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;text-decoration:none;transition:all .2s}.ncta:hover{background:var(--bronze)}
+/* hero */
+.hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative}
+.hero-pattern{position:absolute;inset:0;opacity:.03;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,1) 0,rgba(255,255,255,1) 1px,transparent 0,transparent 60px),repeating-linear-gradient(90deg,rgba(255,255,255,1) 0,rgba(255,255,255,1) 1px,transparent 0,transparent 60px)}
+.hero-l{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px;border-right:1px solid rgba(255,255,255,.06)}
+.hero-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze2);margin-bottom:24px;opacity:.8}
+.hero h1{font-family:var(--serif);font-size:clamp(52px,5.5vw,84px);line-height:.95;color:#fff;letter-spacing:-.01em;margin-bottom:32px}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.45)}
+.hero-divider{width:40px;height:1px;background:var(--bronze);margin-bottom:32px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.4);line-height:1.8;max-width:380px;margin-bottom:48px}
+.hero-btns{display:flex;gap:12px}
+.btn-p{background:var(--bronze);color:#fff;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:13px 28px;text-decoration:none;transition:all .2s}.btn-p:hover{background:var(--bronze2)}
+.btn-o{color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .2s}.btn-o:hover{border-color:rgba(255,255,255,.35);color:#fff}
+.hero-r{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px}
+.hero-quote{font-family:var(--serif);font-size:19px;font-style:italic;color:rgba(255,255,255,.25);line-height:1.55;margin-bottom:48px;max-width:340px}
+.hero-stats{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05)}
+.hs-row{background:rgba(255,255,255,.02);padding:18px 24px;display:flex;align-items:baseline;gap:16px}
+.hs-n{font-family:var(--serif);font-size:24px;color:rgba(255,255,255,.6);min-width:60px}
+.hs-l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+/* sections */
+section{padding:90px 60px}
+.si{max-width:1120px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze);margin-bottom:12px}
+.sh{font-family:var(--serif);font-size:clamp(34px,4vw,54px);line-height:1.0;color:var(--ink);margin-bottom:14px;letter-spacing:-.01em}
+.sh em{font-style:italic}
+/* practice areas */
+.practice{background:var(--white)}
+.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--light);border:1px solid var(--light);margin-top:52px}
+.pa-card{background:var(--white);padding:40px 32px;border-top:2px solid transparent;transition:all .25s}.pa-card:hover{border-top-color:var(--bronze);background:var(--bg2)}
+.pa-card h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:10px}
+.pa-card p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.pa-link{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);text-decoration:none;display:flex;align-items:center;gap:6px;transition:gap .2s}.pa-link:hover{gap:10px}
+/* team */
+.team{background:var(--bg2)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--light);border:1px solid var(--light);margin-top:52px}
+.tc{background:var(--bg2);padding:36px 32px;transition:background .2s}.tc:hover{background:var(--white)}
+.tc-photo{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#d0c8b8,#c0b8a8);margin-bottom:20px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tc-photo svg{opacity:.2}
+.tc h4{font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:4px}
+.tc-role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);margin-bottom:10px}
+.tc-quals{font-size:12px;color:var(--text2);line-height:1.55}
+/* contact */
+.contact{background:var(--white)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:52px}
+.contact-form{background:var(--bg);padding:36px;border:1px solid var(--border)}
+.cf-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.cf-group label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);font-weight:500}
+.cf-group input,.cf-group select,.cf-group textarea{background:var(--white);border:1px solid var(--border);padding:12px 14px;font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;transition:border-color .2s;width:100%}.cf-group input:focus,.cf-group select:focus{border-color:var(--bronze)}
+.cf-group textarea{resize:vertical;min-height:80px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cf-submit{background:var(--ink);color:#fff;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:background .2s;width:100%;margin-top:4px}.cf-submit:hover{background:var(--bronze)}
+.contact-info{display:flex;flex-direction:column;gap:28px}
+.ci{display:flex;gap:14px;align-items:flex-start}
+.ci-bar{width:2px;background:var(--bronze);align-self:stretch;flex-shrink:0;opacity:.4}
+.ci-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.ci-v{font-size:14px;color:var(--text2);line-height:1.6}
+.disclaimer{font-size:11px;color:var(--text3);line-height:1.6;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+/* footer */
+footer{background:var(--ink);padding:52px 60px 24px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:36px}
+.flogo{font-family:var(--serif);font-size:20px;color:rgba(255,255,255,.7);margin-bottom:10px}
+.ftagline{font-size:13px;color:rgba(255,255,255,.3);line-height:1.65;max-width:240px}
+.fcol-h{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}.flinks a:hover{color:#fff}
+.fcopy{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.04em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){nav{padding:14px 24px}nav.s{padding:12px 24px}.nlinks{display:none}.hero{grid-template-columns:1fr}.hero-l{padding:110px 24px 50px}.hero-r{padding:40px 24px 60px}.practice-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.cf-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr;gap:28px}section{padding:70px 24px}footer{padding:40px 24px 20px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">Harlow & Associates</a>
+  <ul class="nlinks"><li><a href="#practice">Practice Areas</a></li><li><a href="#team">Our Team</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a href="#contact" class="ncta">Free consultation</a>
+</nav>
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-l">
+    <p class="hero-eyebrow">Solicitors — Sydney, NSW</p>
+    <h1>Trusted<br>legal <em>counsel.</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Commercial law, property, employment and estate planning. Clear advice, practical outcomes, no unnecessary complexity.</p>
+    <div class="hero-btns"><a href="#contact" class="btn-p">Book consultation</a><a href="#practice" class="btn-o">Practice areas</a></div>
+  </div>
+  <div class="hero-r">
+    <p class="hero-quote">"The measure of a good lawyer is not how they perform in court — it's how often they keep you out of it."</p>
+    <div class="hero-stats">
+      <div class="hs-row"><span class="hs-n">25+</span><span class="hs-l">Years in practice</span></div>
+      <div class="hs-row"><span class="hs-n">1,200+</span><span class="hs-l">Matters resolved</span></div>
+      <div class="hs-row"><span class="hs-n">4</span><span class="hs-l">Principal solicitors</span></div>
+      <div class="hs-row"><span class="hs-n">Law Society of NSW</span><span class="hs-l">Accredited specialists</span></div>
+    </div>
+  </div>
+</section>
+<section class="practice" id="practice">
+  <div class="si">
+    <p class="eyebrow rv">Practice areas</p>
+    <h2 class="sh rv d1">Where we <em>practice.</em></h2>
+    <div class="practice-grid">
+      <div class="pa-card rv d1"><h3>Commercial Law</h3><p>Business structuring, contracts, shareholder agreements, acquisitions and dispute resolution. Pragmatic advice for businesses of all sizes.</p><a href="#contact" class="pa-link">Enquire →</a></div>
+      <div class="pa-card rv d2"><h3>Property & Conveyancing</h3><p>Residential and commercial conveyancing, leasing, development, due diligence and property disputes. Residential fixed-fee available.</p><a href="#contact" class="pa-link">Enquire →</a></div>
+      <div class="pa-card rv d3"><h3>Employment Law</h3><p>Employment contracts, unfair dismissal, workplace investigations and restraint of trade. Acting for both employers and employees.</p><a href="#contact" class="pa-link">Enquire →</a></div>
+      <div class="pa-card rv d1"><h3>Wills & Estates</h3><p>Wills, powers of attorney, estate administration and contested estates. Clear, considered advice on some of life's most important decisions.</p><a href="#contact" class="pa-link">Enquire →</a></div>
+      <div class="pa-card rv d2"><h3>Family Law</h3><p>Separation, divorce, parenting arrangements and property settlements. Sensitive, considered representation at a difficult time.</p><a href="#contact" class="pa-link">Enquire →</a></div>
+      <div class="pa-card rv d3"><h3>Litigation</h3><p>Civil disputes, debt recovery, Supreme Court and Federal Court matters. When resolution without litigation isn't possible.</p><a href="#contact" class="pa-link">Enquire →</a></div>
+    </div>
+  </div>
+</section>
+<section class="team" id="team">
+  <div class="si">
+    <p class="eyebrow rv">Our solicitors</p>
+    <h2 class="sh rv d1">The <em>team.</em></h2>
+    <div class="team-grid">
+      <div class="tc rv d1"><div class="tc-photo"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9a9080" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><h4>Margaret Harlow</h4><p class="tc-role">Principal — Commercial & Property</p><p class="tc-quals">LLB (Hons), University of Sydney. 25 years in practice. Law Society NSW Accredited Specialist in Commercial Litigation.</p></div>
+      <div class="tc rv d2"><div class="tc-photo"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9a9080" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><h4>James Harlow</h4><p class="tc-role">Principal — Employment & Litigation</p><p class="tc-quals">LLB (Hons), UNSW. Former barrister. Specialist in workplace disputes and commercial litigation. 18 years in practice.</p></div>
+      <div class="tc rv d3"><div class="tc-photo"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9a9080" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><h4>Sophie Nguyen</h4><p class="tc-role">Senior Solicitor — Family & Estates</p><p class="tc-quals">LLB, Graduate Diploma Family Law. Collaborative law practitioner. 10 years in family and estate matters.</p></div>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="si">
+    <p class="eyebrow rv">Contact</p>
+    <h2 class="sh rv d1">Book a free<br><em>consultation.</em></h2>
+    <div class="contact-grid">
+      <div class="contact-form rv d1">
+        <div class="cf-row"><div class="cf-group"><label>Name</label><input type="text" placeholder="Jane Smith"/></div><div class="cf-group"><label>Phone</label><input type="tel" placeholder="0400 000 000"/></div></div>
+        <div class="cf-group"><label>Email</label><input type="email" placeholder="jane@email.com"/></div>
+        <div class="cf-group"><label>Area of law</label><select><option>Commercial law</option><option>Property / conveyancing</option><option>Employment law</option><option>Wills & estates</option><option>Family law</option><option>Litigation</option><option>Not sure</option></select></div>
+        <div class="cf-group"><label>Brief description of matter</label><textarea placeholder="A brief description of what you need help with..."></textarea></div>
+        <button class="cf-submit" onclick="this.textContent='Enquiry received — we\'ll contact you within 1 business day'">Submit enquiry</button>
+        <p class="disclaimer">Submitting this form does not create a lawyer-client relationship. Do not include confidential or privileged information. We will contact you to arrange a consultation.</p>
+      </div>
+      <div class="contact-info rv d2">
+        <div class="ci"><div class="ci-bar"></div><div><p class="ci-l">Phone</p><p class="ci-v">(02) 9000 0000</p></div></div>
+        <div class="ci"><div class="ci-bar"></div><div><p class="ci-l">Email</p><p class="ci-v">enquiries@harlowassociates.com.au</p></div></div>
+        <div class="ci"><div class="ci-bar"></div><div><p class="ci-l">Office</p><p class="ci-v">Level 10, 1 Castlereagh Street<br>Sydney NSW 2000</p></div></div>
+        <div class="ci"><div class="ci-bar"></div><div><p class="ci-l">Hours</p><p class="ci-v">Monday–Friday 8:30am–5:30pm<br>After-hours by prior arrangement</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">Harlow & Associates</div><p class="ftagline">Solicitors. Sydney CBD. Commercial, property, employment, family & estates.</p></div>
+      <div><p class="fcol-h">Practice areas</p><ul class="flinks"><li><a href="#">Commercial Law</a></li><li><a href="#">Property</a></li><li><a href="#">Employment</a></li><li><a href="#">Wills & Estates</a></li><li><a href="#">Family Law</a></li></ul></div>
+      <div><p class="fcol-h">Firm</p><ul class="flinks"><li><a href="#">Our team</a></li><li><a href="#">Client portal</a></li><li><a href="#">Costs & fees</a></li><li><a href="#">(02) 9000 0000</a></li></ul></div>
+    </div>
+    <p class="fcopy">© 2025 Harlow & Associates Pty Ltd. Law Society of NSW member. This website contains general information only and does not constitute legal advice.</p>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

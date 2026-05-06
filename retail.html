@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Forage Supply Co. — Homeware & Lifestyle Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Sentient:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f8f5f0;--bg2:#f0ebe2;--white:#ffffff;--ink:#1c1510;--terracotta:#c8603a;--terra2:#e08060;--sage:#7a9070;--light:#ddd5c8;--text2:#6a5a4a;--text3:#a09080;--border:rgba(28,21,16,.1);--serif:'Sentient',serif;--sans:'Epilogue',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+/* top bar */
+.topbar{background:var(--ink);padding:9px 52px;display:flex;align-items:center;justify-content:center;gap:40px}
+.tb-item{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.tb-item strong{color:rgba(255,255,255,.8);font-weight:500}
+nav{background:var(--white);padding:16px 52px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500}
+.nlogo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.nlogo span{color:var(--terracotta);font-style:italic}
+.nlinks{display:flex;gap:28px;list-style:none}
+.nlinks a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--ink)}
+.nav-actions{display:flex;gap:16px;align-items:center}
+.nav-actions a{font-size:12px;letter-spacing:.08em;color:var(--text2);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:6px}.nav-actions a:hover{color:var(--ink)}
+.nav-actions svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}
+/* hero */
+.hero{background:var(--bg2);display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 80px);overflow:hidden}
+.hero-l{display:flex;flex-direction:column;justify-content:center;padding:80px;position:relative}
+.hero-label{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--terracotta);margin-bottom:20px}
+.hero h1{font-family:var(--serif);font-size:clamp(48px,5.5vw,80px);line-height:.95;color:var(--ink);margin-bottom:24px;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--terracotta)}
+.hero-sub{font-size:15px;color:var(--text2);line-height:1.75;max-width:380px;margin-bottom:40px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{background:var(--ink);color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:13px 28px;text-decoration:none;transition:all .2s}.btn-p:hover{background:var(--terracotta)}
+.btn-o{background:transparent;color:var(--ink);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:1px solid var(--border);transition:all .2s}.btn-o:hover{border-color:var(--ink)}
+.hero-r{background:linear-gradient(135deg,#d8c8b8,#c8b8a0);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-r-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+/* featured */
+.featured{padding:80px 52px;background:var(--white)}
+.si{max-width:1200px;margin:0 auto}
+.section-header{display:flex;align-items:end;justify-content:space-between;margin-bottom:48px}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:10px}
+.sh{font-family:var(--serif);font-size:clamp(30px,3.5vw,46px);line-height:1.05;color:var(--ink);letter-spacing:-.02em}
+.sh em{font-style:italic}
+.view-all{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);text-decoration:none;border-bottom:1px solid var(--light);padding-bottom:2px;transition:all .2s}.view-all:hover{color:var(--ink);border-color:var(--ink)}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.product-card{cursor:pointer;transition:all .2s}
+.product-card:hover .product-img{transform:scale(1.02)}
+.product-img-wrap{overflow:hidden;border-radius:6px;margin-bottom:14px;position:relative}
+.product-img{aspect-ratio:1;background:linear-gradient(135deg,#d8c8b4,#c8b8a0);transition:transform .4s;display:flex;align-items:center;justify-content:center}
+.product-img svg{opacity:.1}
+.product-badge{position:absolute;top:10px;left:10px;background:var(--terracotta);color:#fff;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px}
+.product-info h4{font-size:15px;font-weight:400;color:var(--ink);margin-bottom:4px}
+.product-info p{font-size:12px;color:var(--text3);margin-bottom:8px}
+.product-price{font-family:var(--serif);font-size:17px;color:var(--ink)}
+.product-price .was{font-size:13px;color:var(--text3);text-decoration:line-through;margin-left:6px;font-family:var(--sans)}
+/* categories */
+.categories{padding:80px 52px;background:var(--bg2)}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--light);border:1px solid var(--light);margin-top:48px}
+.cat-card{background:var(--bg2);padding:36px 28px;text-align:center;transition:background .2s;text-decoration:none;color:inherit;display:block}.cat-card:hover{background:var(--white)}
+.cat-icon{width:56px;height:56px;border-radius:50%;background:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1px solid var(--light)}
+.cat-icon svg{width:24px;height:24px;stroke:var(--terracotta);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.cat-card h4{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--ink);margin-bottom:4px}
+.cat-card p{font-size:12px;color:var(--text3)}
+/* about */
+.about{padding:80px 52px;background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img{aspect-ratio:4/3;background:linear-gradient(135deg,#d4c4b0,#c4b4a0);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.about-img svg{opacity:.1}
+.about-text .sh{margin-bottom:20px}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:18px}
+.about-values{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.av{padding:18px;background:var(--bg2);border-radius:4px}
+.av h5{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.av p{font-size:12px;color:var(--text2);line-height:1.5}
+/* newsletter */
+.newsletter{padding:80px 52px;background:var(--ink);text-align:center}
+.nl-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--terracotta);margin-bottom:14px;opacity:.8}
+.nl-title{font-family:var(--serif);font-size:clamp(32px,4vw,52px);color:#fff;margin-bottom:12px;letter-spacing:-.02em}
+.nl-title em{font-style:italic;color:var(--terra2)}
+.nl-sub{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:40px}
+.nl-form{display:flex;gap:0;max-width:480px;margin:0 auto}
+.nl-form input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-right:none;padding:13px 18px;font-family:var(--sans);font-size:14px;color:#fff;outline:none}.nl-form input::placeholder{color:rgba(255,255,255,.25)}
+.nl-form button{background:var(--terracotta);color:#fff;font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:13px 24px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}.nl-form button:hover{background:var(--terra2)}
+/* footer */
+footer{background:var(--bg2);padding:52px 52px 28px;border-top:1px solid var(--light)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
+.flogo{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.flogo span{color:var(--terracotta);font-style:italic}
+.ftagline{font-size:13px;color:var(--text2);line-height:1.65;max-width:220px}
+.fcol-h{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}.flinks a:hover{color:var(--ink)}
+.fcopy{border-top:1px solid var(--light);padding-top:20px;font-size:11px;color:var(--text3);letter-spacing:.04em;display:flex;justify-content:space-between}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(max-width:900px){.topbar{padding:8px 16px;gap:16px}.topbar .tb-item:nth-child(2){display:none}nav{padding:14px 24px}.nlinks{display:none}.hero{grid-template-columns:1fr}.hero-l{padding:60px 24px}.hero-r{min-height:50vw}.products-grid{grid-template-columns:1fr 1fr}.cat-grid{grid-template-columns:1fr 1fr}.about-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr;gap:28px}.featured,.categories,.about,.newsletter{padding:60px 24px}footer{padding:40px 24px 20px}.nl-form{flex-direction:column}.nl-form input{border-right:1px solid rgba(255,255,255,.12)}.fcopy{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="tb-item"><strong>Free shipping</strong> on orders over $75</span>
+  <span class="tb-item">Use code <strong>WELCOME10</strong> for 10% off your first order</span>
+  <span class="tb-item"><strong>Click & collect</strong> available in-store</span>
+</div>
+<nav>
+  <a href="#" class="nlogo">Forage<span> Supply</span></a>
+  <ul class="nlinks"><li><a href="#featured">New In</a></li><li><a href="#categories">Shop</a></li><li><a href="#about">About</a></li><li><a href="#">Stockists</a></li></ul>
+  <div class="nav-actions">
+    <a href="#"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>Wishlist</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Cart (0)</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-l">
+    <p class="hero-label">New arrivals — Autumn 2025</p>
+    <h1>Life's small<br><em>beautiful</em><br>objects.</h1>
+    <p class="hero-sub">Thoughtfully sourced homewares, ceramics, textiles and everyday objects from Australian and international makers.</p>
+    <div class="hero-btns"><a href="#featured" class="btn-p">Shop new arrivals</a><a href="#categories" class="btn-o">Browse all</a></div>
+  </div>
+  <div class="hero-r"><div class="hero-r-pattern"></div><svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="rgba(28,21,16,.08)" stroke-width=".5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+</section>
+<section class="featured" id="featured">
+  <div class="si">
+    <div class="section-header rv"><div><p class="eyebrow">New arrivals</p><h2 class="sh">Fresh <em>picks.</em></h2></div><a href="#" class="view-all">View all new →</a></div>
+    <div class="products-grid">
+      <div class="product-card rv d1"><div class="product-img-wrap"><div class="product-img"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(28,21,16,.15)" stroke-width=".8"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><span class="product-badge">New</span></div><div class="product-info"><h4>Stoneware Mug — Dune</h4><p>Hand-thrown ceramic, 300ml</p><p class="product-price">$48.00</p></div></div>
+      <div class="product-card rv d2"><div class="product-img-wrap"><div class="product-img"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(28,21,16,.15)" stroke-width=".8"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div></div><div class="product-info"><h4>Linen Throw — Ochre</h4><p>100% French linen, 140×180cm</p><p class="product-price">$125.00</p></div></div>
+      <div class="product-card rv d3"><div class="product-img-wrap"><div class="product-img"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(28,21,16,.15)" stroke-width=".8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div><span class="product-badge">Sale</span></div><div class="product-info"><h4>Beeswax Candle Set</h4><p>Set of 3, unscented</p><p class="product-price">$38.00<span class="was">$52.00</span></p></div></div>
+      <div class="product-card rv d4"><div class="product-img-wrap"><div class="product-img"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="rgba(28,21,16,.15)" stroke-width=".8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div></div><div class="product-info"><h4>Olive Wood Board</h4><p>Small serving board, hand-finished</p><p class="product-price">$64.00</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="categories" id="categories">
+  <div class="si">
+    <p class="eyebrow rv">Browse by category</p>
+    <h2 class="sh rv d1">Shop the <em>collection.</em></h2>
+    <div class="cat-grid">
+      <a href="#" class="cat-card rv d1"><div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div><h4>Kitchen & Dining</h4><p>Ceramics, glassware & linens</p></a>
+      <a href="#" class="cat-card rv d2"><div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><h4>Home & Living</h4><p>Candles, throws & décor</p></a>
+      <a href="#" class="cat-card rv d3"><div class="cat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div><h4>Wellness</h4><p>Skincare, bath & body</p></a>
+      <a href="#" class="cat-card rv d4"><div class="cat-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><h4>Gift Sets</h4><p>Curated gifts & bundles</p></a>
+    </div>
+  </div>
+</section>
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-img rv"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#a09080" stroke-width=".6"><path d="M3 9l9-7 9 7v11"/></svg></div>
+      <div class="about-text rv d1">
+        <p class="eyebrow">Our story</p>
+        <h2 class="sh">Objects made<br>to <em>last.</em></h2>
+        <p>Forage Supply Co. started as a search for things made slowly, by people who care. We stock Australian and international makers who share our commitment to materials that age well and craftsmanship that holds up.</p>
+        <p>Our shop is in Surry Hills, Sydney — open Tuesday to Sunday. We ship Australia-wide, and to New Zealand.</p>
+        <div class="about-values">
+          <div class="av"><h5>Made to last</h5><p>No fast homewares. Everything we stock is built for years of use.</p></div>
+          <div class="av"><h5>Considered sourcing</h5><p>We visit makers where possible and know the story behind what we sell.</p></div>
+          <div class="av"><h5>Sustainable materials</h5><p>Natural fibres, recycled materials, minimal plastic packaging.</p></div>
+          <div class="av"><h5>Local first</h5><p>Majority Australian-made, always. Supporting local craft where we can.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="newsletter">
+  <p class="nl-label rv">Stay connected</p>
+  <h2 class="nl-title rv d1">Good things,<br><em>in your inbox.</em></h2>
+  <p class="nl-sub rv d2">New arrivals, maker stories, and 10% off your first order.</p>
+  <div class="nl-form rv d3"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">Forage<span> Supply</span></div><p class="ftagline">Thoughtfully sourced objects for everyday life. Surry Hills, Sydney.</p></div>
+      <div><p class="fcol-h">Shop</p><ul class="flinks"><li><a href="#">New In</a></li><li><a href="#">Kitchen & Dining</a></li><li><a href="#">Home & Living</a></li><li><a href="#">Wellness</a></li><li><a href="#">Gift Sets</a></li></ul></div>
+      <div><p class="fcol-h">Info</p><ul class="flinks"><li><a href="#">About us</a></li><li><a href="#">Stockists</a></li><li><a href="#">Shipping & returns</a></li><li><a href="#">Store hours</a></li></ul></div>
+      <div><p class="fcol-h">Get in touch</p><ul class="flinks"><li><a href="#">hello@foragesupply.com.au</a></li><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li><li><a href="#">Shop: 42 Crown St, Surry Hills</a></li></ul></div>
+    </div>
+    <div class="fcopy"><span>© 2025 Forage Supply Co. ABN: XX XXX XXX XXX</span><span>Tue–Sat 10am–6pm · Sun 10am–4pm</span></div>
+  </div>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

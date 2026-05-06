@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Iron & Oak Barbershop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0e0c08;--bg2:#161410;--surface:#1e1c18;--gold:#c8a040;--gold2:#e8c060;--text:#f0e8d8;--text2:#8a8070;--border:rgba(200,160,64,.12);--serif:'Bebas Neue',sans-serif;--sans:'DM Sans',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:20px 52px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(14,12,8,.95);backdrop-filter:blur(12px);padding:14px 52px;border-bottom:1px solid var(--border)}
+.nlogo{font-family:var(--serif);font-size:28px;letter-spacing:.06em;color:var(--gold);text-decoration:none;line-height:1}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--gold)}
+.ncta{background:var(--gold);color:var(--bg);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:11px 24px;text-decoration:none;transition:all .2s}.ncta:hover{background:var(--gold2)}
+/* hero */
+.hero{min-height:100vh;background:var(--bg);display:flex;align-items:center;position:relative;overflow:hidden;padding:0 52px}
+.hero-bg-text{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:var(--serif);font-size:28vw;color:transparent;-webkit-text-stroke:1px rgba(200,160,64,.04);line-height:1;pointer-events:none;user-select:none}
+.hero-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.hero-content{position:relative;z-index:2;max-width:640px;padding:120px 0 80px}
+.hero-eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold)}
+.hero h1{font-family:var(--serif);font-size:clamp(72px,9vw,130px);line-height:.88;letter-spacing:.04em;color:var(--text);margin-bottom:28px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-sub{font-size:15px;color:var(--text2);line-height:1.75;max-width:400px;margin-bottom:44px}
+.hero-btns{display:flex;gap:14px}
+.btn-p{background:var(--gold);color:var(--bg);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:14px 32px;text-decoration:none;transition:all .2s}.btn-p:hover{background:var(--gold2)}
+.btn-o{color:var(--text);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:14px 24px;text-decoration:none;border:1px solid rgba(240,232,216,.15);transition:all .2s}.btn-o:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{position:absolute;bottom:0;right:0;display:flex}
+.hstat{padding:24px 36px;background:var(--surface);border-left:1px solid var(--border);border-top:1px solid var(--border);text-align:center}
+.hstat-n{font-family:var(--serif);font-size:36px;color:var(--gold);line-height:1;margin-bottom:4px}
+.hstat-l{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2)}
+/* sections */
+section{padding:100px 52px}
+.si{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+.sh{font-family:var(--serif);font-size:clamp(42px,5vw,72px);line-height:.92;letter-spacing:.04em;color:var(--text);margin-bottom:16px}
+.sh em{color:var(--gold);font-style:normal}
+/* services */
+.services{background:var(--bg)}
+.svc-list{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-top:60px;border:1px solid var(--border)}
+.svc-row{background:var(--bg);display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:32px;padding:28px 32px;transition:background .2s;cursor:default}.svc-row:hover{background:var(--surface)}
+.svc-num{font-family:var(--serif);font-size:14px;color:var(--gold);opacity:.6}
+.svc-info h4{font-family:var(--serif);font-size:20px;letter-spacing:.04em;margin-bottom:4px}
+.svc-info p{font-size:13px;color:var(--text2);line-height:1.5}
+.svc-price{font-family:var(--serif);font-size:24px;color:var(--gold);white-space:nowrap}
+/* hours */
+.hours{background:var(--surface)}
+.hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hours-table{display:flex;flex-direction:column;gap:1px;margin-top:36px;background:var(--border);border:1px solid var(--border)}
+.ht-row{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:var(--bg);font-size:13px}.ht-row:nth-child(odd){background:var(--surface)}
+.ht-day{color:var(--text2);letter-spacing:.06em}
+.ht-time{color:var(--gold);font-family:var(--serif);font-size:16px;letter-spacing:.04em}
+.contact-block{display:flex;flex-direction:column;gap:20px;margin-top:40px}
+.cb-item{display:flex;gap:14px;align-items:flex-start}
+.cb-icon{width:40px;height:40px;background:var(--bg);display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+.cb-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.cb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:3px}
+.cb-value{font-size:14px;color:var(--text)}
+/* booking */
+.booking{background:var(--gold)}
+.booking .eyebrow{color:var(--bg);opacity:.6}
+.booking .eyebrow::before{background:var(--bg)}
+.booking .sh{color:var(--bg)}
+.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.booking-form{display:flex;flex-direction:column;gap:14px}
+.bf-group{display:flex;flex-direction:column;gap:6px}
+.bf-group label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(14,12,8,.5)}
+.bf-group input,.bf-group select{background:rgba(14,12,8,.08);border:1px solid rgba(14,12,8,.15);padding:13px 16px;font-family:var(--sans);font-size:14px;color:var(--bg);outline:none;transition:border-color .2s}.bf-group input::placeholder{color:rgba(14,12,8,.35)}.bf-group input:focus,.bf-group select:focus{border-color:var(--bg)}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bf-submit{background:var(--bg);color:var(--gold);font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:15px;border:none;cursor:pointer;transition:all .2s;margin-top:6px}.bf-submit:hover{background:var(--surface)}
+/* footer */
+footer{background:var(--surface);padding:48px 52px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;border-top:1px solid var(--border)}
+.flogo{font-family:var(--serif);font-size:26px;letter-spacing:.06em;color:var(--gold);margin-bottom:10px}
+.ftagline{font-size:13px;color:var(--text2);line-height:1.65}
+.fcol-h{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text2);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}.flinks a:hover{color:var(--gold)}
+.fcopy{grid-column:1/-1;border-top:1px solid var(--border);padding-top:20px;font-size:11px;color:var(--text2);letter-spacing:.04em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(max-width:900px){nav{padding:16px 24px}nav.s{padding:14px 24px}.hero{padding:0 24px}.hero-content{padding:100px 0 100px}.hero-stats{position:static;margin-top:40px}.hero-bg-text{display:none}section{padding:70px 24px}.hours-grid{grid-template-columns:1fr}.booking-grid{grid-template-columns:1fr}.bf-row{grid-template-columns:1fr}footer{grid-template-columns:1fr;padding:36px 24px;gap:28px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">Iron & Oak</a>
+  <ul class="nlinks"><li><a href="#services">Services</a></li><li><a href="#hours">Hours</a></li><li><a href="#booking">Book</a></li></ul>
+  <a href="#booking" class="ncta">Book Now</a>
+</nav>
+<section class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-bg-text">CUT</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Traditional Barbershop</p>
+    <h1>SHARP<br><em>CUTS.</em><br>NO BULL.</h1>
+    <p class="hero-sub">Walk-ins welcome. Appointments preferred. Cold drinks in the fridge. We've been doing this long enough to do it right.</p>
+    <div class="hero-btns"><a href="#booking" class="btn-p">Book a cut</a><a href="#services" class="btn-o">View services</a></div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">12+</div><div class="hstat-l">Years open</div></div>
+    <div class="hstat"><div class="hstat-n">$45</div><div class="hstat-l">From</div></div>
+    <div class="hstat"><div class="hstat-n">5★</div><div class="hstat-l">Rating</div></div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="si">
+    <p class="eyebrow rv">What we do</p>
+    <h2 class="sh rv d1">THE <em>MENU.</em></h2>
+    <div class="svc-list">
+      <div class="svc-row rv d1"><span class="svc-num">01</span><div class="svc-info"><h4>Haircut</h4><p>Scissor or clipper cut. Includes consultation, wash and style.</p></div><span class="svc-price">$45</span></div>
+      <div class="svc-row rv d2"><span class="svc-num">02</span><div class="svc-info"><h4>Cut & Beard</h4><p>Full haircut plus beard trim, shape or hot towel shave.</p></div><span class="svc-price">$65</span></div>
+      <div class="svc-row rv d3"><span class="svc-num">03</span><div class="svc-info"><h4>Hot Towel Shave</h4><p>Traditional wet shave with straight razor. The real deal.</p></div><span class="svc-price">$45</span></div>
+      <div class="svc-row rv d4"><span class="svc-num">04</span><div class="svc-info"><h4>Beard Trim</h4><p>Shape, line and tidy. Takes 20 minutes. Makes all the difference.</p></div><span class="svc-price">$30</span></div>
+      <div class="svc-row rv"><span class="svc-num">05</span><div class="svc-info"><h4>Kids Cut</h4><p>Under 12. No fuss, no drama. Lollipop included.</p></div><span class="svc-price">$30</span></div>
+      <div class="svc-row rv"><span class="svc-num">06</span><div class="svc-info"><h4>Senior Cut</h4><p>65 and over. Monday to Wednesday only.</p></div><span class="svc-price">$35</span></div>
+    </div>
+  </div>
+</section>
+<section class="hours" id="hours">
+  <div class="si">
+    <div class="hours-grid">
+      <div><p class="eyebrow rv">Find us</p><h2 class="sh rv d1">HOURS &<br><em>LOCATION.</em></h2><div class="contact-block rv d2"><div class="cb-item"><div class="cb-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><p class="cb-label">Address</p><p class="cb-value">42 High Street, Newtown NSW 2042</p></div></div><div class="cb-item"><div class="cb-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.4 1.13 2 2 0 012.39 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><p class="cb-label">Phone</p><p class="cb-value">(02) 9000 0000</p></div></div></div></div>
+      <div class="rv d1">
+        <div class="hours-table">
+          <div class="ht-row"><span class="ht-day">Monday</span><span class="ht-time">9am – 6pm</span></div>
+          <div class="ht-row"><span class="ht-day">Tuesday</span><span class="ht-time">9am – 6pm</span></div>
+          <div class="ht-row"><span class="ht-day">Wednesday</span><span class="ht-time">9am – 6pm</span></div>
+          <div class="ht-row"><span class="ht-day">Thursday</span><span class="ht-time">9am – 8pm</span></div>
+          <div class="ht-row"><span class="ht-day">Friday</span><span class="ht-time">9am – 8pm</span></div>
+          <div class="ht-row"><span class="ht-day">Saturday</span><span class="ht-time">8am – 5pm</span></div>
+          <div class="ht-row"><span class="ht-day">Sunday</span><span class="ht-time">Closed</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="booking" id="booking">
+  <div class="si">
+    <div class="booking-grid">
+      <div><p class="eyebrow rv">Bookings</p><h2 class="sh rv d1">LOCK IN<br><em>YOUR CUT.</em></h2><p class="rv d2" style="font-size:15px;color:rgba(14,12,8,.6);line-height:1.75;max-width:340px;margin-top:20px">Walk-ins always welcome. Bookings guarantee your time slot. We'll send a reminder the day before.</p></div>
+      <div class="booking-form rv d2">
+        <div class="bf-row"><div class="bf-group"><label>First name</label><input type="text" placeholder="John"/></div><div class="bf-group"><label>Last name</label><input type="text" placeholder="Smith"/></div></div>
+        <div class="bf-group"><label>Phone</label><input type="tel" placeholder="04xx xxx xxx"/></div>
+        <div class="bf-group"><label>Service</label><select><option>Select...</option><option>Haircut</option><option>Cut & Beard</option><option>Hot Towel Shave</option><option>Beard Trim</option><option>Kids Cut</option></select></div>
+        <div class="bf-row"><div class="bf-group"><label>Date</label><input type="date"/></div><div class="bf-group"><label>Time</label><select><option>9:00am</option><option>10:00am</option><option>11:00am</option><option>12:00pm</option><option>1:00pm</option><option>2:00pm</option><option>3:00pm</option><option>4:00pm</option></select></div></div>
+        <button class="bf-submit" onclick="this.textContent='Booking sent — see you soon'">Confirm booking</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div><div class="flogo">Iron & Oak</div><p class="ftagline">Traditional barbershop. Sharp cuts, cold drinks, no nonsense.</p></div>
+  <div><p class="fcol-h">Services</p><ul class="flinks"><li><a href="#">Haircuts</a></li><li><a href="#">Beard & Shave</a></li><li><a href="#">Hot Towel Shave</a></li><li><a href="#">Kids</a></li></ul></div>
+  <div><p class="fcol-h">Visit</p><ul class="flinks"><li><a href="#">42 High Street, Newtown</a></li><li><a href="#">(02) 9000 0000</a></li><li><a href="#">Instagram</a></li></ul></div>
+  <p class="fcopy">© 2025 Iron & Oak Barbershop.</p>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

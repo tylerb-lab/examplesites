@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Meridian Property — Real Estate Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f7f6f2;--bg2:#efede6;--white:#ffffff;--ink:#141210;--charcoal:#2a2826;--gold:#b8963c;--gold2:#d4b050;--light:#dddad2;--text2:#5a5650;--text3:#9a9690;--border:rgba(20,18,16,.09);--serif:'Tenor Sans',sans-serif;--sans:'DM Sans',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+/* top bar */
+.topbar{background:var(--charcoal);padding:9px 60px;display:flex;justify-content:space-between;align-items:center}
+.tb-l{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.1em}
+.tb-r{display:flex;gap:24px}
+.tb-r a{font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:.08em;transition:color .2s}.tb-r a:hover{color:var(--gold)}
+nav{background:var(--white);padding:16px 60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:500;box-shadow:0 2px 20px rgba(0,0,0,.05)}
+.nlogo{font-family:var(--serif);font-size:21px;letter-spacing:.08em;color:var(--ink);text-decoration:none}
+.nlogo span{color:var(--gold)}
+.nlinks{display:flex;gap:28px;list-style:none}
+.nlinks a{font-size:12px;letter-spacing:.1em;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--ink)}
+.nav-actions{display:flex;gap:12px;align-items:center}
+.nav-appraise{background:var(--charcoal);color:#fff;font-size:12px;font-weight:500;padding:10px 20px;text-decoration:none;transition:all .2s;letter-spacing:.04em}.nav-appraise:hover{background:var(--gold)}
+/* hero */
+.hero{background:var(--charcoal);min-height:calc(100vh - 88px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(184,150,60,.06),transparent 60%)}
+.hero-search-bar{position:relative;z-index:2;padding:60px 60px 0}
+.hsb-inner{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);padding:28px 32px;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0;margin-top:80px}
+.hsb-group{padding:0 24px;border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:4px}.hsb-group:first-child{padding-left:0}.hsb-group:last-child{border-right:none;padding-right:0}
+.hsb-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px}
+.hsb-group input,.hsb-group select{background:none;border:none;font-family:var(--sans);font-size:15px;color:#fff;outline:none;cursor:pointer;width:100%}.hsb-group input::placeholder{color:rgba(255,255,255,.35)}.hsb-group select option{background:var(--charcoal)}
+.hsb-btn{background:var(--gold);color:var(--ink);font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:0 28px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}.hsb-btn:hover{background:var(--gold2)}
+.hero-main{position:relative;z-index:2;flex:1;padding:0 60px;display:flex;align-items:flex-end;padding-bottom:60px}
+.hero-content{max-width:700px}
+.hero-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:.8}
+.hero h1{font-family:var(--serif);font-size:clamp(44px,5.5vw,80px);line-height:.96;letter-spacing:.02em;color:#fff;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.35);font-family:'DM Sans',sans-serif;font-size:.75em;letter-spacing:0}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.4);line-height:1.75;max-width:440px}
+.hero-stats{position:absolute;right:60px;bottom:60px;display:flex;flex-direction:column;gap:2px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.hs{padding:18px 28px;display:flex;flex-direction:column;gap:3px;border-bottom:1px solid rgba(255,255,255,.05)}.hs:last-child{border-bottom:none}
+.hs-n{font-family:var(--serif);font-size:22px;color:rgba(255,255,255,.7);letter-spacing:.04em}
+.hs-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+/* listings */
+.listings{padding:80px 60px;background:var(--bg)}
+.si{max-width:1200px;margin:0 auto}
+.section-top{display:flex;align-items:end;justify-content:space-between;margin-bottom:40px}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:.8}
+.sh{font-family:var(--serif);font-size:clamp(28px,3.5vw,46px);letter-spacing:.02em;color:var(--ink);line-height:1.0}
+.view-all{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);text-decoration:none;border-bottom:1px solid var(--light);padding-bottom:2px;transition:all .2s}.view-all:hover{color:var(--ink);border-color:var(--ink)}
+.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.listing-card{background:var(--white);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:all .25s}.listing-card:hover{box-shadow:0 10px 32px rgba(0,0,0,.08);transform:translateY(-3px)}
+.listing-img{aspect-ratio:4/3;background:linear-gradient(135deg,#d4d0c8,#c8c4bc);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.listing-img svg{opacity:.1}
+.listing-status{position:absolute;top:14px;left:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;font-weight:500}
+.status-sale{background:var(--charcoal);color:#fff}
+.status-sold{background:var(--gold);color:var(--ink)}
+.status-rent{background:#fff;color:var(--charcoal)}
+.listing-body{padding:22px}
+.listing-price{font-family:var(--serif);font-size:22px;letter-spacing:.02em;color:var(--ink);margin-bottom:4px}
+.listing-addr{font-size:14px;color:var(--text2);margin-bottom:12px}
+.listing-meta{display:flex;gap:16px}
+.lm{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text3)}
+.lm svg{width:13px;height:13px;stroke:var(--text3);fill:none;stroke-width:1.5;stroke-linecap:round}
+/* services */
+.services{padding:80px 60px;background:var(--bg2)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--light);border:1px solid var(--light);margin-top:48px}
+.svc-card{background:var(--bg2);padding:38px 32px;transition:background .2s}.svc-card:hover{background:var(--white)}
+.svc-num{font-family:var(--serif);font-size:32px;color:var(--light);letter-spacing:.02em;margin-bottom:16px;display:block;line-height:1}
+.svc-card h3{font-family:var(--serif);font-size:20px;letter-spacing:.02em;color:var(--ink);margin-bottom:10px}
+.svc-card p{font-size:13px;color:var(--text2);line-height:1.7}
+/* team */
+.team{padding:80px 60px;background:var(--white)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.tc{border:1px solid var(--border)}
+.tc-photo{aspect-ratio:3/4;background:linear-gradient(135deg,#d8d4cc,#ccc8c0);display:flex;align-items:center;justify-content:center}
+.tc-photo svg{opacity:.15}
+.tc-info{padding:18px 20px}
+.tc-info h4{font-family:var(--serif);font-size:17px;letter-spacing:.04em;color:var(--ink);margin-bottom:3px}
+.tc-info p{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.tc-info span{font-size:12px;color:var(--text3)}
+/* appraisal */
+.appraisal{padding:80px 60px;background:var(--charcoal)}
+.appraisal .eyebrow{color:var(--gold);opacity:.7}
+.appraisal .sh{color:#fff}
+.appraisal-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:48px}
+.appraisal-form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:36px}
+.af-group{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.af-group label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.af-group input,.af-group select{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:12px 14px;font-family:var(--sans);font-size:14px;color:#fff;outline:none;transition:border-color .2s;width:100%}.af-group input::placeholder{color:rgba(255,255,255,.2)}.af-group input:focus,.af-group select:focus{border-color:var(--gold)}.af-group select option{background:var(--charcoal)}
+.af-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.af-submit{background:var(--gold);color:var(--ink);font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:background .2s;width:100%;margin-top:4px}.af-submit:hover{background:var(--gold2)}
+.appraisal-info{display:flex;flex-direction:column;gap:24px}
+.ai-item{border-left:2px solid rgba(255,255,255,.07);padding-left:20px}
+.ai-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px}
+.ai-value{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65}
+/* footer */
+footer{background:var(--charcoal);padding:52px 60px 24px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.flogo{font-family:var(--serif);font-size:21px;letter-spacing:.08em;color:rgba(255,255,255,.7);margin-bottom:10px}
+.flogo span{color:var(--gold)}
+.ftagline{font-size:13px;color:rgba(255,255,255,.3);line-height:1.65;max-width:220px}
+.fcol-h{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}.flinks a:hover{color:#fff}
+.fcopy{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;font-size:11px;color:rgba(255,255,255,.18);letter-spacing:.04em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(max-width:900px){.topbar{padding:7px 16px}.topbar .tb-l{display:none}nav{padding:14px 24px}.nlinks{display:none}.hero-search-bar{padding:20px 24px 0}.hsb-inner{grid-template-columns:1fr;gap:16px;padding:20px}.hsb-group{padding:0;border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:12px}.hsb-group:last-child{border-bottom:none;padding-bottom:0}.hsb-btn{padding:12px}.hero-main{padding:24px}.hero-stats{position:static;margin-top:24px;flex-direction:row;flex-wrap:wrap}.hs{flex:1;min-width:120px}.listings-grid{grid-template-columns:1fr}.svc-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr 1fr}.appraisal-grid{grid-template-columns:1fr}.af-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr;gap:28px}.listings,.services,.team,.appraisal{padding:60px 24px}footer{padding:40px 24px 20px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="tb-l">Licenced real estate agent — NSW licence no. XXXXXXXXX</span>
+  <div class="tb-r"><a href="tel:0200000000">(02) 0000 0000</a><a href="mailto:hello@meridianproperty.com.au">hello@meridianproperty.com.au</a></div>
+</div>
+<nav>
+  <a href="#" class="nlogo">MERIDIAN <span>PROPERTY</span></a>
+  <ul class="nlinks"><li><a href="#listings">Buy</a></li><li><a href="#listings">Rent</a></li><li><a href="#services">Sell</a></li><li><a href="#team">Our team</a></li></ul>
+  <div class="nav-actions"><a href="#appraisal" class="nav-appraise">Free Appraisal</a></div>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-search-bar">
+    <div class="hsb-inner">
+      <div class="hsb-group"><p class="hsb-label">Search suburb</p><input type="text" placeholder="e.g. Mosman, Balmain..."/></div>
+      <div class="hsb-group"><p class="hsb-label">Property type</p><select><option>All types</option><option>House</option><option>Apartment</option><option>Townhouse</option><option>Land</option></select></div>
+      <div class="hsb-group"><p class="hsb-label">Buy or rent</p><select><option>For sale</option><option>For rent</option><option>Sold</option></select></div>
+      <button class="hsb-btn">Search</button>
+    </div>
+  </div>
+  <div class="hero-main">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Sydney Inner Suburbs</p>
+      <h1>PROPERTY.<br>DONE <em>properly.</em></h1>
+      <p class="hero-sub">Residential sales and property management across Sydney's inner suburbs. Honest advice. Transparent process. Results you can trust.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">$1.2B+</div><div class="hs-l">Sales this year</div></div>
+      <div class="hs"><div class="hs-n">18yr</div><div class="hs-l">In the market</div></div>
+      <div class="hs"><div class="hs-n">98%</div><div class="hs-l">Clearance rate</div></div>
+    </div>
+  </div>
+</section>
+<section class="listings" id="listings">
+  <div class="si">
+    <div class="section-top rv"><div><p class="eyebrow">Properties</p><h2 class="sh">Current listings.</h2></div><a href="#" class="view-all">View all properties →</a></div>
+    <div class="listings-grid">
+      <div class="listing-card rv d1">
+        <div class="listing-img"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span class="listing-status status-sale">For sale</span></div>
+        <div class="listing-body"><div class="listing-price">$2,450,000</div><div class="listing-addr">42 Regent Street, Paddington NSW 2021</div><div class="listing-meta"><span class="lm"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>4 bed</span><span class="lm"><svg viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16"/></svg>2 bath</span><span class="lm"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/></svg>2 car</span><span class="lm"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>310m²</span></div></div>
+      </div>
+      <div class="listing-card rv d2">
+        <div class="listing-img"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg><span class="listing-status status-sale">For sale</span></div>
+        <div class="listing-body"><div class="listing-price">$1,195,000</div><div class="listing-addr">8/24 Darling Street, Balmain NSW 2041</div><div class="listing-meta"><span class="lm"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11"/></svg>2 bed</span><span class="lm"><svg viewBox="0 0 24 24"><path d="M4 12h16"/></svg>1 bath</span><span class="lm"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/></svg>1 car</span><span class="lm"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>95m²</span></div></div>
+      </div>
+      <div class="listing-card rv d3">
+        <div class="listing-img"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".8"><path d="M3 9l9-7 9 7v11"/></svg><span class="listing-status status-rent">For rent</span></div>
+        <div class="listing-body"><div class="listing-price">$1,100/wk</div><div class="listing-addr">15 Nicholson Street, Newtown NSW 2042</div><div class="listing-meta"><span class="lm"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11"/></svg>3 bed</span><span class="lm"><svg viewBox="0 0 24 24"><path d="M4 12h16"/></svg>2 bath</span><span class="lm"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/></svg>1 car</span><span class="lm"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>190m²</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="si">
+    <p class="eyebrow rv">Services</p>
+    <h2 class="sh rv d1">What we do.</h2>
+    <div class="svc-grid">
+      <div class="svc-card rv d1"><span class="svc-num">01</span><h3>Residential Sales</h3><p>Auction, private treaty and off-market sales. We develop a bespoke marketing strategy for every property, priced to sell correctly from day one.</p></div>
+      <div class="svc-card rv d2"><span class="svc-num">02</span><h3>Property Management</h3><p>Full service residential management — tenant sourcing, rent collection, maintenance coordination and regular inspections. Detailed monthly reporting.</p></div>
+      <div class="svc-card rv d3"><span class="svc-num">03</span><h3>Buyers Agency</h3><p>Independent buyers representation. We search, inspect, negotiate and bid on your behalf. Fee charged to buyer — not the vendor.</p></div>
+    </div>
+  </div>
+</section>
+<section class="team" id="team">
+  <div class="si">
+    <p class="eyebrow rv">Our agents</p>
+    <h2 class="sh rv d1">The team.</h2>
+    <div class="team-grid">
+      <div class="tc rv d1"><div class="tc-photo"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#9a9690" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tc-info"><h4>Alexandra Mills</h4><p>Director & Principal</p><span>18 years selling inner Sydney. Specialises in Paddington, Balmain and Glebe.</span></div></div>
+      <div class="tc rv d2"><div class="tc-photo"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#9a9690" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tc-info"><h4>Tom Reyes</h4><p>Sales Agent</p><span>Specialist in Newtown, Marrickville and the inner west. Auction specialist.</span></div></div>
+      <div class="tc rv d3"><div class="tc-photo"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#9a9690" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tc-info"><h4>Priya Varma</h4><p>Property Manager</p><span>Manages 80+ properties. 10 years in residential PM. Always available to landlords and tenants.</span></div></div>
+      <div class="tc rv d4"><div class="tc-photo"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#9a9690" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div><div class="tc-info"><h4>Daniel Park</h4><p>Buyers Agent</p><span>Buyers advocate. Ex-valuer. Deep market knowledge across all inner Sydney suburbs.</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="appraisal" id="appraisal">
+  <div class="si">
+    <p class="eyebrow rv">Free appraisal</p>
+    <h2 class="sh rv d1">What's your property<br>actually worth?</h2>
+    <div class="appraisal-grid">
+      <div class="appraisal-form rv d1">
+        <div class="af-group"><label>Property address</label><input type="text" placeholder="42 Regent Street, Paddington NSW 2021"/></div>
+        <div class="af-row"><div class="af-group"><label>Property type</label><select><option>House</option><option>Apartment</option><option>Townhouse</option><option>Other</option></select></div><div class="af-group"><label>Bedrooms</label><select><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div></div>
+        <div class="af-row"><div class="af-group"><label>Your name</label><input type="text" placeholder="Jane Smith"/></div><div class="af-group"><label>Phone</label><input type="tel" placeholder="0400 000 000"/></div></div>
+        <div class="af-group"><label>Email</label><input type="email" placeholder="jane@email.com"/></div>
+        <div class="af-group"><label>Timeline</label><select><option>Considering selling in 3–6 months</option><option>Considering selling in 6–12 months</option><option>Just curious about value</option><option>Ready to sell now</option></select></div>
+        <button class="af-submit" onclick="this.textContent='Request sent — we\'ll be in touch within 24 hours'">Request free appraisal</button>
+      </div>
+      <div class="appraisal-info rv d2">
+        <div class="ai-item"><p class="ai-label">What you'll get</p><p class="ai-value">An honest, data-backed appraisal of your property's current market value. No obligation, no pressure. Just information.</p></div>
+        <div class="ai-item"><p class="ai-label">How it works</p><p class="ai-value">We'll visit your property, review recent comparable sales, and give you a written appraisal with our recommended price range and strategy.</p></div>
+        <div class="ai-item"><p class="ai-label">Response time</p><p class="ai-value">We'll contact you within 24 hours to arrange a time that suits you.</p></div>
+        <div class="ai-item"><p class="ai-label">Contact us directly</p><p class="ai-value">(02) 0000 0000<br>hello@meridianproperty.com.au</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">MERIDIAN <span>PROPERTY</span></div><p class="ftagline">Residential sales and property management. Sydney inner suburbs.</p></div>
+      <div><p class="fcol-h">Buy & sell</p><ul class="flinks"><li><a href="#">Properties for sale</a></li><li><a href="#">Recent results</a></li><li><a href="#">Free appraisal</a></li><li><a href="#">Buyers agency</a></li></ul></div>
+      <div><p class="fcol-h">Rent</p><ul class="flinks"><li><a href="#">Rentals available</a></li><li><a href="#">Property management</a></li><li><a href="#">Tenant resources</a></li></ul></div>
+      <div><p class="fcol-h">Agency</p><ul class="flinks"><li><a href="#">Our team</a></li><li><a href="#">(02) 0000 0000</a></li><li><a href="#">hello@meridianproperty.com.au</a></li><li><a href="#">42 Crown St, Surry Hills</a></li></ul></div>
+    </div>
+    <p class="fcopy">© 2025 Meridian Property Pty Ltd. Licensed real estate agent NSW. Licence no. XXXXXXXXX. Member REINSW. All prices and information are subject to change.</p>
+  </div>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

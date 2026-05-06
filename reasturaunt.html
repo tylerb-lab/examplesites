@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ember Kitchen — Restaurant & Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#faf5ee;--bg2:#f2ebe0;--ink:#1a120a;--ember:#c84820;--ember2:#e86030;--warm:#d4903a;--cream:#f5e8d0;--text2:#6a5040;--text3:#a08870;--light:#ddd0c0;--border:rgba(26,18,10,.1);--serif:'Spectral',serif;--sans:'DM Sans',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(250,245,238,.96);backdrop-filter:blur(16px);padding:14px 60px;border-bottom:1px solid var(--light)}
+.nlogo{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--ink)}
+.nav-reserve{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ember);text-decoration:none;border-bottom:1px solid var(--ember);padding-bottom:1px;transition:all .2s}.nav-reserve:hover{color:var(--ink);border-color:var(--ink)}
+/* hero */
+.hero{min-height:100vh;background:var(--ink);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 80px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%,rgba(200,72,32,.08),transparent 60%),linear-gradient(180deg,rgba(26,18,10,.4) 0%,rgba(26,18,10,.85) 70%,var(--ink) 100%)}
+.hero-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;pointer-events:none}
+.hero-art svg{opacity:.04;width:60%;height:auto}
+.hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end}
+.hero-eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ember2);margin-bottom:22px;opacity:.8}
+.hero h1{font-family:var(--serif);font-size:clamp(52px,6.5vw,96px);line-height:.9;color:#fff;letter-spacing:-.02em;margin-bottom:0}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.4)}
+.hero-r{padding-left:40px;border-left:1px solid rgba(255,255,255,.08)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.4);line-height:1.8;max-width:360px;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px}
+.btn-p{background:var(--ember);color:#fff;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:13px 28px;text-decoration:none;transition:all .2s}.btn-p:hover{background:var(--ember2)}
+.btn-o{color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:13px 24px;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .2s}.btn-o:hover{border-color:rgba(255,255,255,.3);color:#fff}
+.hero-detail{margin-top:40px;display:flex;flex-direction:column;gap:8px}
+.hd-row{display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,.3)}
+.hd-row svg{width:13px;height:13px;stroke:var(--ember);fill:none;stroke-width:1.5;flex-shrink:0}
+/* sections */
+section{padding:90px 60px}
+.si{max-width:1140px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ember);margin-bottom:12px;opacity:.8}
+.sh{font-family:var(--serif);font-size:clamp(34px,4vw,54px);line-height:1.0;color:var(--ink);letter-spacing:-.02em;margin-bottom:14px}
+.sh em{font-style:italic}
+/* menu */
+.menu{background:var(--bg)}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--light);border:1px solid var(--light);margin-top:56px}
+.menu-panel{background:var(--bg);padding:44px}
+.menu-panel h3{font-family:var(--serif);font-size:26px;font-style:italic;color:var(--ink);margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.menu-items{display:flex;flex-direction:column;gap:22px}
+.mi{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.mi-info h4{font-size:15px;color:var(--ink);margin-bottom:3px;font-weight:400}
+.mi-info p{font-size:12px;color:var(--text3);line-height:1.5}
+.mi-price{font-family:var(--serif);font-size:17px;color:var(--ember);white-space:nowrap;flex-shrink:0}
+.menu-note{font-size:11px;color:var(--text3);margin-top:24px;padding-top:18px;border-top:1px solid var(--border);letter-spacing:.04em}
+/* about */
+.about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img{aspect-ratio:4/3;background:linear-gradient(135deg,#2a1810,#1a1008);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.about-img-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(200,72,32,.15),transparent 60%)}
+.about-img svg{opacity:.05}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:18px}
+.chef-tag{display:inline-flex;align-items:center;gap:8px;background:var(--cream);border:1px solid var(--border);border-radius:100px;padding:6px 16px;font-size:12px;color:var(--text2);margin-bottom:24px}
+.chef-tag svg{width:14px;height:14px;stroke:var(--ember);fill:none;stroke-width:1.5}
+/* bookings */
+.bookings{background:var(--ink)}
+.bookings .eyebrow{color:var(--ember2);opacity:.7}
+.bookings .sh{color:#fff}
+.bookings-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.bookings-form{display:flex;flex-direction:column;gap:12px}
+.bf-group{display:flex;flex-direction:column;gap:6px}
+.bf-group label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.bf-group input,.bf-group select{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:12px 14px;font-family:var(--sans);font-size:14px;color:#fff;outline:none;transition:border-color .2s}.bf-group input::placeholder{color:rgba(255,255,255,.2)}.bf-group input:focus,.bf-group select:focus{border-color:var(--ember)}.bf-group select option{background:var(--ink)}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bf-submit{background:var(--ember);color:#fff;font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:background .2s;margin-top:4px}.bf-submit:hover{background:var(--ember2)}
+.bookings-info{display:flex;flex-direction:column;gap:28px}
+.bi-item{border-left:2px solid rgba(255,255,255,.08);padding-left:20px}
+.bi-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:6px}
+.bi-value{font-size:14px;color:rgba(255,255,255,.55);line-height:1.65}
+/* footer */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.05);padding:48px 60px 24px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:36px}
+.flogo{font-family:var(--serif);font-size:22px;font-style:italic;color:rgba(255,255,255,.7);margin-bottom:10px}
+.ftagline{font-size:13px;color:rgba(255,255,255,.3);line-height:1.65}
+.fcol-h{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}.flinks a:hover{color:#fff}
+.fcopy{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.04em}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){nav{padding:14px 24px}nav.s{padding:12px 24px}.nlinks{display:none}.hero{padding:0 24px 60px}.hero-content{grid-template-columns:1fr}.hero-r{padding-left:0;border-left:none;border-top:1px solid rgba(255,255,255,.06);padding-top:32px}.menu-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.bookings-grid{grid-template-columns:1fr}.bf-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr;gap:28px}section{padding:70px 24px}footer{padding:40px 24px 20px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">Ember Kitchen</a>
+  <ul class="nlinks"><li><a href="#menu">Menu</a></li><li><a href="#about">About</a></li><li><a href="#bookings">Reservations</a></li></ul>
+  <a href="#bookings" class="nav-reserve">Reserve a table</a>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-art"><svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><circle cx="200" cy="200" r="180" fill="none" stroke="white" stroke-width="1"/><circle cx="200" cy="200" r="140" fill="none" stroke="white" stroke-width="1"/><circle cx="200" cy="200" r="100" fill="none" stroke="white" stroke-width="1"/><line x1="20" y1="200" x2="380" y2="200" stroke="white" stroke-width="1"/><line x1="200" y1="20" x2="200" y2="380" stroke="white" stroke-width="1"/></svg></div>
+  <div class="hero-content">
+    <div>
+      <p class="hero-eyebrow">Wood-fire kitchen & bar</p>
+      <h1>Food that<br>tastes like<br><em>somewhere.</em></h1>
+    </div>
+    <div class="hero-r">
+      <p class="hero-sub">Seasonal Australian produce cooked over wood-fire. Lunch Wednesday–Sunday. Dinner Thursday–Saturday. No reservations for parties of two or fewer.</p>
+      <div class="hero-btns"><a href="#bookings" class="btn-p">Reserve a table</a><a href="#menu" class="btn-o">View menu</a></div>
+      <div class="hero-detail">
+        <div class="hd-row"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>42 Crown Street, Surry Hills NSW 2010</div>
+        <div class="hd-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Lunch Wed–Sun 12–3pm · Dinner Thu–Sat 6–10pm</div>
+        <div class="hd-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.07 9.8 2 2 0 012 2h3"/></svg>(02) 9000 0000</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="menu" id="menu">
+  <div class="si">
+    <p class="eyebrow rv">Menu</p>
+    <h2 class="sh rv d1">What's on the<br><em>fire tonight.</em></h2>
+    <div class="menu-grid">
+      <div class="menu-panel rv d1">
+        <h3>Entrée</h3>
+        <div class="menu-items">
+          <div class="mi"><div class="mi-info"><h4>Wood-roasted bread</h4><p>House-cultured butter, smoked salt, olive oil</p></div><span class="mi-price">$12</span></div>
+          <div class="mi"><div class="mi-info"><h4>Freshly shucked oysters</h4><p>Coffin Bay, mignonette dressing — half dozen</p></div><span class="mi-price">$28</span></div>
+          <div class="mi"><div class="mi-info"><h4>Kingfish ceviche</h4><p>Yuzu, cucumber, finger lime, toasted seeds</p></div><span class="mi-price">$24</span></div>
+          <div class="mi"><div class="mi-info"><h4>Grilled broccolini</h4><p>Romesco, almonds, soft-boiled egg</p></div><span class="mi-price">$19</span></div>
+          <div class="mi"><div class="mi-info"><h4>House charcuterie board</h4><p>Daily selection with pickles and grilled sourdough</p></div><span class="mi-price">$32</span></div>
+        </div>
+        <p class="menu-note">Menu changes daily based on seasonal availability.</p>
+      </div>
+      <div class="menu-panel rv d2">
+        <h3>Main</h3>
+        <div class="menu-items">
+          <div class="mi"><div class="mi-info"><h4>Wood-fired market fish</h4><p>Today's catch, burnt butter, capers, lemon</p></div><span class="mi-price">$42</span></div>
+          <div class="mi"><div class="mi-info"><h4>Rangers Valley rib-eye</h4><p>600g, chimichurri, wood-roasted potatoes</p></div><span class="mi-price">$68</span></div>
+          <div class="mi"><div class="mi-info"><h4>Free-range half chicken</h4><p>24hr brine, charred corn, herb jus</p></div><span class="mi-price">$38</span></div>
+          <div class="mi"><div class="mi-info"><h4>Wood-fired mushroom risotto</h4><p>Mixed local mushrooms, aged parmesan, truffle</p></div><span class="mi-price">$34</span></div>
+          <div class="mi"><div class="mi-info"><h4>Slow-roasted lamb shoulder</h4><p>For two to share, harissa, flatbread, yoghurt</p></div><span class="mi-price">$85</span></div>
+        </div>
+        <p class="menu-note">All proteins sourced from Australian farms. Ask your server for today's specials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-img rv"><div class="about-img-glow"></div><svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width=".5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg></div>
+      <div class="rv d1">
+        <div class="chef-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>Head Chef — Marcus Ellery</div>
+        <p class="eyebrow">About</p>
+        <h2 class="sh">Honest food,<br><em>good company.</em></h2>
+        <p>Ember Kitchen opened in 2019 as a love letter to wood-fire cooking. Our kitchen is built around two custom wood-fired ovens and a whole-animal ethos — we use everything, waste nothing.</p>
+        <p>Chef Marcus Ellery trained in Adelaide and spent five years cooking in regional Spain before returning to Sydney. His food is direct and unfussy — good ingredients, live fire, smart technique.</p>
+        <p>We're a neighbourhood restaurant. We want you to come back. That means consistent quality, a menu that changes with the seasons, and staff who actually enjoy being here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bookings" id="bookings">
+  <div class="si">
+    <div class="bookings-grid">
+      <div><p class="eyebrow rv">Reservations</p><h2 class="sh rv d1">Book your<br><em>table.</em></h2>
+        <div class="bookings-info rv d2">
+          <div class="bi-item"><p class="bi-label">Hours</p><p class="bi-value">Lunch: Wed–Sun 12–3pm<br>Dinner: Thu–Sat 6–10pm</p></div>
+          <div class="bi-item"><p class="bi-label">Walk-ins</p><p class="bi-value">Tables of 1–2 are always walk-in. We hold walk-in space at the bar nightly.</p></div>
+          <div class="bi-item"><p class="bi-label">Groups</p><p class="bi-value">Private dining for groups of 10+ available. Enquire separately.</p></div>
+          <div class="bi-item"><p class="bi-label">Phone</p><p class="bi-value">(02) 9000 0000</p></div>
+        </div>
+      </div>
+      <div class="bookings-form rv d2">
+        <div class="bf-row"><div class="bf-group"><label>Name</label><input type="text" placeholder="Jane Smith"/></div><div class="bf-group"><label>Phone</label><input type="tel" placeholder="0400 000 000"/></div></div>
+        <div class="bf-group"><label>Email</label><input type="email" placeholder="jane@email.com"/></div>
+        <div class="bf-row"><div class="bf-group"><label>Date</label><input type="date"/></div><div class="bf-group"><label>Time preference</label><select><option>Lunch (12–3pm)</option><option>Early dinner (6pm)</option><option>Later dinner (8pm)</option></select></div></div>
+        <div class="bf-row"><div class="bf-group"><label>Guests</label><select><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select></div><div class="bf-group"><label>Special requests</label><input type="text" placeholder="Allergies, occasion..."/></div></div>
+        <button class="bf-submit" onclick="this.textContent='Request sent — we\'ll confirm within a few hours'">Request reservation</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">Ember Kitchen</div><p class="ftagline">Wood-fire kitchen & bar. 42 Crown Street, Surry Hills.</p></div>
+      <div><p class="fcol-h">Visit</p><ul class="flinks"><li><a href="#">42 Crown Street, Surry Hills</a></li><li><a href="#">(02) 9000 0000</a></li><li><a href="#">Lunch Wed–Sun</a></li><li><a href="#">Dinner Thu–Sat</a></li></ul></div>
+      <div><p class="fcol-h">Connect</p><ul class="flinks"><li><a href="#">Instagram</a></li><li><a href="#">Private dining</a></li><li><a href="#">Gift vouchers</a></li><li><a href="#">hello@emberkitchen.com.au</a></li></ul></div>
+    </div>
+    <p class="fcopy">© 2025 Ember Kitchen. 42 Crown Street, Surry Hills NSW 2010. Liquor licence: XXXXXXXXXX.</p>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

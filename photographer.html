@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Clara Neve Photography — Wedding Photographer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Karla:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#faf8f5;--bg2:#f2ede6;--ink:#1a1612;--warm:#c8906a;--warm2:#e8b08a;--stone:#7a6a5a;--light:#ddd0c0;--serif:'Libre Baskerville',serif;--sans:'Karla',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(250,248,245,.95);backdrop-filter:blur(16px);padding:14px 52px;border-bottom:1px solid var(--light)}
+.nlogo{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--ink);text-decoration:none;letter-spacing:.06em}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--ink)}
+.ncta{color:var(--warm);font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--warm);padding-bottom:2px;transition:all .2s}.ncta:hover{color:var(--ink);border-color:var(--ink)}
+/* hero */
+.hero{min-height:100vh;background:var(--ink);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-l{position:relative;background:linear-gradient(160deg,#2a1e16,#1a1612);display:flex;align-items:center;justify-content:center;padding:80px 60px}
+.hero-img-ph{width:100%;height:100%;position:absolute;inset:0;background:linear-gradient(135deg,#3a2820 0%,#2a1e16 50%,#1a1410 100%);display:flex;align-items:center;justify-content:center}
+.hero-img-ph svg{opacity:.06}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,22,18,.2),rgba(26,22,18,.6))}
+.hero-r{display:flex;flex-direction:column;justify-content:center;padding:120px 60px;position:relative;z-index:1}
+.hero-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--warm2);margin-bottom:24px;opacity:.8}
+.hero h1{font-family:var(--serif);font-size:clamp(44px,5vw,72px);line-height:1.05;color:#fff;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--warm2)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.45);line-height:1.8;max-width:380px;margin-bottom:44px}
+.hero-btns{display:flex;gap:16px;align-items:center}
+.btn-p{background:var(--warm);color:#fff;font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px 30px;text-decoration:none;transition:all .2s}.btn-p:hover{background:var(--warm2)}
+.btn-o{color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px 0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);transition:all .2s}.btn-o:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+/* portfolio */
+.portfolio{padding:100px 52px;background:var(--bg)}
+.si{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--warm);margin-bottom:14px}
+.sh{font-family:var(--serif);font-size:clamp(34px,4vw,52px);line-height:1.05;color:var(--ink);margin-bottom:16px}
+.sh em{font-style:italic;color:var(--warm)}
+.port-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--light);border:1px solid var(--light);margin-top:60px}
+.port-cell{aspect-ratio:1;background:linear-gradient(135deg,#d4c0b0,#c0a890);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer;transition:opacity .3s}.port-cell:hover{opacity:.9}
+.port-cell.tall{grid-row:span 2;aspect-ratio:auto}
+.port-cell svg{opacity:.1}
+.port-label{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(26,22,18,.6));color:rgba(255,255,255,.8);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:0;transition:opacity .3s}.port-cell:hover .port-label{opacity:1}
+/* packages */
+.packages{padding:100px 52px;background:var(--bg2)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--light);border:1px solid var(--light);margin-top:60px}
+.pkg-card{background:var(--bg2);padding:44px 36px;position:relative;transition:background .2s}.pkg-card:hover{background:var(--bg)}
+.pkg-card.featured{background:var(--ink)}.pkg-card.featured h3,.pkg-card.featured .pkg-price{color:#fff}.pkg-card.featured p,.pkg-card.featured li{color:rgba(255,255,255,.5)}
+.pkg-card.featured::before{content:'Most booked';position:absolute;top:24px;right:24px;background:var(--warm);color:#fff;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px}
+.pkg-eyebrow{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--warm);margin-bottom:16px}
+.pkg-card h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:20px}
+.pkg-price{font-family:var(--serif);font-size:38px;color:var(--ink);line-height:1;margin-bottom:8px}
+.pkg-price small{font-size:16px}
+.pkg-sub{font-size:12px;color:var(--stone);margin-bottom:24px;letter-spacing:.04em}
+.pkg-includes{list-style:none;display:flex;flex-direction:column;gap:9px}
+.pkg-includes li{font-size:13px;color:var(--stone);display:flex;gap:8px;line-height:1.4}.pkg-includes li::before{content:'—';color:var(--warm);flex-shrink:0}
+/* about */
+.about{padding:100px 52px;background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img{aspect-ratio:3/4;background:linear-gradient(135deg,#d4c0b0,#c0a890);border-radius:2px;display:flex;align-items:center;justify-content:center}
+.about-img svg{opacity:.1}
+.about-text .sh{margin-bottom:24px}
+.about-text p{font-size:15px;color:var(--stone);line-height:1.8;margin-bottom:20px}
+/* contact */
+.contact{padding:100px 52px;background:var(--ink)}
+.contact .eyebrow{color:var(--warm2);opacity:.7}
+.contact .sh{color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.cf-group{display:flex;flex-direction:column;gap:6px}
+.cf-group label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.cf-group input,.cf-group select,.cf-group textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:13px 16px;font-family:var(--sans);font-size:14px;color:#fff;outline:none;transition:border-color .2s;width:100%;resize:vertical}.cf-group input::placeholder,.cf-group textarea::placeholder{color:rgba(255,255,255,.2)}.cf-group input:focus,.cf-group select:focus,.cf-group textarea:focus{border-color:var(--warm)}.cf-group select option{background:#1a1612}.cf-group textarea{min-height:90px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf-submit{background:var(--warm);color:#fff;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:15px;border:none;cursor:pointer;transition:background .2s;margin-top:6px}.cf-submit:hover{background:var(--warm2)}
+.contact-info{display:flex;flex-direction:column;gap:32px}
+.ci-item p{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:6px}
+.ci-item a,.ci-item span{font-size:15px;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s}.ci-item a:hover{color:var(--warm)}
+.contact-quote{border-left:2px solid var(--warm);padding-left:24px;margin-top:48px}
+.contact-quote p{font-family:var(--serif);font-size:17px;font-style:italic;color:rgba(255,255,255,.5);line-height:1.6}
+/* footer */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:32px 52px;display:flex;align-items:center;justify-content:space-between}
+.flogo{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(255,255,255,.4);text-decoration:none}
+.fcopy{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.06em}
+.fsocials{display:flex;gap:20px}
+.fsocials a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}.fsocials a:hover{color:var(--warm)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){nav{padding:16px 24px}nav.s{padding:14px 24px}.nlinks{display:none}.hero{grid-template-columns:1fr}.hero-l{min-height:60vw}.hero-r{padding:60px 24px}.port-grid{grid-template-columns:1fr 1fr}.port-cell.tall{grid-row:auto;aspect-ratio:1}.pkg-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.cf-row{grid-template-columns:1fr}section{padding:70px 24px}footer{flex-direction:column;gap:16px;padding:28px 24px;text-align:center}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">Clara Neve</a>
+  <ul class="nlinks"><li><a href="#portfolio">Portfolio</a></li><li><a href="#packages">Packages</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a href="#contact" class="ncta">Enquire</a>
+</nav>
+<section class="hero">
+  <div class="hero-l">
+    <div class="hero-img-ph"><svg width="300" height="300" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width=".4"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/></svg></div>
+    <div class="hero-img-overlay"></div>
+  </div>
+  <div class="hero-r">
+    <p class="hero-eyebrow">Wedding & Elopement Photography</p>
+    <h1>Stories told<br>in <em>honest</em><br>light.</h1>
+    <p class="hero-sub">Documentary wedding photography for couples who want their day captured as it actually was — real, warm, and entirely yours.</p>
+    <div class="hero-btns"><a href="#contact" class="btn-p">Check availability</a><a href="#portfolio" class="btn-o">View portfolio</a></div>
+  </div>
+</section>
+<section class="portfolio" id="portfolio">
+  <div class="si">
+    <p class="eyebrow rv">Portfolio</p>
+    <h2 class="sh rv d1">Recent <em>work.</em></h2>
+    <div class="port-grid">
+      <div class="port-cell tall rv d1"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width=".8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg><span class="port-label">The coast</span></div>
+      <div class="port-cell rv d2"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width=".8"><circle cx="12" cy="12" r="10"/></svg><span class="port-label">Golden hour</span></div>
+      <div class="port-cell rv d3"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width=".8"><path d="M3 9l9-7 9 7v11"/></svg><span class="port-label">Garden ceremony</span></div>
+      <div class="port-cell rv d2"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width=".8"><circle cx="12" cy="12" r="10"/></svg><span class="port-label">Candid reception</span></div>
+      <div class="port-cell rv d3"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width=".8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78"/></svg><span class="port-label">Intimate elopement</span></div>
+    </div>
+  </div>
+</section>
+<section class="packages" id="packages">
+  <div class="si">
+    <p class="eyebrow rv">Investment</p>
+    <h2 class="sh rv d1">Simple <em>packages.</em><br>No hidden extras.</h2>
+    <div class="pkg-grid">
+      <div class="pkg-card rv d1"><p class="pkg-eyebrow">Half Day</p><h3>Essential</h3><div class="pkg-price">$2,200</div><p class="pkg-sub">Up to 5 hours coverage</p><ul class="pkg-includes"><li>Online gallery, 400+ edited images</li><li>5 hours coverage</li><li>1 photographer</li><li>Delivery within 6 weeks</li></ul></div>
+      <div class="pkg-card featured rv d2"><p class="pkg-eyebrow">Full Day</p><h3>Signature</h3><div class="pkg-price">$3,800</div><p class="pkg-sub">Up to 10 hours coverage</p><ul class="pkg-includes"><li>Online gallery, 700+ edited images</li><li>10 hours coverage</li><li>1 photographer</li><li>Engagement session included</li><li>Printed album option</li><li>Delivery within 6 weeks</li></ul></div>
+      <div class="pkg-card rv d3"><p class="pkg-eyebrow">Full Day</p><h3>Film & Digital</h3><div class="pkg-price">$5,200</div><p class="pkg-sub">Digital + film hybrid coverage</p><ul class="pkg-includes"><li>Digital gallery + film scans</li><li>10 hours coverage</li><li>2 photographers</li><li>Engagement session on film</li><li>Fine art album included</li><li>Priority 4-week delivery</li></ul></div>
+    </div>
+  </div>
+</section>
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-img rv"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width=".6"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg></div>
+      <div class="about-text rv d1">
+        <p class="eyebrow">About</p>
+        <h2 class="sh">Hi, I'm <em>Clara.</em></h2>
+        <p>I've been photographing weddings for over a decade. I shoot with a documentary eye — quietly, unobtrusively, catching the moments that happen when you're not posing.</p>
+        <p>I believe the best wedding photos look like your wedding actually looked. Not staged. Not filtered into something unrecognisable. Just you, in the light that was there, in the moment it happened.</p>
+        <p>I'm based in Sydney but travel throughout Australia and internationally. My calendar fills quickly — if you're planning a wedding in the next 18 months, get in touch early.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="si">
+    <div class="contact-grid">
+      <div><p class="eyebrow rv">Get in touch</p><h2 class="sh rv d1">Let's talk<br>about your <em>day.</em></h2>
+        <div class="contact-info rv d2">
+          <div class="ci-item"><p>Email</p><a href="mailto:hello@claraneye.com.au">hello@claraneye.com.au</a></div>
+          <div class="ci-item"><p>Based in</p><span>Sydney, NSW — travel Australia-wide</span></div>
+          <div class="ci-item"><p>Response time</p><span>Usually within 24 hours</span></div>
+        </div>
+        <div class="contact-quote rv d3"><p>"Clara captured moments I didn't even know happened. Looking through the gallery felt like reliving our whole day."</p></div>
+      </div>
+      <div class="contact-form rv d2">
+        <div class="cf-row"><div class="cf-group"><label>Your name</label><input type="text" placeholder="Jane & John"/></div><div class="cf-group"><label>Email</label><input type="email" placeholder="hello@you.com"/></div></div>
+        <div class="cf-row"><div class="cf-group"><label>Wedding date</label><input type="date"/></div><div class="cf-group"><label>Venue / location</label><input type="text" placeholder="Sydney, Hunter Valley..."/></div></div>
+        <div class="cf-group"><label>Package interest</label><select><option>Essential (half day)</option><option>Signature (full day)</option><option>Film & Digital</option><option>Not sure yet</option></select></div>
+        <div class="cf-group"><label>Tell me about your day</label><textarea placeholder="What matters most to you? Any special moments, family situations or things I should know..."></textarea></div>
+        <button class="cf-submit" onclick="this.textContent='Message sent — I\'ll be in touch soon'">Send enquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <a href="#" class="flogo">Clara Neve Photography</a>
+  <span class="fcopy">© 2025 Clara Neve Photography. Sydney, NSW.</span>
+  <div class="fsocials"><a href="#">Instagram</a><a href="#">Pinterest</a></div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

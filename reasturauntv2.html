@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ember — Restaurant & Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;cursor:none}
+body{background:#0e0b07;color:#f0e8d8;font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+:root{
+  --bg:#0e0b07;--bg2:#161208;--surface:#1e180e;
+  --ember:#e84820;--ember2:#ff6030;
+  --gold:#d4901a;--gold2:#f0b030;
+  --cream:#f0e8d8;
+  --text2:rgba(240,232,216,.5);--text3:rgba(240,232,216,.2);
+  --border:rgba(240,232,216,.07);
+  --serif:'Fraunces',serif;--display:'Bebas Neue',sans-serif;--sans:'DM Sans',sans-serif;
+}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--ember);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+#cur-r{position:fixed;width:34px;height:34px;border:1px solid rgba(232,72,32,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .22s ease}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:26px 52px;display:flex;align-items:center;justify-content:space-between;transition:all .5s}
+nav.s{background:rgba(14,11,7,.93);backdrop-filter:blur(20px);padding:14px 52px;border-bottom:1px solid var(--border)}
+.nlogo{font-family:var(--display);font-size:26px;letter-spacing:.1em;color:var(--cream);text-decoration:none}
+.nlinks{display:flex;gap:32px;list-style:none}
+.nlinks a{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--cream)}
+.ncta{background:var(--ember);color:#fff;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:11px 24px;text-decoration:none;border-radius:2px;transition:background .2s}.ncta:hover{background:var(--ember2)}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--bg);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");pointer-events:none;z-index:1}
+.h-glow{position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(232,72,32,.11) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:gp 5s ease-in-out infinite;pointer-events:none}
+@keyframes gp{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.12)}}
+
+/* BURGER STAGE */
+.b-stage{position:absolute;width:460px;height:460px;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;transition:transform 1s ease}
+.b-stage.float{animation:float 5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-16px)}}
+
+.bl{position:absolute;left:50%;transform:translateX(-50%);opacity:0;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+
+/* Layer sizes & positions */
+.bl-bun-top{width:300px;height:68px;top:44px}
+.bl-lettuce {width:320px;height:32px;top:112px}
+.bl-tomato  {width:282px;height:26px;top:140px}
+.bl-cheese  {width:292px;height:20px;top:162px}
+.bl-patty   {width:280px;height:50px;top:178px}
+.bl-onion   {width:272px;height:19px;top:224px}
+.bl-sauce   {width:280px;height:15px;top:240px}
+.bl-bun-bot {width:292px;height:50px;top:252px}
+
+/* Entry keyframes - each layer from different direction */
+@keyframes bunTopIn  {from{opacity:0;transform:translateX(-50%) translateY(-150px) rotate(-9deg)}to{opacity:1;transform:translateX(-50%) translateY(0) rotate(0deg)}}
+@keyframes lettuceIn {from{opacity:0;transform:translateX(calc(-50% - 90px)) scale(.8) rotate(7deg)}to{opacity:1;transform:translateX(-50%) scale(1) rotate(0deg)}}
+@keyframes tomatoIn  {from{opacity:0;transform:translateX(calc(-50% + 100px)) scale(.85) rotate(-5deg)}to{opacity:1;transform:translateX(-50%) scale(1) rotate(0deg)}}
+@keyframes cheeseIn  {from{opacity:0;transform:translateX(-50%) translateY(-70px) rotate(14deg)}to{opacity:1;transform:translateX(-50%) translateY(0) rotate(0deg)}}
+@keyframes pattyIn   {from{opacity:0;transform:translateX(-50%) scale(.65) rotate(-4deg)}to{opacity:1;transform:translateX(-50%) scale(1) rotate(0deg)}}
+@keyframes onionIn   {from{opacity:0;transform:translateX(calc(-50% - 110px)) rotate(9deg)}to{opacity:1;transform:translateX(-50%) rotate(0deg)}}
+@keyframes sauceIn   {from{opacity:0;transform:translateX(calc(-50% + 80px)) scaleX(.5)}to{opacity:1;transform:translateX(-50%) scaleX(1)}}
+@keyframes bunBotIn  {from{opacity:0;transform:translateX(-50%) translateY(110px) rotate(5deg)}to{opacity:1;transform:translateX(-50%) translateY(0) rotate(0deg)}}
+
+.b-stage.go .bl-bun-top{animation:bunTopIn  .75s cubic-bezier(.16,1,.3,1) .1s  forwards}
+.b-stage.go .bl-lettuce{animation:lettuceIn .72s cubic-bezier(.16,1,.3,1) .22s forwards}
+.b-stage.go .bl-tomato {animation:tomatoIn  .68s cubic-bezier(.16,1,.3,1) .32s forwards}
+.b-stage.go .bl-cheese {animation:cheeseIn  .65s cubic-bezier(.16,1,.3,1) .41s forwards}
+.b-stage.go .bl-patty  {animation:pattyIn   .75s cubic-bezier(.16,1,.3,1) .50s forwards}
+.b-stage.go .bl-onion  {animation:onionIn   .62s cubic-bezier(.16,1,.3,1) .58s forwards}
+.b-stage.go .bl-sauce  {animation:sauceIn   .55s cubic-bezier(.16,1,.3,1) .64s forwards}
+.b-stage.go .bl-bun-bot{animation:bunBotIn  .75s cubic-bezier(.16,1,.3,1) .70s forwards}
+
+/* HERO TEXT */
+.h-text{position:absolute;z-index:10;left:52px;bottom:84px}
+.h-eyebrow{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ember);margin-bottom:14px;opacity:0;transform:translateY(18px);transition:all .7s .85s cubic-bezier(.16,1,.3,1)}
+.h-eyebrow.in{opacity:.8;transform:none}
+.h-h1{font-family:var(--display);font-size:clamp(68px,7.5vw,108px);line-height:.86;letter-spacing:.04em;margin-bottom:20px}
+.h-word{display:block;opacity:0;transform:translateY(100%);transition:all .7s cubic-bezier(.16,1,.3,1)}
+.h-word.in{opacity:1;transform:none}
+.h-word:nth-child(1){transition-delay:.95s}
+.h-word:nth-child(2){transition-delay:1.1s}
+.h-word:nth-child(3){transition-delay:1.25s;color:var(--ember)}
+.h-sub{font-size:14px;color:var(--text2);line-height:1.75;max-width:330px;margin-bottom:28px;opacity:0;transform:translateY(14px);transition:all .7s 1.4s cubic-bezier(.16,1,.3,1)}
+.h-sub.in{opacity:1;transform:none}
+.h-btns{display:flex;gap:12px;opacity:0;transform:translateY(14px);transition:all .7s 1.55s cubic-bezier(.16,1,.3,1)}
+.h-btns.in{opacity:1;transform:none}
+.btn-p{background:var(--ember);color:#fff;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:13px 28px;text-decoration:none;border-radius:2px;display:inline-block;transition:all .25s}
+.btn-p:hover{background:var(--ember2);transform:translateY(-2px)}
+.btn-g{color:var(--cream);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:13px 22px;text-decoration:none;border:1px solid rgba(240,232,216,.15);border-radius:2px;display:inline-block;transition:all .25s}
+.btn-g:hover{border-color:rgba(240,232,216,.4);transform:translateY(-2px)}
+
+/* side info */
+.h-side{position:absolute;z-index:10;right:52px;bottom:84px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;opacity:0;transition:all .7s 1.7s cubic-bezier(.16,1,.3,1);transform:translateX(16px)}
+.h-side.in{opacity:1;transform:none}
+.h-side-row{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);display:flex;align-items:center;gap:8px}
+.h-side-row::after{content:'';width:22px;height:1px;background:rgba(240,232,216,.12)}
+.h-side-row.hot{color:var(--ember)}.h-side-row.hot::after{background:var(--ember)}
+
+/* scroll hint */
+.s-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeHint .8s 2.2s forwards}
+@keyframes fadeHint{to{opacity:.35}}
+.s-line{width:1px;height:38px;background:linear-gradient(to bottom,rgba(240,232,216,.35),transparent);overflow:hidden;position:relative}
+.s-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--ember);animation:sDrop 2.2s ease-in-out 2.5s infinite}
+@keyframes sDrop{0%{top:-100%}100%{top:200%}}
+.s-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,232,216,.25)}
+
+/* MARQUEE */
+.marquee{background:var(--ember);padding:13px 0;overflow:hidden}
+.mq-inner{display:flex;width:max-content;animation:mq 16s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{font-family:var(--display);font-size:15px;letter-spacing:.18em;color:#fff;padding:0 28px;white-space:nowrap;display:inline-flex;align-items:center;gap:14px}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4)}
+
+/* SECTIONS */
+section{padding:96px 52px}
+.si{max-width:1140px;margin:0 auto}
+.ey{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ember);margin-bottom:12px;opacity:.8}
+.sh{font-family:var(--serif);font-size:clamp(34px,4vw,52px);line-height:1.0;color:var(--cream);margin-bottom:14px;letter-spacing:-.01em}
+.sh em{font-style:italic;color:rgba(240,232,216,.35)}
+
+/* ABOUT */
+.about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img{aspect-ratio:3/4;background:linear-gradient(150deg,#2a1810,#160e06);border-radius:6px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.about-img-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 35% 65%,rgba(232,72,32,.2),transparent 60%)}
+.about-img svg{opacity:.06}
+.a-float{position:absolute;top:-20px;right:-20px;background:var(--ember);padding:14px 18px;border-radius:4px;transform:rotate(4deg);transition:transform .3s;cursor:default}
+.a-float:hover{transform:rotate(0) scale(1.05)}
+.a-float-n{font-family:var(--display);font-size:26px;letter-spacing:.04em;line-height:1}
+.a-float-l{font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-top:1px}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:16px}
+.a-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:28px}
+.ast{background:var(--bg);padding:18px 22px}
+.ast-n{font-family:var(--display);font-size:26px;letter-spacing:.04em;color:var(--ember);line-height:1;margin-bottom:3px}
+.ast-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+
+/* MENU */
+.menu{background:var(--bg2)}
+.menu-hd{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:52px}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:14px}
+.tab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);padding:9px 18px 12px;cursor:pointer;border:none;background:none;font-family:var(--sans);transition:color .2s;position:relative}
+.tab::after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:2px;background:var(--ember);transition:width .3s}
+.tab.on{color:var(--cream)}.tab.on::after{width:100%}
+.panels{border:1px solid var(--border)}
+.panel{display:none}.panel.on{display:block}
+.mi{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:20px 28px;border-bottom:1px solid var(--border);transition:background .2s;cursor:default}
+.mi:hover{background:var(--surface)}.mi:last-child{border-bottom:none}
+.mi-l h4{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--cream);margin-bottom:3px;font-weight:300}
+.mi-l p{font-size:12px;color:var(--text2);line-height:1.4;max-width:300px}
+.mi-tag{display:inline-block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;background:rgba(232,72,32,.12);color:var(--ember);padding:2px 7px;border-radius:2px;margin-top:4px}
+.mi-price{font-family:var(--display);font-size:20px;color:var(--ember);letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+
+/* SPECIALS BENTO */
+.specials{background:var(--bg)}
+.bento{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;margin-top:52px;height:540px}
+.bc{background:var(--surface);border-radius:8px;padding:26px;border:1px solid var(--border);position:relative;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;transition:all .35s}
+.bc:hover{border-color:rgba(232,72,32,.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.bc:hover::before{opacity:1}
+.bc::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 80%,rgba(232,72,32,.1),transparent 70%);opacity:0;transition:opacity .3s}
+.bc-feat{grid-row:span 2;background:linear-gradient(155deg,#2a1410,#180e08)}
+.bc-glow{position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(232,72,32,.18);top:-30px;right:-30px;filter:blur(45px);pointer-events:none}
+.bc-num{font-family:var(--display);font-size:68px;color:rgba(240,232,216,.04);line-height:1;position:absolute;top:12px;right:16px}
+.bc-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin-bottom:6px;opacity:.8}
+.bc-title{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--cream);margin-bottom:6px;font-weight:300}
+.bc-feat .bc-title{font-size:28px}
+.bc-desc{font-size:12px;color:var(--text2);line-height:1.55;margin-bottom:10px}
+.bc-price{font-family:var(--display);font-size:20px;color:var(--gold);letter-spacing:.04em}
+
+/* RESERVATION */
+.reservation{background:var(--ember);padding:80px 52px}
+.res-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.res-text .sh{color:#fff}
+.res-text .ey{color:rgba(255,255,255,.5);opacity:1}
+.res-text p{font-size:15px;color:rgba(255,255,255,.6);line-height:1.75;margin:18px 0 28px}
+.res-detail{display:flex;flex-direction:column;gap:10px}
+.rd{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.55)}
+.rd svg{width:14px;height:14px;stroke:rgba(255,255,255,.45);fill:none;stroke-width:1.5;stroke-linecap:round;flex-shrink:0}
+.res-form{background:rgba(0,0,0,.2);padding:32px;border-radius:4px}
+.rf-g{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
+.rf-g label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.rf-g input,.rf-g select{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:11px 13px;font-family:var(--sans);font-size:13px;color:#fff;outline:none;border-radius:2px;transition:border-color .2s;width:100%}.rf-g input::placeholder{color:rgba(255,255,255,.2)}.rf-g input:focus,.rf-g select:focus{border-color:rgba(255,255,255,.35)}.rf-g select option{background:#1a0e08}
+.rf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rf-btn{width:100%;background:#fff;color:var(--ember);font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;border-radius:2px;transition:all .25s;margin-top:12px}
+.rf-btn:hover{background:var(--cream);transform:translateY(-1px)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 52px 24px}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px}
+.f-logo{font-family:var(--display);font-size:26px;letter-spacing:.1em;color:var(--cream);margin-bottom:10px}
+.f-tag{font-size:13px;color:var(--text2);line-height:1.65;max-width:200px}
+.f-soc{display:flex;gap:12px;margin-top:18px}
+.f-soc a{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .25s}.f-soc a:hover{border-color:var(--ember);background:rgba(232,72,32,.1)}
+.f-soc svg{width:14px;height:14px;stroke:var(--text2);fill:none;stroke-width:1.5;transition:stroke .2s}.f-soc a:hover svg{stroke:var(--ember)}
+.fc h5{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.fl{list-style:none;display:flex;flex-direction:column;gap:9px}
+.fl a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s}.fl a:hover{color:var(--cream)}
+.fb{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between}
+.fb span{font-size:11px;color:var(--text3);letter-spacing:.05em}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rvl{opacity:0;transform:translateX(-28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rvr{opacity:0;transform:translateX(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.rv.in,.rvl.in,.rvr.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+@media(max-width:900px){
+  html{cursor:auto}#cur,#cur-r{display:none}
+  nav{padding:14px 24px}nav.s{padding:12px 24px}.nlinks{display:none}
+  .h-text{left:24px;bottom:56px}.h-side{display:none}
+  .b-stage{width:280px;height:280px}
+  .bl-bun-top{width:186px;height:42px;top:27px}
+  .bl-lettuce{width:198px;height:20px;top:69px}
+  .bl-tomato{width:174px;height:16px;top:87px}
+  .bl-cheese{width:180px;height:12px;top:100px}
+  .bl-patty{width:174px;height:31px;top:110px}
+  .bl-onion{width:168px;height:12px;top:138px}
+  .bl-sauce{width:174px;height:9px;top:148px}
+  .bl-bun-bot{width:180px;height:31px;top:155px}
+  section{padding:64px 24px}
+  .about-grid,.menu-hd,.res-grid{grid-template-columns:1fr}
+  .a-float{top:-14px;right:0}
+  .bento{grid-template-columns:1fr;grid-template-rows:auto;height:auto}
+  .bc-feat{grid-row:auto}
+  .ft{grid-template-columns:1fr 1fr;gap:28px}
+  .reservation{padding:60px 24px}
+  footer{padding:44px 24px 20px}
+  .rf-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<nav id="nav">
+  <a href="#" class="nlogo">EMBER</a>
+  <ul class="nlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Tonight</a></li>
+    <li><a href="#reservation">Reservations</a></li>
+  </ul>
+  <a href="#reservation" class="ncta">Reserve a table</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="h-glow"></div>
+
+  <!-- DECONSTRUCTED BURGER -->
+  <div class="b-stage" id="bs">
+
+    <!-- BUN TOP -->
+    <div class="bl bl-bun-top">
+      <svg viewBox="0 0 300 68" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="btg" cx="50%" cy="25%" r="75%">
+            <stop offset="0%" stop-color="#d4943c"/>
+            <stop offset="100%" stop-color="#8b5818"/>
+          </radialGradient>
+        </defs>
+        <path d="M18 68 Q8 38 8 28 Q8 2 150 2 Q292 2 292 28 Q292 38 282 68Z" fill="url(#btg)"/>
+        <ellipse cx="100" cy="22" rx="8" ry="4.5" fill="#b8741c" transform="rotate(-14 100 22)"/>
+        <ellipse cx="150" cy="14" rx="9" ry="5" fill="#b8741c" transform="rotate(4 150 14)"/>
+        <ellipse cx="200" cy="21" rx="8" ry="4.5" fill="#b8741c" transform="rotate(18 200 21)"/>
+        <ellipse cx="130" cy="32" rx="6.5" ry="3.5" fill="#b8741c" transform="rotate(-7 130 32)"/>
+        <ellipse cx="178" cy="30" rx="6.5" ry="3.5" fill="#b8741c" transform="rotate(11 178 30)"/>
+        <path d="M60 17 Q110 9 170 13" stroke="rgba(255,215,110,.22)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <!-- LETTUCE -->
+    <div class="bl bl-lettuce">
+      <svg viewBox="0 0 320 32" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 18 Q18 3 38 11 Q58 1 78 13 Q98 3 118 15 Q138 1 158 13 Q178 3 198 15 Q218 1 238 13 Q258 3 278 13 Q295 5 316 18 L316 26 Q200 32 6 26Z" fill="#3a8a28"/>
+        <path d="M6 22 Q60 16 120 20 Q180 14 240 20 Q280 15 316 20" stroke="#2a7018" stroke-width="1.5" fill="none" opacity=".5"/>
+        <path d="M6 18 Q16 7 26 12 Q34 4 44 10 Q54 2 64 8 Q72 1 82 7" stroke="#4aaa36" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/>
+        <path d="M236 6 Q248 0 258 6 Q268 2 278 8 Q288 3 298 9 Q308 5 316 13" stroke="#4aaa36" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/>
+      </svg>
+    </div>
+
+    <!-- TOMATO -->
+    <div class="bl bl-tomato">
+      <svg viewBox="0 0 282 26" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="tomg" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#e84830"/><stop offset="100%" stop-color="#c02e1e"/></radialGradient></defs>
+        <ellipse cx="66" cy="13" rx="58" ry="11" fill="url(#tomg)"/>
+        <ellipse cx="150" cy="13" rx="60" ry="11" fill="url(#tomg)"/>
+        <ellipse cx="232" cy="13" rx="50" ry="11" fill="url(#tomg)"/>
+        <line x1="36" y1="5" x2="46" y2="21" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="66" y1="2" x2="66" y2="24" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="94" y1="5" x2="84" y2="21" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="122" y1="4" x2="128" y2="22" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="150" y1="2" x2="150" y2="24" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="178" y1="4" x2="172" y2="22" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="206" y1="4" x2="212" y2="20" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="232" y1="2" x2="232" y2="24" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+        <line x1="258" y1="4" x2="252" y2="20" stroke="rgba(255,110,90,.28)" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <!-- CHEESE -->
+    <div class="bl bl-cheese">
+      <svg viewBox="0 0 292 20" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="chg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0b830"/><stop offset="100%" stop-color="#d49020"/></linearGradient></defs>
+        <path d="M0 5 L7 20 L285 20 L292 5 Q270 0 235 1.5 Q195 -2 150 1.5 Q108 -2 60 1.5 Q22 0 0 5Z" fill="url(#chg)"/>
+        <path d="M56 20 Q54 27 52 20" fill="#c88010"/><path d="M116 20 Q113 29 111 20" fill="#c88010"/>
+        <path d="M185 20 Q183 26 181 20" fill="#c88010"/><path d="M248 20 Q246 28 244 20" fill="#c88010"/>
+        <ellipse cx="76" cy="10" rx="5" ry="2.8" fill="rgba(150,90,8,.18)"/>
+        <ellipse cx="152" cy="8" rx="4.5" ry="2.2" fill="rgba(150,90,8,.18)"/>
+        <ellipse cx="224" cy="10" rx="5" ry="2.8" fill="rgba(150,90,8,.18)"/>
+      </svg>
+    </div>
+
+    <!-- PATTY -->
+    <div class="bl bl-patty">
+      <svg viewBox="0 0 280 50" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="pg" cx="50%" cy="38%" r="72%"><stop offset="0%" stop-color="#6a3010"/><stop offset="65%" stop-color="#481e08"/><stop offset="100%" stop-color="#280e02"/></radialGradient></defs>
+        <rect x="3" y="7" width="274" height="35" rx="10" fill="url(#pg)"/>
+        <path d="M36 11 Q48 13.5 60 9 Q72 13 84 9 Q96 13 108 9" stroke="rgba(90,40,8,.55)" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <path d="M112 11 Q124 13.5 136 9 Q148 13 160 9 Q172 13 184 9" stroke="rgba(90,40,8,.55)" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <path d="M188 11 Q200 13.5 212 9 Q224 13 236 9 Q248 13 260 9" stroke="rgba(90,40,8,.55)" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+        <rect x="3" y="7" width="274" height="35" rx="10" fill="none" stroke="#1a0802" stroke-width="2.5"/>
+        <path d="M18 17 Q76 11 150 13 Q210 11 264 17" stroke="rgba(170,80,28,.18)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <!-- ONION -->
+    <div class="bl bl-onion">
+      <svg viewBox="0 0 272 19" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="47" cy="9.5" rx="42" ry="7.5" fill="#a06820" opacity=".88"/>
+        <ellipse cx="47" cy="9.5" rx="30" ry="4.5" fill="none" stroke="#c07c2c" stroke-width="1.4" opacity=".55"/>
+        <ellipse cx="124" cy="9.5" rx="46" ry="7.5" fill="#a06820" opacity=".9"/>
+        <ellipse cx="124" cy="9.5" rx="32" ry="4.5" fill="none" stroke="#c07c2c" stroke-width="1.4" opacity=".55"/>
+        <ellipse cx="210" cy="9.5" rx="58" ry="7.5" fill="#a06820" opacity=".85"/>
+        <ellipse cx="210" cy="9.5" rx="44" ry="4.5" fill="none" stroke="#c07c2c" stroke-width="1.4" opacity=".55"/>
+      </svg>
+    </div>
+
+    <!-- SAUCE -->
+    <div class="bl bl-sauce">
+      <svg viewBox="0 0 280 15" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 7 Q20 1 40 9 Q60 1 80 9 Q100 1 120 9 Q140 1 160 7 Q180 1 200 7 Q220 1 240 7 Q260 1 275 9 L275 13 L8 13Z" fill="#c82010" opacity=".82"/>
+        <path d="M8 7 Q32 3 52 8 Q72 3 92 8 Q112 3 132 8 Q152 3 172 8 Q192 3 212 8 Q232 3 252 8 Q268 4 276 8" stroke="#e03020" stroke-width="1" fill="none" opacity=".45"/>
+      </svg>
+    </div>
+
+    <!-- BUN BOTTOM -->
+    <div class="bl bl-bun-bot">
+      <svg viewBox="0 0 292 50" style="width:100%;height:100%" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="bbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4943c"/><stop offset="100%" stop-color="#8b5818"/></linearGradient></defs>
+        <path d="M3 5 Q0 34 0 44 L0 50 L292 50 L292 44 Q292 34 289 5 Q265 0 146 0 Q27 0 3 5Z" fill="url(#bbg)"/>
+        <path d="M28 11 Q76 5 146 5 Q216 5 264 11" stroke="rgba(255,195,95,.18)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+  </div><!-- /b-stage -->
+
+  <!-- HERO TEXT -->
+  <div class="h-text">
+    <p class="h-eyebrow" id="hEy">Wood-fire kitchen — Surry Hills, Sydney</p>
+    <h1 class="h-h1">
+      <span class="h-word" id="hw1">BORN</span>
+      <span class="h-word" id="hw2">FROM</span>
+      <span class="h-word" id="hw3">FIRE.</span>
+    </h1>
+    <p class="h-sub" id="hSub">Seasonal produce. Live fire. No shortcuts.<br>Open Wednesday through Saturday, inner Sydney.</p>
+    <div class="h-btns" id="hBtns">
+      <a href="#reservation" class="btn-p">Reserve a table</a>
+      <a href="#menu" class="btn-g">View menu</a>
+    </div>
+  </div>
+
+  <!-- SIDE TAGS -->
+  <div class="h-side" id="hSide">
+    <div class="h-side-row hot">Dinner tonight</div>
+    <div class="h-side-row">6pm – 10pm</div>
+    <div class="h-side-row">42 Crown St</div>
+  </div>
+
+  <!-- SCROLL HINT -->
+  <div class="s-hint">
+    <div class="s-line"></div>
+    <span class="s-label">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mq-inner">
+    <span class="mq-item">Wood Fired<span class="mq-dot"></span></span>
+    <span class="mq-item">Seasonal Menu<span class="mq-dot"></span></span>
+    <span class="mq-item">Open Wed–Sat<span class="mq-dot"></span></span>
+    <span class="mq-item">Surry Hills<span class="mq-dot"></span></span>
+    <span class="mq-item">NSW Good Food Guide Hatted<span class="mq-dot"></span></span>
+    <span class="mq-item">Wood Fired<span class="mq-dot"></span></span>
+    <span class="mq-item">Seasonal Menu<span class="mq-dot"></span></span>
+    <span class="mq-item">Open Wed–Sat<span class="mq-dot"></span></span>
+    <span class="mq-item">Surry Hills<span class="mq-dot"></span></span>
+    <span class="mq-item">NSW Good Food Guide Hatted<span class="mq-dot"></span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="rvl" style="position:relative">
+        <div class="about-img">
+          <div class="about-img-glow"></div>
+          <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="rgba(232,72,32,.1)" stroke-width=".5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="1" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="23" y2="12"/></svg>
+        </div>
+        <div class="a-float"><div class="a-float-n">2019</div><div class="a-float-l">Est.</div></div>
+      </div>
+      <div class="rvr">
+        <p class="ey">Our story</p>
+        <h2 class="sh">Food that<br>tastes like <em>somewhere.</em></h2>
+        <div class="about-text">
+          <p>Ember opened in 2019 with a simple premise: get the best produce you can, put it over fire, and don't overthink it. Our kitchen runs on two custom wood-fired ovens.</p>
+          <p>Head chef Marcus Ellery trained in Adelaide and spent five years in regional Spain. His food is direct and unfussy — good ingredients, live fire, smart technique.</p>
+        </div>
+        <div class="a-stats">
+          <div class="ast"><div class="ast-n">2</div><div class="ast-l">Wood-fired ovens</div></div>
+          <div class="ast"><div class="ast-n">4.9★</div><div class="ast-l">Google rating</div></div>
+          <div class="ast"><div class="ast-n">Hatted</div><div class="ast-l">Good Food Guide</div></div>
+          <div class="ast"><div class="ast-n">100%</div><div class="ast-l">Seasonal menu</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="si">
+    <div class="menu-hd">
+      <div>
+        <p class="ey rv">The menu</p>
+        <h2 class="sh rv d1">What's on<br>the <em>fire.</em></h2>
+      </div>
+      <div class="rv d2">
+        <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:18px">Changes daily with what arrives each morning. This is a sample — ask your server for today's specials.</p>
+        <div class="tabs">
+          <button class="tab on" onclick="tab(this,'entree')">Entrée</button>
+          <button class="tab" onclick="tab(this,'main')">Main</button>
+          <button class="tab" onclick="tab(this,'dessert')">Dessert</button>
+          <button class="tab" onclick="tab(this,'drinks')">Drinks</button>
+        </div>
+      </div>
+    </div>
+    <div class="panels rv d3">
+      <div class="panel on" id="p-entree">
+        <div class="mi"><div class="mi-l"><h4>Wood-roasted bread</h4><p>House-cultured butter, smoked salt, olive oil</p></div><span class="mi-price">$12</span></div>
+        <div class="mi"><div class="mi-l"><h4>Freshly shucked oysters</h4><p>Coffin Bay SA, mignonette, finger lime — half dozen</p><span class="mi-tag">Market fresh</span></div><span class="mi-price">$28</span></div>
+        <div class="mi"><div class="mi-l"><h4>Kingfish ceviche</h4><p>Yuzu, cucumber, jalapeño, toasted seeds</p></div><span class="mi-price">$24</span></div>
+        <div class="mi"><div class="mi-l"><h4>Grilled broccolini</h4><p>Romesco, almonds, soft-boiled egg, crispy capers</p><span class="mi-tag">Vegetarian</span></div><span class="mi-price">$19</span></div>
+        <div class="mi"><div class="mi-l"><h4>House charcuterie</h4><p>Chef's daily selection, pickles, grilled sourdough</p></div><span class="mi-price">$32</span></div>
+      </div>
+      <div class="panel" id="p-main">
+        <div class="mi"><div class="mi-l"><h4>Wood-fired market fish</h4><p>Today's catch, burnt butter, capers, preserved lemon</p><span class="mi-tag">Ask your server</span></div><span class="mi-price">$42</span></div>
+        <div class="mi"><div class="mi-l"><h4>Rangers Valley rib-eye 600g</h4><p>Chimichurri, wood-roasted potatoes, bone marrow butter</p><span class="mi-tag">Signature</span></div><span class="mi-price">$68</span></div>
+        <div class="mi"><div class="mi-l"><h4>Free-range half chicken</h4><p>24hr brine, charred corn, herb jus, watercress</p></div><span class="mi-price">$38</span></div>
+        <div class="mi"><div class="mi-l"><h4>Mushroom risotto</h4><p>Local mixed mushrooms, aged parmesan, truffle</p><span class="mi-tag">Vegetarian</span></div><span class="mi-price">$34</span></div>
+        <div class="mi"><div class="mi-l"><h4>Slow-roasted lamb shoulder</h4><p>For two — harissa, flatbread, labne, sumac onion</p></div><span class="mi-price">$85</span></div>
+      </div>
+      <div class="panel" id="p-dessert">
+        <div class="mi"><div class="mi-l"><h4>Burnt basque cheesecake</h4><p>Pedro Ximénez caramel, crème fraîche</p></div><span class="mi-price">$18</span></div>
+        <div class="mi"><div class="mi-l"><h4>Dark chocolate ganache</h4><p>Salted caramel, praline, vanilla ice cream</p></div><span class="mi-price">$16</span></div>
+        <div class="mi"><div class="mi-l"><h4>Seasonal sorbet & gelato</h4><p>Three scoops — ask for today's flavours</p></div><span class="mi-price">$14</span></div>
+        <div class="mi"><div class="mi-l"><h4>Cheese selection</h4><p>Three Australian cheeses, quince, lavosh, honeycomb</p></div><span class="mi-price">$24</span></div>
+      </div>
+      <div class="panel" id="p-drinks">
+        <div class="mi"><div class="mi-l"><h4>Natural wine list</h4><p>Curated Australian and European natural wines</p></div><span class="mi-price">From $12</span></div>
+        <div class="mi"><div class="mi-l"><h4>Cocktail menu</h4><p>Seasonal cocktails built around fire, smoke and citrus</p></div><span class="mi-price">From $20</span></div>
+        <div class="mi"><div class="mi-l"><h4>Beer & cider</h4><p>Australian craft on tap and in bottles</p></div><span class="mi-price">From $10</span></div>
+        <div class="mi"><div class="mi-l"><h4>Non-alcoholic</h4><p>House shrubs, ferments, kombucha, premium soft drinks</p></div><span class="mi-price">From $8</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALS -->
+<section class="specials" id="specials">
+  <div class="si">
+    <p class="ey rv">Tonight's specials</p>
+    <h2 class="sh rv d1">What we're<br><em>excited about.</em></h2>
+    <div class="bento">
+      <div class="bc bc-feat rv d1"><div class="bc-glow"></div><div class="bc-num">01</div><div><p class="bc-tag">Chef's feature</p><h3 class="bc-title">Whole Roasted Snapper over Embers</h3><p class="bc-desc">Today's catch from Sydney Fish Market. Slow-roasted whole over ironbark coals with wild herbs, charred lemon and salsa verde. Serves two.</p><p class="bc-price">$88 for two</p></div></div>
+      <div class="bc rv d2"><div class="bc-num">02</div><p class="bc-tag">Vegetarian</p><h3 class="bc-title">Fire-Roasted Cauliflower</h3><p class="bc-desc">Harissa butter, pomegranate, tahini.</p><p class="bc-price">$32</p></div>
+      <div class="bc rv d3"><div class="bc-num">03</div><p class="bc-tag">Dessert</p><h3 class="bc-title">Smoked Fig & Honey Tart</h3><p class="bc-desc">Hunter Valley figs, lavender honey, almond frangipane.</p><p class="bc-price">$19</p></div>
+      <div class="bc rv d4"><div class="bc-num">04</div><p class="bc-tag">Cocktail of the week</p><h3 class="bc-title">Smoked Negroni</h3><p class="bc-desc">Cold-smoked Campari, gin, vermouth. Torched orange peel.</p><p class="bc-price">$22</p></div>
+      <div class="bc rv d5"><div class="bc-num">05</div><p class="bc-tag">Wine pick</p><h3 class="bc-title">Ochota Barrels Slint</h3><p class="bc-desc">Grenache, McLaren Vale. Lifted, wild, perfect with lamb.</p><p class="bc-price">$16 / glass</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <div class="res-grid">
+    <div class="rvl">
+      <p class="ey">Reservations</p>
+      <h2 class="sh">Book your<br>table tonight.</h2>
+      <p>Walk-ins welcome for two or fewer. Bookings recommended for groups of three or more — especially Thursday to Saturday evenings.</p>
+      <div class="res-detail">
+        <div class="rd"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Lunch Wed–Sun 12–3pm · Dinner Thu–Sat 6–10pm</div>
+        <div class="rd"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>42 Crown Street, Surry Hills NSW 2010</div>
+        <div class="rd"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 013.07 9.8 2 2 0 012 2h3"/></svg>(02) 9000 0000</div>
+      </div>
+    </div>
+    <div class="rvr">
+      <div class="res-form">
+        <div class="rf-row"><div class="rf-g"><label>Name</label><input type="text" placeholder="Jane Smith"/></div><div class="rf-g"><label>Phone</label><input type="tel" placeholder="0400 000 000"/></div></div>
+        <div class="rf-row"><div class="rf-g"><label>Date</label><input type="date"/></div><div class="rf-g"><label>Time</label><select><option>Lunch 12:00pm</option><option>Lunch 1:00pm</option><option>Dinner 6:00pm</option><option>Dinner 7:00pm</option><option>Dinner 8:00pm</option></select></div></div>
+        <div class="rf-row"><div class="rf-g"><label>Guests</label><select><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7–10</option></select></div><div class="rf-g"><label>Special requests</label><input type="text" placeholder="Allergies, occasions..."/></div></div>
+        <button class="rf-btn" onclick="this.textContent='Reservation request sent!'">Confirm reservation</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="si">
+    <div class="ft">
+      <div>
+        <div class="f-logo">EMBER</div>
+        <p class="f-tag">Wood-fire kitchen & bar. 42 Crown Street, Surry Hills NSW 2010.</p>
+        <div class="f-soc">
+          <a href="#"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+        </div>
+      </div>
+      <div class="fc"><h5>Visit</h5><ul class="fl"><li><a href="#">42 Crown St, Surry Hills</a></li><li><a href="#">Wed–Sun Lunch 12–3pm</a></li><li><a href="#">Thu–Sat Dinner 6–10pm</a></li><li><a href="#">(02) 9000 0000</a></li></ul></div>
+      <div class="fc"><h5>Explore</h5><ul class="fl"><li><a href="#">Menu</a></li><li><a href="#">Tonight's specials</a></li><li><a href="#">Private dining</a></li><li><a href="#">Gift vouchers</a></li></ul></div>
+      <div class="fc"><h5>More</h5><ul class="fl"><li><a href="#">About</a></li><li><a href="#">Press</a></li><li><a href="#">Careers</a></li><li><a href="#">hello@emberkitchen.com.au</a></li></ul></div>
+    </div>
+    <div class="fb">
+      <span>© 2025 Ember Kitchen. Liquor Licence: XXXXXXXXXX.</span>
+      <span>42 Crown Street, Surry Hills NSW 2010</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.11;ry+=(my-ry)*.11;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(.5)';ring.style.transform='translate(-50%,-50%) scale(1.6)';ring.style.opacity='.55'});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='1'});
+});
+
+// ── NAV ──
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+
+// ── BURGER LOAD ──
+const bs=document.getElementById('bs');
+setTimeout(()=>{
+  bs.classList.add('go');
+  // after all layers assembled, start floating
+  setTimeout(()=>{
+    bs.classList.remove('go');
+    bs.classList.add('float');
+  },1700);
+},180);
+
+// ── HERO TEXT IN ──
+const els={hEy:.3,hw1:.95,hw2:1.1,hw3:1.25,hSub:1.4,hBtns:1.55,hSide:1.65};
+Object.entries(els).forEach(([id,delay])=>{
+  setTimeout(()=>document.getElementById(id)?.classList.add('in'),delay*1000);
+});
+
+// ── SCROLL REVEAL ──
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')});
+},{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el));
+
+// ── MENU TABS ──
+function tab(btn,panel){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  const el=document.getElementById('p-'+panel);
+  el.classList.add('on');
+  el.style.animation='none';el.offsetHeight;
+  el.style.animation='tabIn .3s ease forwards';
+}
+const sty=document.createElement('style');
+sty.textContent='@keyframes tabIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}';
+document.head.appendChild(sty);
+
+// ── BURGER PARALLAX ON SCROLL ──
+window.addEventListener('scroll',()=>{
+  if(!bs.classList.contains('float')) return;
+  const y=scrollY;
+  bs.style.animation='none';
+  bs.style.transform=`translate(-50%,-50%) translateY(${y*.1}px)`;
+  document.querySelector('.h-glow').style.transform=`translate(-50%,-50%) translateY(${y*.055}px)`;
+  if(y===0) bs.style.animation='float 5s ease-in-out infinite';
+});
+
+// ── BURGER HOVER: EXPLODE ──
+bs.addEventListener('mouseenter',()=>{
+  const data=[
+    ['.bl-bun-top',-68,0],
+    ['.bl-lettuce',-32,0],
+    ['.bl-tomato',-18,0],
+    ['.bl-cheese',-10,0],
+    ['.bl-patty',  0, 0],
+    ['.bl-onion',  14,0],
+    ['.bl-sauce',  22,0],
+    ['.bl-bun-bot',42,0],
+  ];
+  data.forEach(([sel,y])=>{
+    const el=bs.querySelector(sel);
+    if(el) el.style.transform=`translateX(-50%) translateY(${y}px)`;
+  });
+});
+bs.addEventListener('mouseleave',()=>{
+  document.querySelectorAll('.bl').forEach(el=>{
+    el.style.transform='translateX(-50%) translateY(0)';
+  });
+});
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.btn-p,.btn-g,.ncta').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.22;
+    const y=(e.clientY-r.top-r.height/2)*.22;
+    el.style.transform=`translate(${x}px,${y}px)`;
+  });
+  el.addEventListener('mouseleave',()=>el.style.transform='');
+});
+</script>
+</body>
+</html>

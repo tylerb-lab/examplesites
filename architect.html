@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Form Studio — Architecture & Interior Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Editorial+New:ital,wght@0,400;1,400&family=Neue+Montreal:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f5f4f0;--bg2:#edece8;--white:#ffffff;--ink:#0e0e0c;--mid:#6a6a68;--light:#d4d3ce;--accent:#c84820;--serif:'DM Serif Display',serif;--sans:'DM Sans',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 60px;display:flex;align-items:center;justify-content:space-between;transition:all .4s;mix-blend-mode:normal}
+nav.s{background:rgba(245,244,240,.96);backdrop-filter:blur(20px);padding:14px 60px;border-bottom:1px solid var(--light)}
+.nlogo{font-family:var(--serif);font-size:18px;color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.nlinks{display:flex;gap:36px;list-style:none}
+.nlinks a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s}.nlinks a:hover{color:var(--ink)}
+.ncta{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:1px;transition:all .2s}.ncta:hover{color:var(--accent);border-color:var(--accent)}
+/* hero */
+.hero{min-height:100vh;background:var(--ink);position:relative;overflow:hidden;display:grid;grid-template-rows:1fr auto}
+.hero-canvas{position:absolute;inset:0;background:linear-gradient(135deg,#1a1916 0%,#0e0e0c 100%)}
+.hero-lines{position:absolute;inset:0;opacity:.04}
+.hero-lines line{stroke:#ffffff;stroke-width:1}
+.hero-content{position:relative;z-index:2;padding:160px 60px 0;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:end}
+.hero-l{padding-bottom:80px}
+.hero-eyebrow{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px}
+.hero h1{font-family:var(--serif);font-size:clamp(52px,6vw,92px);line-height:.95;color:#fff;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.45)}
+.hero-r{padding-bottom:80px;padding-left:60px;border-left:1px solid rgba(255,255,255,.08)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.4);line-height:1.8;margin-bottom:40px}
+.btn-p{background:#fff;color:var(--ink);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:13px 28px;text-decoration:none;display:inline-block;transition:all .2s}.btn-p:hover{background:var(--accent);color:#fff}
+.hero-bottom{position:relative;z-index:2;padding:0 60px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.06)}
+.hb-stat{padding:24px 0;border-right:1px solid rgba(255,255,255,.06)}.hb-stat:last-child{border-right:none}
+.hb-n{font-family:var(--serif);font-size:28px;color:rgba(255,255,255,.7);margin-bottom:4px}
+.hb-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+/* work */
+.work{padding:100px 60px;background:var(--bg)}
+.si{max-width:1200px;margin:0 auto}
+.section-top{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:56px}
+.eyebrow{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+.sh{font-family:var(--serif);font-size:clamp(34px,4vw,54px);line-height:1.0;color:var(--ink);letter-spacing:-.01em}
+.sh em{font-style:italic;color:var(--accent)}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--light);border:1px solid var(--light)}
+.work-cell{background:var(--bg);overflow:hidden;position:relative;cursor:pointer}
+.work-cell:first-child{grid-row:span 2}
+.work-img{aspect-ratio:1;background:linear-gradient(135deg,#d4d0c8,#c4c0b8);display:flex;align-items:center;justify-content:center;transition:transform .5s}.work-cell:first-child .work-img{aspect-ratio:auto;height:100%}.work-cell:hover .work-img{transform:scale(1.03)}
+.work-img svg{opacity:.1}
+.work-overlay{position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(transparent,rgba(14,14,12,.8));opacity:0;transition:opacity .3s}.work-cell:hover .work-overlay{opacity:1}
+.work-overlay h4{font-family:var(--serif);font-size:18px;color:#fff;margin-bottom:4px}
+.work-overlay p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+/* services */
+.services{padding:100px 60px;background:var(--bg2)}
+.svc-list{margin-top:56px;display:flex;flex-direction:column;gap:1px;background:var(--light);border:1px solid var(--light)}
+.svc-row{background:var(--bg2);display:grid;grid-template-columns:80px 1fr 1fr auto;align-items:center;gap:40px;padding:32px 40px;transition:background .2s;cursor:default}.svc-row:hover{background:var(--white)}
+.svc-num{font-size:11px;letter-spacing:.1em;color:var(--mid);font-variant-numeric:tabular-nums}
+.svc-row h3{font-family:var(--serif);font-size:21px;color:var(--ink)}
+.svc-row p{font-size:13px;color:var(--mid);line-height:1.55}
+.svc-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+/* about */
+.about{padding:100px 60px;background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-img-stack{position:relative}
+.about-img-main{aspect-ratio:3/4;background:linear-gradient(135deg,#d4d0c8,#c0bcb4);display:flex;align-items:center;justify-content:center}
+.about-img-main svg{opacity:.08}
+.about-img-sm{position:absolute;bottom:-24px;right:-24px;width:55%;aspect-ratio:4/3;background:linear-gradient(135deg,#c8c4bc,#b8b4ac);border:4px solid var(--white)}
+.about-text{padding-top:20px}
+.about-text p{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:18px}
+.about-awards{margin-top:32px;padding-top:28px;border-top:1px solid var(--light)}
+.aw-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.aw-list{display:flex;flex-direction:column;gap:10px}
+.aw-item{font-size:13px;color:var(--mid);display:flex;gap:10px;align-items:baseline}
+.aw-item span{font-family:var(--serif);font-size:15px;color:var(--ink)}
+/* contact */
+.contact{padding:100px 60px;background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:56px}
+.contact-form{display:flex;flex-direction:column;gap:12px}
+.cf-group{display:flex;flex-direction:column;gap:6px}
+.cf-group label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mid)}
+.cf-group input,.cf-group select,.cf-group textarea{background:var(--white);border:1px solid var(--light);padding:12px 14px;font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;transition:border-color .2s;width:100%;border-radius:0}.cf-group input:focus,.cf-group select:focus,.cf-group textarea:focus{border-color:var(--ink)}
+.cf-group textarea{resize:vertical;min-height:90px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cf-submit{background:var(--ink);color:#fff;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:background .2s;margin-top:6px}.cf-submit:hover{background:var(--accent)}
+.contact-info{display:flex;flex-direction:column;gap:36px}
+.ci-block h4{font-family:var(--serif);font-size:20px;color:var(--ink);margin-bottom:6px}
+.ci-block p{font-size:14px;color:var(--mid);line-height:1.7}
+/* footer */
+footer{background:var(--ink);padding:52px 60px 28px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px;margin-bottom:40px}
+.flogo{font-family:var(--serif);font-size:18px;color:rgba(255,255,255,.7);margin-bottom:10px}
+.ftagline{font-size:13px;color:rgba(255,255,255,.3);line-height:1.65}
+.fcol-h{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}.flinks a:hover{color:#fff}
+.fcopy{border-top:1px solid rgba(255,255,255,.07);padding-top:20px;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:.04em;display:flex;justify-content:space-between}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+@media(max-width:900px){nav{padding:16px 24px}nav.s{padding:14px 24px}.nlinks{display:none}.hero-content{grid-template-columns:1fr;padding:120px 24px 0}.hero-r{padding:40px 0 60px;border-left:none;border-top:1px solid rgba(255,255,255,.08)}.hero-bottom{padding:0 24px;grid-template-columns:1fr 1fr}.work-grid{grid-template-columns:1fr}.work-cell:first-child{grid-row:auto}.section-top{grid-template-columns:1fr}.svc-row{grid-template-columns:1fr;gap:8px}.svc-num{display:none}.about-grid{grid-template-columns:1fr}.about-img-sm{display:none}.contact-grid{grid-template-columns:1fr}.cf-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr;gap:28px}.work,.services,.about,.contact{padding:70px 24px}footer{padding:40px 24px 20px}.fcopy{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#" class="nlogo">Form Studio</a>
+  <ul class="nlinks"><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#about">Studio</a></li><li><a href="#contact">Contact</a></li></ul>
+  <a href="#contact" class="ncta">Start a project</a>
+</nav>
+<section class="hero">
+  <div class="hero-canvas">
+    <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="200" x2="1440" y2="200"/><line x1="0" y1="400" x2="1440" y2="400"/>
+      <line x1="0" y1="600" x2="1440" y2="600"/><line x1="360" y1="0" x2="360" y2="900"/>
+      <line x1="720" y1="0" x2="720" y2="900"/><line x1="1080" y1="0" x2="1080" y2="900"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-l">
+      <p class="hero-eyebrow">Architecture & Interior Design — Sydney</p>
+      <h1>Space,<br>made <em>thoughtful.</em></h1>
+    </div>
+    <div class="hero-r">
+      <p class="hero-sub">We design homes, apartments and commercial spaces that are quiet, useful and worth living in. Architecture and interiors from concept to completion.</p>
+      <a href="#work" class="btn-p">View our work</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hb-stat"><div class="hb-n">12</div><div class="hb-l">Years in practice</div></div>
+    <div class="hb-stat"><div class="hb-n">80+</div><div class="hb-l">Projects completed</div></div>
+    <div class="hb-stat"><div class="hb-n">3×</div><div class="hb-l">AIA Award winner</div></div>
+    <div class="hb-stat"><div class="hb-n">Full</div><div class="hb-l">ARBV registration</div></div>
+  </div>
+</section>
+<section class="work" id="work">
+  <div class="si">
+    <div class="section-top rv">
+      <div><p class="eyebrow">Selected work</p><h2 class="sh">Recent <em>projects.</em></h2></div>
+      <p style="font-size:15px;color:var(--mid);line-height:1.75;max-width:380px">From modest renovations to large-scale new builds. Every project receives the same level of attention.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work-cell rv d1"><div class="work-img"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="work-overlay"><h4>Redfern Terrace</h4><p>Residential · 2024</p></div></div>
+      <div class="work-cell rv d2"><div class="work-img"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".8"><rect x="2" y="3" width="20" height="14" rx="2"/></svg></div><div class="work-overlay"><h4>Surry Hills Studio</h4><p>Commercial · 2024</p></div></div>
+      <div class="work-cell rv d3"><div class="work-img"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8"/></svg></div><div class="work-overlay"><h4>Bronte Residence</h4><p>Residential · 2023</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="services" id="services">
+  <div class="si">
+    <p class="eyebrow rv">Services</p>
+    <h2 class="sh rv d1">What we <em>do.</em></h2>
+    <div class="svc-list">
+      <div class="svc-row rv d1"><span class="svc-num">01</span><h3>Architecture</h3><p>New builds, extensions and renovations. Full service from feasibility to construction documentation.</p><span class="svc-tag">Residential & commercial</span></div>
+      <div class="svc-row rv d2"><span class="svc-num">02</span><h3>Interior Design</h3><p>Spatial planning, material selection, joinery design and furniture procurement.</p><span class="svc-tag">Full or partial scope</span></div>
+      <div class="svc-row rv d3"><span class="svc-num">03</span><h3>Concept Design</h3><p>Early-stage design exploration and feasibility. Useful before engaging a builder or buying a property.</p><span class="svc-tag">Fixed fee available</span></div>
+      <div class="svc-row rv"><span class="svc-num">04</span><h3>Contract Administration</h3><p>On-site representation during construction to ensure the project is built as designed.</p><span class="svc-tag">CA & ICA</span></div>
+    </div>
+  </div>
+</section>
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div class="about-img-stack rv">
+        <div class="about-img-main"><svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#6a6a68" stroke-width=".6"><path d="M3 9l9-7 9 7v11"/></svg></div>
+        <div class="about-img-sm"></div>
+      </div>
+      <div class="about-text rv d1">
+        <p class="eyebrow">About the studio</p>
+        <h2 class="sh">Architecture<br>as <em>practice.</em></h2>
+        <p>Form Studio is a Sydney-based architecture and interior design practice founded in 2012. We work on residential and commercial projects, with a focus on buildings that are quiet, considered and built to last.</p>
+        <p>We believe good architecture doesn't need to announce itself. The best rooms are the ones you don't notice — you just feel at ease in them.</p>
+        <div class="about-awards">
+          <p class="aw-label">Recognition</p>
+          <div class="aw-list">
+            <div class="aw-item"><span>2024</span> — AIA NSW Residential Architecture Award</div>
+            <div class="aw-item"><span>2022</span> — Houses Awards Shortlist, Alteration & Addition</div>
+            <div class="aw-item"><span>2021</span> — AIA NSW Interior Architecture Award</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <div class="si">
+    <p class="eyebrow rv">Contact</p>
+    <h2 class="sh rv d1">Start a <em>conversation.</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info rv d1">
+        <div class="ci-block"><h4>New enquiries</h4><p>We take on a limited number of projects each year. If you have a project in mind, send us a brief description and we'll be in touch.</p></div>
+        <div class="ci-block"><h4>Studio</h4><p>Level 2, 88 Reservoir Street<br>Surry Hills NSW 2010<br><br>Visits by appointment only.</p></div>
+        <div class="ci-block"><h4>Contact</h4><p>hello@formstudio.com.au<br>(02) 9000 0000</p></div>
+      </div>
+      <div class="contact-form rv d2">
+        <div class="cf-row"><div class="cf-group"><label>Name</label><input type="text" placeholder="Jane Smith"/></div><div class="cf-group"><label>Email</label><input type="email" placeholder="jane@email.com"/></div></div>
+        <div class="cf-group"><label>Project type</label><select><option>Residential — new build</option><option>Residential — renovation/extension</option><option>Interior design only</option><option>Commercial</option><option>Concept / feasibility</option></select></div>
+        <div class="cf-group"><label>Approximate budget</label><select><option>Under $200k</option><option>$200k – $500k</option><option>$500k – $1M</option><option>$1M+</option><option>Not sure yet</option></select></div>
+        <div class="cf-group"><label>Tell us about your project</label><textarea placeholder="Location, rough scope, timeline, anything else relevant..."></textarea></div>
+        <button class="cf-submit" onclick="this.textContent='Sent — we\'ll be in touch shortly'">Send enquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="si">
+    <div class="footer-top">
+      <div><div class="flogo">Form Studio</div><p class="ftagline">Architecture and interior design. Sydney, NSW. Established 2012.</p></div>
+      <div><p class="fcol-h">Work</p><ul class="flinks"><li><a href="#">Residential</a></li><li><a href="#">Commercial</a></li><li><a href="#">Interiors</a></li><li><a href="#">All projects</a></li></ul></div>
+      <div><p class="fcol-h">Studio</p><ul class="flinks"><li><a href="#">About</a></li><li><a href="#">Services</a></li><li><a href="#">Awards</a></li><li><a href="#">Contact</a></li></ul></div>
+    </div>
+    <div class="fcopy"><span>© 2025 Form Studio Pty Ltd. ARBV Registration No. XXXXXX.</span><span>Surry Hills, Sydney NSW</span></div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>80));
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
